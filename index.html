@@ -32,7 +32,13 @@ body{
 /* ---------- HERO ---------- */
 .hero{
   position:relative;
-  height:100svh;
+  height:220vh;            /* дистанция скролла, за которую проматывается интро */
+  min-height:1100px;
+}
+.hero-sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
   min-height:560px;
   display:flex;
   flex-direction:column;
@@ -46,13 +52,17 @@ body{
   width:100%;
   height:100%;
   object-fit:cover;
-  z-index:0;
 }
-.hero::after{
+.hero .loop-vid{z-index:0;opacity:0;transition:opacity .8s ease}
+.hero .intro-vid{z-index:1;opacity:1;transition:opacity .8s ease}
+.hero.intro-done .loop-vid{opacity:1}
+.hero.intro-done .intro-vid{opacity:0}
+.hero-sticky::after{
   content:"";
   position:absolute;
   inset:0;
-  z-index:1;
+  z-index:2;
+  pointer-events:none;
   background:linear-gradient(180deg,
     rgba(37,34,29,.25) 0%,
     rgba(37,34,29,.15) 45%,
@@ -61,22 +71,28 @@ body{
 }
 .hero-content{
   position:relative;
-  z-index:2;
+  z-index:3;
   text-align:center;
   padding:0 24px;
 }
 .hero h1,.hero p,.hero .cta{
   opacity:0;
   transform:translateY(26px);
+}
+/* текст проявляется в конце интро */
+.hero.intro-done h1,.hero.intro-done p,.hero.intro-done .cta{
   animation:heroUp .9s cubic-bezier(.2,.8,.2,1) forwards;
 }
-.hero h1{animation-delay:.15s}
-.hero p{animation-delay:.42s}
-.hero .cta{animation-delay:.62s}
+.hero.intro-done h1{animation-delay:.05s}
+.hero.intro-done p{animation-delay:.28s}
+.hero.intro-done .cta{animation-delay:.46s}
 @keyframes heroUp{to{opacity:1;transform:none}}
-.scroll-hint{opacity:0;animation:heroUp .9s ease .9s forwards,bob 2.2s ease-in-out 1.8s infinite}
+.scroll-hint{opacity:calc(1 - var(--sp,0))}
+.hero.intro-done .scroll-hint{opacity:0}
 @media (prefers-reduced-motion:reduce){
   .hero h1,.hero p,.hero .cta,.scroll-hint{opacity:1;transform:none;animation:none}
+  .hero .loop-vid{opacity:1}
+  .hero .intro-vid{display:none}
 }
 .hero h1{
   font-size:clamp(64px,14vw,160px);
@@ -178,7 +194,6 @@ h2{
 /* ---------- КАСТОМНЫЙ КУРСОР ---------- */
 .cursor-dot,.cursor-ring{
   position:fixed;top:0;left:0;
-  border-radius:50%;
   pointer-events:none;
   z-index:9999;
   transform:translate(-50%,-50%);
@@ -186,17 +201,39 @@ h2{
   transition:opacity .3s ease;
   mix-blend-mode:screen;
 }
-.cursor-dot{width:7px;height:7px;background:var(--amber)}
+/* центр — неоновое перекрестие */
+.cursor-dot{width:0;height:0}
+.cursor-dot::before,.cursor-dot::after{
+  content:"";position:absolute;top:0;left:0;
+  background:#FFB067;
+  box-shadow:0 0 6px #FFB067,0 0 2px #FFB067;
+  transform:translate(-50%,-50%);
+}
+.cursor-dot::before{width:2px;height:13px}
+.cursor-dot::after{width:13px;height:2px}
+/* кольцо — вращающийся неоновый ореол */
 .cursor-ring{
-  width:34px;height:34px;
-  border:1px solid rgba(217,162,110,.55);
-  transition:opacity .3s ease,width .25s ease,height .25s ease,border-color .25s ease,background .25s ease;
+  width:30px;height:30px;
+  border-radius:50%;
+  border:1px solid rgba(255,176,103,.55);
+  box-shadow:0 0 10px rgba(255,176,103,.28),inset 0 0 6px rgba(255,176,103,.14);
+  animation:cursSpin 6s linear infinite;
+  transition:opacity .3s ease,width .25s ease,height .25s ease,border-color .25s ease,box-shadow .25s ease;
 }
+/* засечки прицела */
+.cursor-ring::before,.cursor-ring::after{
+  content:"";position:absolute;top:50%;left:50%;
+  background:rgba(255,176,103,.6);
+}
+.cursor-ring::before{width:1px;height:7px;transform:translate(-50%,-50%);box-shadow:0 -12px 0 rgba(255,176,103,.6),0 12px 0 rgba(255,176,103,.6)}
+.cursor-ring::after{width:7px;height:1px;transform:translate(-50%,-50%);box-shadow:-12px 0 0 rgba(255,176,103,.6),12px 0 0 rgba(255,176,103,.6)}
 .cursor-ring.hot{
-  width:56px;height:56px;
-  border-color:rgba(217,162,110,.9);
-  background:rgba(217,162,110,.08);
+  width:50px;height:50px;
+  border-color:rgba(255,176,103,.95);
+  box-shadow:0 0 20px rgba(255,176,103,.5),inset 0 0 12px rgba(255,176,103,.22);
 }
+@keyframes cursSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.cursor-ring{animation:none}}
 @media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
 body.has-cursor{cursor:none}
 body.has-cursor a,body.has-cursor .cta,body.has-cursor .proj{cursor:none}
@@ -504,13 +541,16 @@ footer{
 <div class="cursor-dot" aria-hidden="true"></div>
 
 <header class="hero">
-  <video autoplay muted loop playsinline preload="auto" poster="assets/poster.jpg" src="assets/hero-loop.mp4"></video>
-  <div class="hero-content">
-    <h1>Raincoat</h1>
-    <p>Креатив &times; код: превращаю идеи в работающие проекты</p>
-    <a class="cta" href="#contacts">Написать мне</a>
+  <div class="hero-sticky">
+    <video class="intro-vid" muted playsinline preload="auto" src="assets/intro.mp4"></video>
+    <video class="loop-vid" muted loop playsinline preload="auto" poster="assets/poster.jpg" src="assets/hero-loop.mp4"></video>
+    <div class="hero-content">
+      <h1>Raincoat</h1>
+      <p>Креатив &times; код: превращаю идеи в работающие проекты</p>
+      <a class="cta" href="#contacts">Написать мне</a>
+    </div>
+    <div class="scroll-hint">scroll</div>
   </div>
-  <div class="scroll-hint">scroll</div>
 </header>
 
 <section id="about" class="about">
@@ -635,6 +675,58 @@ const io=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- HERO: интро проматывается скроллом → на его месте появляется луп ---------- */
+(()=>{
+  const hero=document.querySelector('.hero');
+  if(!hero)return;
+  const intro=hero.querySelector('.intro-vid');
+  const loop=hero.querySelector('.loop-vid');
+  if(!intro||!loop)return;
+  if(reduceMotion){
+    hero.style.height='100svh';hero.style.minHeight='560px';
+    hero.classList.add('intro-done');loop.play().catch(()=>{});
+    return;
+  }
+  let dur=0,done=false,targetT=0,raf=0,primed=false;
+  function grabDur(){
+    if(!dur&&isFinite(intro.duration)&&intro.duration>0){dur=intro.duration;onScroll();}
+  }
+  /* прогрев декодера: короткий muted-плей, потом стоп на 0 — иначе кадр при seek не рисуется */
+  function prime(){
+    if(primed)return;primed=true;
+    intro.play().then(()=>{intro.pause();intro.currentTime=0;grabDur();onScroll();}).catch(()=>{grabDur();});
+  }
+  ['loadedmetadata','durationchange','canplay','loadeddata'].forEach(ev=>intro.addEventListener(ev,grabDur));
+  intro.addEventListener('loadeddata',prime);
+  /* видео могло уже загрузиться до навешивания слушателей */
+  if(intro.readyState>=1)grabDur();
+  if(intro.readyState>=2)prime();
+  function finish(){
+    if(done)return;done=true;
+    hero.classList.add('intro-done');   /* crossfade на луп + текст fade-in */
+    loop.play().catch(()=>{});
+  }
+  function unfinish(){
+    if(!done)return;done=false;
+    hero.classList.remove('intro-done');
+    loop.pause();
+  }
+  function applyT(){raf=0;if(!done&&dur){try{intro.currentTime=targetT}catch(e){}}}
+  function onScroll(){
+    if(!dur)grabDur();
+    const max=hero.offsetHeight-innerHeight;
+    const p=max>0?Math.min(1,Math.max(0,(-hero.getBoundingClientRect().top)/max)):0;
+    hero.style.setProperty('--sp',p.toFixed(3));
+    if(dur)targetT=p*Math.max(0,dur-0.05);   /* кадр видео = позиция скролла */
+    if(p>=0.985)finish();else unfinish();
+    if(!raf)raf=requestAnimationFrame(applyT);
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  intro.load();
+  onScroll();
+})();
 
 /* ---------- SPOTLIGHT НА КАРТОЧКАХ ---------- */
 document.addEventListener('pointermove',e=>{
@@ -929,7 +1021,7 @@ document.addEventListener('pointermove',e=>{
     /* \u043c\u043e\u0442\u043e */
     ['motorcycle',3],['ABS',1],['chain maintenance',1],['wheel bearings',1],
     /* \u0441\u0430\u043c\u043e\u0440\u0430\u0437\u0432\u0438\u0442\u0438\u0435 */
-    ['self-development',3],['discipline',2],['time management',2],['David Goggins',2],
+    ['self-development',3],['discipline',2],['time management',2],
     ['quitting smoking',1],['crisis management',1],['body language',1],['game psychology',1],
     ['mafia',1],['strategy',2],
     /* \u043a\u0440\u0438\u043f\u0442\u0430 */
