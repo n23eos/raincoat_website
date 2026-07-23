@@ -32,13 +32,7 @@ body{
 /* ---------- HERO ---------- */
 .hero{
   position:relative;
-  height:220vh;            /* дистанция скролла, за которую проматывается интро */
-  min-height:1100px;
-}
-.hero-sticky{
-  position:sticky;
-  top:0;
-  height:100vh;
+  height:100svh;
   min-height:560px;
   display:flex;
   flex-direction:column;
@@ -52,17 +46,13 @@ body{
   width:100%;
   height:100%;
   object-fit:cover;
+  z-index:0;
 }
-.hero .loop-vid{z-index:0;opacity:0;transition:opacity .8s ease}
-.hero .intro-vid{z-index:1;opacity:1;transition:opacity .8s ease}
-.hero.intro-done .loop-vid{opacity:1}
-.hero.intro-done .intro-vid{opacity:0}
-.hero-sticky::after{
+.hero::after{
   content:"";
   position:absolute;
   inset:0;
-  z-index:2;
-  pointer-events:none;
+  z-index:1;
   background:linear-gradient(180deg,
     rgba(37,34,29,.25) 0%,
     rgba(37,34,29,.15) 45%,
@@ -71,28 +61,22 @@ body{
 }
 .hero-content{
   position:relative;
-  z-index:3;
+  z-index:2;
   text-align:center;
   padding:0 24px;
 }
 .hero h1,.hero p,.hero .cta{
   opacity:0;
   transform:translateY(26px);
-}
-/* текст проявляется в конце интро */
-.hero.intro-done h1,.hero.intro-done p,.hero.intro-done .cta{
   animation:heroUp .9s cubic-bezier(.2,.8,.2,1) forwards;
 }
-.hero.intro-done h1{animation-delay:.05s}
-.hero.intro-done p{animation-delay:.28s}
-.hero.intro-done .cta{animation-delay:.46s}
+.hero h1{animation-delay:.15s}
+.hero p{animation-delay:.42s}
+.hero .cta{animation-delay:.62s}
 @keyframes heroUp{to{opacity:1;transform:none}}
-.scroll-hint{opacity:calc(1 - var(--sp,0))}
-.hero.intro-done .scroll-hint{opacity:0}
+.scroll-hint{opacity:0;animation:heroUp .9s ease .9s forwards,bob 2.2s ease-in-out 1.8s infinite}
 @media (prefers-reduced-motion:reduce){
   .hero h1,.hero p,.hero .cta,.scroll-hint{opacity:1;transform:none;animation:none}
-  .hero .loop-vid{opacity:1}
-  .hero .intro-vid{display:none}
 }
 .hero h1{
   font-size:clamp(64px,14vw,160px);
@@ -541,16 +525,13 @@ footer{
 <div class="cursor-dot" aria-hidden="true"></div>
 
 <header class="hero">
-  <div class="hero-sticky">
-    <video class="intro-vid" muted playsinline preload="auto" src="assets/intro.mp4"></video>
-    <video class="loop-vid" muted loop playsinline preload="auto" poster="assets/poster.jpg" src="assets/hero-loop.mp4"></video>
-    <div class="hero-content">
-      <h1>Raincoat</h1>
-      <p>Креатив &times; код: превращаю идеи в работающие проекты</p>
-      <a class="cta" href="#contacts">Написать мне</a>
-    </div>
-    <div class="scroll-hint">scroll</div>
+  <video autoplay muted loop playsinline preload="auto" poster="assets/poster.jpg" src="assets/hero-loop.mp4"></video>
+  <div class="hero-content">
+    <h1>Raincoat</h1>
+    <p>Креатив &times; код: превращаю идеи в работающие проекты</p>
+    <a class="cta" href="#contacts">Написать мне</a>
   </div>
+  <div class="scroll-hint">scroll</div>
 </header>
 
 <section id="about" class="about">
@@ -675,58 +656,6 @@ const io=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-/* ---------- HERO: интро проматывается скроллом → на его месте появляется луп ---------- */
-(()=>{
-  const hero=document.querySelector('.hero');
-  if(!hero)return;
-  const intro=hero.querySelector('.intro-vid');
-  const loop=hero.querySelector('.loop-vid');
-  if(!intro||!loop)return;
-  if(reduceMotion){
-    hero.style.height='100svh';hero.style.minHeight='560px';
-    hero.classList.add('intro-done');loop.play().catch(()=>{});
-    return;
-  }
-  let dur=0,done=false,targetT=0,raf=0,primed=false;
-  function grabDur(){
-    if(!dur&&isFinite(intro.duration)&&intro.duration>0){dur=intro.duration;onScroll();}
-  }
-  /* прогрев декодера: короткий muted-плей, потом стоп на 0 — иначе кадр при seek не рисуется */
-  function prime(){
-    if(primed)return;primed=true;
-    intro.play().then(()=>{intro.pause();intro.currentTime=0;grabDur();onScroll();}).catch(()=>{grabDur();});
-  }
-  ['loadedmetadata','durationchange','canplay','loadeddata'].forEach(ev=>intro.addEventListener(ev,grabDur));
-  intro.addEventListener('loadeddata',prime);
-  /* видео могло уже загрузиться до навешивания слушателей */
-  if(intro.readyState>=1)grabDur();
-  if(intro.readyState>=2)prime();
-  function finish(){
-    if(done)return;done=true;
-    hero.classList.add('intro-done');   /* crossfade на луп + текст fade-in */
-    loop.play().catch(()=>{});
-  }
-  function unfinish(){
-    if(!done)return;done=false;
-    hero.classList.remove('intro-done');
-    loop.pause();
-  }
-  function applyT(){raf=0;if(!done&&dur){try{intro.currentTime=targetT}catch(e){}}}
-  function onScroll(){
-    if(!dur)grabDur();
-    const max=hero.offsetHeight-innerHeight;
-    const p=max>0?Math.min(1,Math.max(0,(-hero.getBoundingClientRect().top)/max)):0;
-    hero.style.setProperty('--sp',p.toFixed(3));
-    if(dur)targetT=p*Math.max(0,dur-0.05);   /* кадр видео = позиция скролла */
-    if(p>=0.985)finish();else unfinish();
-    if(!raf)raf=requestAnimationFrame(applyT);
-  }
-  addEventListener('scroll',onScroll,{passive:true});
-  addEventListener('resize',onScroll);
-  intro.load();
-  onScroll();
-})();
 
 /* ---------- SPOTLIGHT НА КАРТОЧКАХ ---------- */
 document.addEventListener('pointermove',e=>{
