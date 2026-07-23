@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проекты — Raincoat</title>
+<meta name="description" content="Кейсы Raincoat: проблема → решение → стек → результат. Продукты, плагины Obsidian, музыка и видео, трейдинг и web3.">
+<style>
+:root{
+  --charcoal:#25221D;
+  --wood:#574938;
+  --sage:#939271;
+  --olive:#AEAE87;
+  --cream:#D1C997;
+  --amber:#D9A26E;
+  --terracotta:#965E2F;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--charcoal);
+  color:var(--cream);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--terracotta);color:var(--cream)}
+
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+/* ---------- HEADER ---------- */
+header.page{padding:56px 0 0}
+.back{
+  display:inline-block;
+  color:var(--sage);
+  text-decoration:none;
+  font-size:14px;
+  letter-spacing:.08em;
+  transition:color .3s;
+}
+.back:hover{color:var(--amber)}
+.page-title{padding:48px 0 18px}
+.section-label{
+  color:var(--terracotta);
+  font-size:14px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+h1{
+  font-size:clamp(34px,5.5vw,58px);
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--cream);
+}
+.lede{
+  margin-top:14px;
+  max-width:640px;
+  color:var(--olive);
+  font-size:clamp(15px,1.8vw,18px);
+}
+.lede b{color:var(--cream);font-weight:600}
+
+/* ---------- FILTERS ---------- */
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:34px 0 44px;
+}
+.filters button{
+  font:inherit;
+  font-size:13px;
+  color:var(--sage);
+  background:transparent;
+  border:1px solid var(--wood);
+  border-radius:999px;
+  padding:7px 16px;
+  cursor:pointer;
+  transition:color .25s,border-color .25s,background .25s;
+}
+.filters button:hover{color:var(--amber);border-color:var(--amber)}
+.filters button.active{
+  color:var(--charcoal);
+  background:var(--amber);
+  border-color:var(--amber);
+}
+
+/* ---------- CASE CARDS ---------- */
+.cases{display:flex;flex-direction:column;gap:16px;padding-bottom:90px}
+details.case{
+  background:rgba(87,73,56,.28);
+  border:1px solid rgba(147,146,113,.25);
+  border-radius:14px;
+  overflow:hidden;
+  transition:border-color .3s,background .3s;
+}
+details.case:hover{border-color:rgba(217,162,110,.55);background:rgba(87,73,56,.4)}
+details.case[open]{border-color:var(--amber);background:rgba(87,73,56,.45)}
+details.case.hide{display:none}
+summary{
+  list-style:none;
+  cursor:pointer;
+  padding:22px 26px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:4px 18px;
+  align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary .name{
+  color:var(--amber);
+  font-size:19px;
+  font-weight:700;
+  letter-spacing:-.01em;
+}
+summary .one{
+  grid-column:1;
+  color:var(--olive);
+  font-size:14.5px;
+}
+summary .chev{
+  grid-row:1 / span 2;
+  grid-column:2;
+  color:var(--sage);
+  font-size:18px;
+  transition:transform .3s;
+}
+details[open] summary .chev{transform:rotate(90deg)}
+.case-body{
+  padding:2px 26px 24px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px 26px;
+}
+.case-body .cell b{
+  display:block;
+  color:var(--terracotta);
+  font-size:12px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.case-body .cell p{color:var(--olive);font-size:14.5px}
+.case-body .cell p strong{color:var(--cream);font-weight:600}
+.stack{
+  grid-column:1 / -1;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.stack span{
+  font-size:12px;
+  color:var(--sage);
+  border:1px solid var(--wood);
+  border-radius:999px;
+  padding:3px 11px;
+}
+.case-link{grid-column:1 / -1}
+.case-link a{
+  color:var(--amber);
+  text-decoration:none;
+  font-size:14px;
+  border-bottom:1px solid rgba(217,162,110,.4);
+  transition:border-color .3s;
+}
+.case-link a:hover{border-color:var(--amber)}
+
+/* ---------- REVEAL ---------- */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.reveal.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+footer{
+  text-align:center;
+  color:var(--sage);
+  font-size:13px;
+  padding:40px 0 46px;
+}
+@media(max-width:560px){
+  summary{padding:18px 18px}
+  .case-body{padding:0 18px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="page">
+  <a class="back" href="index.html">&larr; на главную</a>
+</header>
+
+<div class="page-title">
+  <p class="section-label">Проекты</p>
+  <h1>Кейсы</h1>
+  <p class="lede">Каждый кейс — по одной схеме: <b>проблема → решение → стек → результат</b>. Всё собрано из реальных репозиториев, ничего выдуманного.</p>
+</div>
+
+<nav class="filters" id="filters">
+  <button class="active" data-f="all">Все</button>
+  <button data-f="product">Продукты</button>
+  <button data-f="obsidian">Obsidian</button>
+  <button data-f="media">Музыка и видео</button>
+  <button data-f="trade">Трейдинг и web3</button>
+  <button data-f="tools">Инструменты</button>
+</nav>
+
+<div class="cases" id="cases">
+
+<!-- ===== ТРЕЙДИНГ И WEB3 ===== -->
+
+<details class="case reveal" data-cat="trade" open>
+  <summary>
+    <span class="name">I Was Here</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Gasless proof-of-attendance NFT на Base — гость сканирует QR и получает бейдж, не платя за газ.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>POAP-бейджи за посещение событий требуют от гостя кошелька с ETH и оплаты газа — 90% людей отваливаются на этом шаге.</p></div>
+    <div class="cell"><b>Решение</b><p>ERC-1155 контракт + аккаунт-абстракция: гость входит по email (Base Account), подписывает клейм, а газ платит paymaster (ERC-4337 + EIP-5792). Бейджи накапливаются в уровни Bronze → Platinum.</p></div>
+    <div class="cell"><b>Результат</b><p><strong>Живёт в Base mainnet.</strong> Реальный бейдж заклеймлен end-to-end: пользователь заплатил 0 ETH, газ полностью спонсирован.</p></div>
+    <div class="stack"><span>Solidity</span><span>Foundry</span><span>ERC-1155</span><span>ERC-4337</span><span>Next.js</span><span>Base</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="trade">
+  <summary>
+    <span class="name">Polymarket BTC 5m Bot</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Исследовательский бот: есть ли edge против рынка на 5-минутных ставках BTC. Честный ответ: нет.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Гипотеза: fair value по Binance-прокси опережает цены Polymarket на рынках «BTC вверх/вниз за 5 минут» — на этом можно зарабатывать.</p></div>
+    <div class="cell"><b>Решение</b><p>Shadow-бот: считает fair value, бумажно торгует с реалистичной моделью исполнения, логирует всё. Gated-система решений: momentum-фильтр, модель издержек, quality gates, walk-forward OOS. Деплой на VPS под systemd.</p></div>
+    <div class="cell"><b>Результат</b><p>Исследование закрыто с доказательствами: <strong>у сигнала нет edge</strong> (Brier рынка 0.164 против 0.185 у модели; при расхождении рынок прав в 63.6%). Деньги не потеряны — бот не вышел из DRY_RUN.</p></div>
+    <div class="stack"><span>Python</span><span>Polymarket CLOB</span><span>Binance API</span><span>systemd / VPS</span><span>walk-forward</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="trade">
+  <summary>
+    <span class="name">Polymarket Weather Bot</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Автономный бот на рынках дневной максимальной температуры: метеомодели против толпы.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Погодные рынки Polymarket оценивает толпа «на глаз», а физическая величина предсказуема моделями — потенциальный source of edge.</p></div>
+    <div class="cell"><b>Решение</b><p>Две стратегии: (A) вероятности из 31-членного ансамбля GFS с поправкой на систематическую ошибку станции; (B) intraday-трекинг реального METAR-максимума — ставки на бакеты, исход которых уже почти определён.</p></div>
+    <div class="cell"><b>Результат</b><p>Рабочий бот в режиме симуляции с тестами; live-торговля закрыта критериями приёмки и ручным флагом <strong>--live --confirm</strong>.</p></div>
+    <div class="stack"><span>Python</span><span>Open-Meteo / GFS</span><span>METAR</span><span>Polymarket</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="trade tools">
+  <summary>
+    <span class="name">web3-tools</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Генератор EVM-кошельков и vanity-адресов: адрес, начинающийся с выбранного паттерна.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Красивый / узнаваемый адрес кошелька (0xCAFE…, 0xN23E…) нельзя выбрать — только перебрать миллионы ключей.</p></div>
+    <div class="cell"><b>Решение</b><p>CLI-перебор с паттернами «начинается / заканчивается / содержит»; один адрес работает во всех EVM-сетях.</p></div>
+    <div class="cell"><b>Результат</b><p>Опубликованный пакет с CI-тестами на GitHub Actions, MIT.</p></div>
+    <div class="stack"><span>Python</span><span>EVM</span><span>GitHub Actions</span></div>
+    <div class="case-link"><a href="https://github.com/N23eos/web3-tools" target="_blank" rel="noopener">GitHub: открытый репозиторий &rarr;</a></div>
+  </div>
+</details>
+
+<!-- ===== ПРОДУКТЫ ===== -->
+
+<details class="case reveal" data-cat="product">
+  <summary>
+    <span class="name">AI Receptionist SMB</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">AI-бот для малого бизнеса: отвечает клиентам по базе знаний, собирает заявки, передаёт оператору.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Малый бизнес теряет клиентов, потому что не успевает отвечать в мессенджерах: ночь, выходные, поток однотипных вопросов.</p></div>
+    <div class="cell"><b>Решение</b><p>Бот в Telegram/WhatsApp с RAG по базе знаний бизнеса (pgvector), сбор заявок, запись на услуги и handoff сложных диалогов живому оператору. Дашборд для владельца.</p></div>
+    <div class="cell"><b>Результат</b><p>Этап 3 из ТЗ завершён: Telegram-бот работает — webhook, диалоги, автоответ по базе знаний, передача оператору. Разворачивается одной командой docker compose.</p></div>
+    <div class="stack"><span>NestJS</span><span>Prisma</span><span>PostgreSQL + pgvector</span><span>Next.js</span><span>Docker</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="product">
+  <summary>
+    <span class="name">TimeSlot</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Telegram-first букинг-платформа для нишевых сервисов: подписка, без комиссий.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Мастерам и небольшим студиям дорого жить на платформах с комиссией с каждой записи, а собственный сайт с записью — избыточен.</p></div>
+    <div class="cell"><b>Решение</b><p>Вся запись — в Telegram: онбординг владельца через state machine, deep-link для клиентов, гонки за слот решает EXCLUDE-констрейнт в БД, надёжные уведомления — через transactional outbox, напоминания за 24 ч и 2 ч.</p></div>
+    <div class="cell"><b>Результат</b><p>Спринты 0–4 закрыты: онбординг, запись клиента, кабинет владельца с agenda и ручной записью, напоминания с ретраями и идемпотентностью.</p></div>
+    <div class="stack"><span>NestJS</span><span>PostgreSQL</span><span>Telegram Bot API</span><span>Docker</span><span>outbox pattern</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="product">
+  <summary>
+    <span class="name">SoulOS</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">AI-операционка для бизнеса: изолированный агент-инстанс на каждого клиента, управление из Telegram.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Дать бизнесу AI-агента с доступом к его данным страшно: одна ошибка записи — и испорчена реальная база клиента.</p></div>
+    <div class="cell"><b>Решение</b><p>Форк Hermes Agent «тонким overlay»: весь код в своём пакете, правки ядра помечены. Пять инвариантов выживания, главный — write safety: запись только через dry-run → diff → бэкап → подтверждение. Business Brain знает архитектуру бизнеса клиента.</p></div>
+    <div class="cell"><b>Результат</b><p>Рабочая архитектура, готовится distribution: .env.template для развёртывания клиентских инстансов.</p></div>
+    <div class="stack"><span>Python</span><span>Hermes Agent</span><span>Telegram</span><span>Docker</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="product">
+  <summary>
+    <span class="name">CasperVPN</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">VPN-сервис, устойчивый к DPI-блокировкам: живучесть через разнообразие транспортов, а не «шифрование посильнее».</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Одиночные VPN-протоколы блокируются DPI-системами класса ТСПУ целиком — нужна система, которая переключается, а не один «неубиваемый» туннель.</p></div>
+    <div class="cell"><b>Решение</b><p>Ядро sing-box на всех нодах, несколько транспортов одновременно (VLESS-REALITY / Hysteria2 / AmneziaWG), клиент переключается сам; свои приложения не пишем — внешние клиенты через per-user subscription URL. Архитектура задокументирована через ADR.</p></div>
+    <div class="cell"><b>Результат</b><p>Go-монорепо из 6 сервисов с общими контрактами, сборка и тесты одной командой make.</p></div>
+    <div class="stack"><span>Go</span><span>sing-box</span><span>Docker</span><span>ADR-документация</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="product tools">
+  <summary>
+    <span class="name">FlowSpeech</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Локальная альтернатива Wispr Flow для macOS: зажал клавишу — надиктовал — чистый текст у курсора.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Диктовка быстрее набора, но облачные сервисы платные и шлют голос на сервер, а сырой транскрипт полон «эээ» и оговорок.</p></div>
+    <div class="cell"><b>Решение</b><p>Распознавание локально (faster-whisper, без интернета), чистка текста через LLM на выбор (Claude / OpenAI / DeepSeek / Ollama) прямо из menu bar. Live-волна на экране, личный словарь, статистика WPM по приложениям.</p></div>
+    <div class="cell"><b>Результат</b><p>Настоящее FlowSpeech.app со своей иконкой и автозапуском; два режима — push-to-talk и toggle.</p></div>
+    <div class="stack"><span>Python</span><span>faster-whisper</span><span>macOS</span><span>Claude API</span></div>
+    <div class="case-link"><a href="https://github.com/N23eos/flowspeech" target="_blank" rel="noopener">GitHub: открытый репозиторий &rarr;</a></div>
+  </div>
+</details>
+
+
+<!-- ===== OBSIDIAN ===== -->
+
+<details class="case reveal" data-cat="obsidian">
+  <summary>
+    <span class="name">Advanced Graph View</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Граф Obsidian для больших vault (5–50 тыс. заметок): из «комка волос» — в инструмент анализа.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Штатный граф Obsidian на большом vault превращается в бесполезный клубок: всё видно и ничего не понятно.</p></div>
+    <div class="cell"><b>Решение</b><p>WebGL-рендер на Pixi.js, физика в Web Worker. Любая метрика — в размер/цвет/свечение узла: PageRank, частота открытий, свежесть правок. Louvain-кластеры с автоименованием по TF-IDF, оверлеи сирот и битых ссылок, свои операторы поиска (opened:&gt;10, links:0…).</p></div>
+    <div class="cell"><b>Результат</b><p><strong>10 000+ узлов при 50+ FPS.</strong> Работает на реальном vault в 9 тыс. заметок; демо-видео в репозитории.</p></div>
+    <div class="stack"><span>TypeScript</span><span>Pixi.js / WebGL</span><span>Web Worker</span><span>Obsidian API</span></div>
+    <div class="case-link"><a href="https://github.com/n23eos/advanced_graph_view" target="_blank" rel="noopener">GitHub: открытый репозиторий &rarr;</a></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="obsidian">
+  <summary>
+    <span class="name">Column Explorer</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Файл-менеджер для Obsidian в стиле Finder: Miller columns, drag &amp; drop, календарь заметок.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Стандартное дерево файлов Obsidian неудобно для глубоких структур: постоянное разворачивание-сворачивание, нет обзора пути.</p></div>
+    <div class="cell"><b>Решение</b><p>Колонки как в Finder: клик по папке открывает содержимое справа. Полный файл-менеджер: создание, переименование, multi-select, контекстные меню, цвета папок; виртуальные ряды Recents, закладок и календарь с числом созданных заметок по дням.</p></div>
+    <div class="cell"><b>Результат</b><p>Полноценный плагин с документацией, скриншотами и тестовым покрытием.</p></div>
+    <div class="stack"><span>TypeScript</span><span>Obsidian API</span><span>esbuild</span></div>
+    <div class="case-link"><a href="https://github.com/N23eos/column_explorer" target="_blank" rel="noopener">GitHub: открытый репозиторий &rarr;</a></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="obsidian">
+  <summary>
+    <span class="name">Vault Telegram Bridge</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Написал себе в Telegram — заметка сама появилась в daily note Obsidian. Без сервера.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Мысли приходят на прогулке, а vault — на компьютере. Существующие мосты требуют VPS, Docker или платных сервисов.</p></div>
+    <div class="cell"><b>Решение</b><p>Плагин сам опрашивает Telegram-бота при открытии Obsidian: текст с форматированием приходит как Markdown, фото/голосовые/файлы сохраняются в attachments и встраиваются, хэштеги маршрутизируют по тематическим заметкам.</p></div>
+    <div class="cell"><b>Результат</b><p>Ноль инфраструктуры: без сервера, VPS и Docker; работает на десктопе и мобильном.</p></div>
+    <div class="stack"><span>TypeScript</span><span>Telegram Bot API</span><span>Obsidian API</span></div>
+    <div class="case-link"><a href="https://github.com/n23eos/vault_telegram_bridge" target="_blank" rel="noopener">GitHub: открытый репозиторий &rarr;</a></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="obsidian">
+  <summary>
+    <span class="name">Graph Explorer</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Граф заметок как галактика: летаешь на звездолёте, а каждая игровая награда реально улучшает vault.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Наводить порядок в заметках скучно: сироты копятся, старое знание не повторяется, ссылки не строятся.</p></div>
+    <div class="cell"><b>Решение</b><p>Игра поверх реального графа: заметки — планеты, wikilinks — гиперворота. Экономика тянет игрока в «Туманность Сирот», повторение знаний — spaced repetition (SM-2) через «майнинг», постройка гиперворот физически вписывает ссылку в md-файл. Граф игры всегда равен реальному графу vault.</p></div>
+    <div class="cell"><b>Результат</b><p>Играбельный плагин: каждое игровое действие оставляет vault лучше, чем было.</p></div>
+    <div class="stack"><span>TypeScript</span><span>Obsidian API</span><span>SM-2</span><span>canvas</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="obsidian">
+  <summary>
+    <span class="name">Vault Agent Dashboard</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Агентские LLM-воркфлоу прямо внутри Obsidian: по расписанию, по событиям, с ревью каждого изменения.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Хочется, чтобы агент разбирал inbox и наводил порядок в волте сам — но без риска, что LLM молча перепишет заметки.</p></div>
+    <div class="cell"><b>Решение</b><p>Воркфлоу описываются обычными markdown-заметками, запускаются по cron / событиям файлов / вручную. Всё через очередь ревью с diff-просмотром; три режима прав read-only → write-draft → auto-write. Полный трейс каждого запуска: что прочитал, какие инструменты, сколько токенов.</p></div>
+    <div class="cell"><b>Результат</b><p>Local-first: работает без сервера, LLM на выбор — Anthropic / OpenAI / Ollama (офлайн).</p></div>
+    <div class="stack"><span>TypeScript</span><span>Obsidian API</span><span>Anthropic / Ollama</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="obsidian tools">
+  <summary>
+    <span class="name">vault-mirror</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Твои заметки уже знают, кто ты. Это заставляет их рассказать: 16 отчётов-зеркал из твоего vault.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Свои паттерны изнутри не видны, хотя годами лежат в заметках открытым текстом. Другу нужны годы, чтобы всё это прочитать.</p></div>
+    <div class="cell"><b>Решение</b><p>Папка промптов рядом с заметками: любому агенту с доступом к файлам говоришь «читай 00-start.md и начинай» — и получаешь 16 отчётов с доказательствами: как думаешь, что ценишь vs что делаешь, почему умирают проекты, 30-дневный план под твои реальные паттерны срывов. Каждое утверждение подкреплено цитатой из заметки.</p></div>
+    <div class="cell"><b>Результат</b><p>Ноль кода, ноль зависимостей, ноль телеметрии — это просто промпты. Работает с Claude Code, Cursor, Codex.</p></div>
+    <div class="stack"><span>Prompt engineering</span><span>Markdown</span><span>agent-agnostic</span></div>
+    <div class="case-link"><a href="https://github.com/N23eos/vault-mirror" target="_blank" rel="noopener">GitHub: открытый репозиторий &rarr;</a></div>
+  </div>
+</details>
+
+<!-- ===== МУЗЫКА И ВИДЕО ===== -->
+
+<details class="case reveal" data-cat="media">
+  <summary>
+    <span class="name">Music Visual Machine</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Audio-reactive визуализатор, которым управляют AI-агенты: «сделай визуал под этот трек» → готовое видео.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Визуал под музыку — это часы ручной работы в After Effects на каждый трек, а генераторы «one-click» не дают контроля.</p></div>
+    <div class="cell"><b>Решение</b><p>Пайплайн: аудио → per-frame фичи (свой FFT, стриминг) → 8 сцен на React/Three.js → рендер через Remotion с прозрачным фоном (ProRes 4444) для композитинга в Final Cut. Сегментированный резюмируемый рендер длинных треков, MCP-сервер — визуализатором управляет агент.</p></div>
+    <div class="cell"><b>Результат</b><p><strong>v1.0, все фазы 0–6 закрыты</strong>: тесты на детерминизм, golden frames, BPM и MCP-контракт.</p></div>
+    <div class="stack"><span>TypeScript</span><span>Remotion</span><span>React + Three.js</span><span>MCP</span><span>pnpm monorepo</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="media">
+  <summary>
+    <span class="name">WAV Humanizer</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">DSP-процессор, который заставляет квантованное аудио звучать как живое исполнение.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Сгенерированная и жёстко квантованная музыка звучит механически: идеальный ритм и одинаковая динамика выдают машину.</p></div>
+    <div class="cell"><b>Решение</b><p>Пайплайн Analyzer → HumanizationEngine → EffectsChain: детект темпа и фраз, transient-aware микросдвиги тайминга, контекстная вариация velocity, «усталость» к концу фразы, дрейф питча, аналоговое тепло. JSON-отчёт о каждом преобразовании.</p></div>
+    <div class="cell"><b>Результат</b><p>CLI с батч-обработкой, 24-bit WAV на выходе, smoke-тесты.</p></div>
+    <div class="stack"><span>Python</span><span>DSP</span><span>Pedalboard</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="media">
+  <summary>
+    <span class="name">Suno Prompt Hub</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Блочный конструктор промптов для Suno: собери стиль, крути слот-машину тегов, генерируй пачками.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Хорошие промпты для Suno — это комбинаторика из десятков тегов; вручную перебирать варианты медленно и без системы.</p></div>
+    <div class="cell"><b>Решение</b><p>Блоки тем (жанр, атмосфера, ритм, приёмы…) с реролл/слот-машиной и локом блоков, пакетная генерация до 200 промптов, «эволюция» — скрещивание и мутация пресетов, коллекция карточек с редкостью common → legendary, улучшение через LLM.</p></div>
+    <div class="cell"><b>Результат</b><p>Открыл index.html — работает: без сборки, зависимостей и сервера. 7 спринтов фич.</p></div>
+    <div class="stack"><span>Vanilla JS</span><span>HTML/CSS</span><span>LLM API</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="media tools">
+  <summary>
+    <span class="name">YouTube Pipeline Gen</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Контент-фабрика для YouTube-каналов: идеи, сценарии, промпты для Suno/Midjourney/Runway, метаданные.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Несколько каналов = конвейер однотипной работы: придумать, расписать, сгенерировать ассеты, оформить метаданные — на каждое видео.</p></div>
+    <div class="cell"><b>Решение</b><p>Пайплайн с профилями каналов в YAML: анализ ниши → идеи → сценарии → промпты для ИИ-генерации → метаданные и Shorts → редакторская оценка. Два режима оплаты: через подписку Claude (CLI) или API-ключ.</p></div>
+    <div class="cell"><b>Результат</b><p>Рабочее приложение + macOS .app, тесты, конфиги на 4 канала.</p></div>
+    <div class="stack"><span>Python</span><span>Claude CLI / API</span><span>YAML-конфиги</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="media tools">
+  <summary>
+    <span class="name">AI Music Checker</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Проверка mp3/wav на признаки AI-генерации — целиком в браузере, файлы никуда не уходят.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Нужно быстро понять, сгенерирован ли трек (Suno и т.п.), не отправляя аудио на чужие серверы.</p></div>
+    <div class="cell"><b>Решение</b><p>Анализ через Web Audio API: следы в метаданных, crest factor и компрессия, стабильность спектрального центра, повторяемость секундных паттернов, стерео-корреляция.</p></div>
+    <div class="cell"><b>Результат</b><p>Один index.html: перетащил файл — получил вердикт. Ноль бэкенда.</p></div>
+    <div class="stack"><span>JavaScript</span><span>Web Audio API</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="media tools">
+  <summary>
+    <span class="name">youtube_video_optimizer</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Сжатие видео для загрузки на YouTube: пресеты ffmpeg + macOS droplet «перетащил — готово».</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Исходники видео весят гигабайты, а флаги ffmpeg каждый раз гуглятся заново.</p></div>
+    <div class="cell"><b>Решение</b><p>Тонкая обёртка над ffmpeg с выверенными пресетами (720/1080/480, CRF) + AppleScript-droplet: перетащил файл на иконку — получил сжатый. Внутри — Claude-skill для агентов.</p></div>
+    <div class="cell"><b>Результат</b><p>Опубликован с лицензией и агент-гайдом; используется в собственном YouTube-пайплайне.</p></div>
+    <div class="stack"><span>Bash</span><span>ffmpeg</span><span>AppleScript</span></div>
+    <div class="case-link"><a href="https://github.com/N23eos/youtube_video_optimizer" target="_blank" rel="noopener">GitHub: открытый репозиторий &rarr;</a></div>
+  </div>
+</details>
+
+<!-- ===== ИНСТРУМЕНТЫ / ИГРЫ ===== -->
+
+
+<details class="case reveal" data-cat="tools">
+  <summary>
+    <span class="name">Prompt Manager</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Менеджер промптов для macOS: menu bar, Spotlight-палитра, шаблоны с переменными и MCP-сервер.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Рабочие промпты разбросаны по заметкам и чатам; ни быстрого доступа, ни переменных, ни доступа для агентов.</p></div>
+    <div class="cell"><b>Решение</b><p>Приложение в menu bar со Spotlight-style палитрой, тегами, избранным и {{variable}}-шаблонами. Плюс MCP-сервер: Claude и другие агенты ищут и используют твои промпты напрямую.</p></div>
+    <div class="cell"><b>Результат</b><p>Собирается в standalone .app одним скриптом.</p></div>
+    <div class="stack"><span>Electron</span><span>Node.js</span><span>MCP</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-cat="product">
+  <summary>
+    <span class="name">Hermes Skill Pack</span>
+    <span class="chev">&rarr;</span>
+    <span class="one">Коммерческий каталог outcome-ориентированных skill-паков для Hermes Agent: MVP с проверкой спроса.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b>Проблема</b><p>Отдельные SKILL.md-файлы никто не покупает; ценность — в протестированных воркфлоу с онбордингом, диагностикой и обновлениями совместимости.</p></div>
+    <div class="cell"><b>Решение</b><p>Evidence-driven MVP: сначала фаза 0 — валидация спроса, платный пак за гейтом. Бесплатные скиллы публикуются в отдельный публичный tap-репозиторий через allowlist-бандл; факты о Hermes пинятся к конкретной версии.</p></div>
+    <div class="cell"><b>Результат</b><p>Инфраструктура каталога: сайт, формат пакетов, threat model, стратегия тестирования.</p></div>
+    <div class="stack"><span>Node 22</span><span>Python 3.12</span><span>Hermes Agent</span></div>
+  </div>
+</details>
+
+</div><!-- /cases -->
+
+<footer>Raincoat &copy; 2026 &middot; <a class="back" href="index.html">на главную</a></footer>
+
+</div><!-- /wrap -->
+
+<script>
+// reveal on scroll
+const io=new IntersectionObserver(es=>{
+  for(const e of es){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// filters
+const btns=document.querySelectorAll('#filters button');
+btns.forEach(b=>b.addEventListener('click',()=>{
+  btns.forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const f=b.dataset.f;
+  document.querySelectorAll('details.case').forEach(c=>{
+    const show=f==='all'||c.dataset.cat.split(' ').includes(f);
+    c.classList.toggle('hide',!show);
+    if(show)c.classList.add('visible');
+  });
+}));
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+.fuse_hidden*
+
+# Черновики и резервные копии
+*.bak
+*.backup.html
+index.backup.html
+youtube.html.bak
+Untitled-*.png
+ChatGPT Image*.png
+PLAN.md

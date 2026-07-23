@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raincoat — креатив и код</title>
+<meta name="description" content="Raincoat: превращаю идеи в работающие проекты. Креатив, код, эксперименты.">
+<meta property="og:title" content="Raincoat">
+<meta property="og:description" content="Креатив и код">
+<style>
+:root{
+  --charcoal:#25221D;
+  --wood:#574938;
+  --sage:#939271;
+  --olive:#AEAE87;
+  --cream:#D1C997;
+  --amber:#D9A26E;
+  --terracotta:#965E2F;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--charcoal);
+  color:var(--cream);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.hero,section,footer{position:relative;z-index:1}
+::selection{background:var(--terracotta);color:var(--cream)}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  height:100svh;
+  min-height:560px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+.hero video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(180deg,
+    rgba(37,34,29,.25) 0%,
+    rgba(37,34,29,.15) 45%,
+    rgba(37,34,29,.85) 92%,
+    var(--charcoal) 100%);
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  padding:0 24px;
+}
+.hero h1,.hero p,.hero .cta{
+  opacity:0;
+  transform:translateY(26px);
+  animation:heroUp .9s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.hero h1{animation-delay:.15s}
+.hero p{animation-delay:.42s}
+.hero .cta{animation-delay:.62s}
+@keyframes heroUp{to{opacity:1;transform:none}}
+.scroll-hint{opacity:0;animation:heroUp .9s ease .9s forwards,bob 2.2s ease-in-out 1.8s infinite}
+@media (prefers-reduced-motion:reduce){
+  .hero h1,.hero p,.hero .cta,.scroll-hint{opacity:1;transform:none;animation:none}
+}
+.hero h1{
+  font-size:clamp(64px,14vw,160px);
+  font-weight:700;
+  letter-spacing:-.03em;
+  line-height:1;
+  color:var(--cream);
+  text-shadow:0 4px 40px rgba(37,34,29,.6);
+}
+.hero p{
+  margin-top:16px;
+  font-size:clamp(16px,2.2vw,22px);
+  color:var(--olive);
+  text-shadow:0 2px 20px rgba(37,34,29,.8);
+}
+.hero .cta{
+  position:relative;
+  overflow:hidden;
+  margin-top:36px;
+  display:inline-block;
+  padding:14px 36px;
+  border:1px solid var(--amber);
+  border-radius:999px;
+  color:var(--amber);
+  text-decoration:none;
+  font-size:16px;
+  transition:background .35s,color .35s,box-shadow .35s;
+  will-change:transform;
+}
+.hero .cta::before{
+  content:"";
+  position:absolute;inset:0;z-index:-1;
+  background:var(--amber);
+  transform:translateY(101%);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.hero .cta:hover{
+  color:var(--charcoal);
+  box-shadow:0 12px 34px rgba(217,162,110,.28);
+}
+.hero .cta:hover::before{transform:translateY(0)}
+.scroll-hint{
+  position:absolute;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  color:var(--sage);
+  font-size:13px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ---------- SECTIONS ---------- */
+section{
+  max-width:1040px;
+  margin:0 auto;
+  padding:110px 24px;
+}
+.section-label{
+  color:var(--terracotta);
+  font-size:14px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+h2{
+  font-size:clamp(30px,4.5vw,48px);
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--cream);
+  margin-bottom:40px;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:none}
+
+/* ---------- WORD-REVEAL (заголовки и текст) ---------- */
+.reveal-words{opacity:1}
+.reveal-words .w{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(.7em) rotate(3deg);
+  transition:opacity .55s cubic-bezier(.2,.75,.2,1),transform .65s cubic-bezier(.2,.75,.2,1);
+  transition-delay:var(--d,0s);
+  will-change:transform,opacity;
+}
+.reveal-words.visible .w{opacity:1;transform:none}
+.reveal-words strong .w{color:var(--cream)}
+@media (prefers-reduced-motion:reduce){
+  .reveal-words .w{opacity:1!important;transform:none!important;transition:none!important}
+}
+
+/* ---------- КАСТОМНЫЙ КУРСОР ---------- */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  opacity:0;
+  transition:opacity .3s ease;
+  mix-blend-mode:screen;
+}
+.cursor-dot{width:7px;height:7px;background:var(--amber)}
+.cursor-ring{
+  width:34px;height:34px;
+  border:1px solid rgba(217,162,110,.55);
+  transition:opacity .3s ease,width .25s ease,height .25s ease,border-color .25s ease,background .25s ease;
+}
+.cursor-ring.hot{
+  width:56px;height:56px;
+  border-color:rgba(217,162,110,.9);
+  background:rgba(217,162,110,.08);
+}
+@media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+body.has-cursor{cursor:none}
+body.has-cursor a,body.has-cursor .cta,body.has-cursor .proj{cursor:none}
+
+/* ---------- PROJECTS ---------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:22px;
+}
+.card{
+  background:rgba(87,73,56,.28);
+  border:1px solid rgba(147,146,113,.25);
+  border-radius:14px;
+  padding:28px;
+  transition:transform .3s,border-color .3s,background .3s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--amber);
+  background:rgba(87,73,56,.45);
+}
+.card h3{
+  color:var(--amber);
+  font-size:20px;
+  margin-bottom:10px;
+}
+.card p{color:var(--olive);font-size:15px}
+.card .tag{
+  display:inline-block;
+  margin-top:16px;
+  font-size:12px;
+  color:var(--sage);
+  border:1px solid var(--wood);
+  border-radius:999px;
+  padding:4px 12px;
+}
+
+/* ---------- PROJECTS MARQUEE ---------- */
+.marquee-wrap{
+  position:relative;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.marquee-row{
+  display:flex;
+  gap:14px;
+  width:max-content;
+  will-change:transform;
+}
+.marquee-row + .marquee-row{margin-top:14px}
+.marquee-row.rtl{animation:scroll-rtl 70s linear infinite}
+.marquee-row.ltr{animation:scroll-ltr 82s linear infinite}
+.marquee-wrap:hover .marquee-row{animation-play-state:paused}
+@keyframes scroll-rtl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scroll-ltr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){
+  .marquee-row{animation:none!important}
+  .marquee-wrap{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+}
+#projects{max-width:none;padding-left:0;padding-right:0}
+#projects > .section-label,#projects > h2{
+  max-width:1040px;margin-left:auto;margin-right:auto;
+  padding-left:24px;padding-right:24px;
+}
+.proj{
+  position:relative;
+  overflow:hidden;
+  flex:0 0 288px;
+  padding:14px 16px;
+  border:1px solid rgba(147,146,113,.18);
+  border-radius:10px;
+  background:rgba(87,73,56,.18);
+  transition:border-color .25s,background .25s,transform .25s,box-shadow .25s;
+}
+.proj::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:radial-gradient(160px circle at var(--mx,50%) var(--my,50%),rgba(217,162,110,.16),transparent 70%);
+  opacity:0;
+  transition:opacity .3s;
+  pointer-events:none;
+}
+.proj:hover{
+  border-color:var(--amber);
+  background:rgba(87,73,56,.34);
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 8px 30px rgba(37,34,29,.5),0 0 0 1px rgba(217,162,110,.15);
+}
+.proj:hover::before{opacity:1}
+.proj::after{
+  content:"";
+  position:absolute;
+  top:0;left:-80%;
+  width:60%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(209,201,151,.07),transparent);
+  transform:skewX(-20deg);
+  pointer-events:none;
+  transition:left .6s ease;
+}
+.proj:hover::after{left:120%}
+.proj b{
+  display:block;
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:14px;
+  color:var(--amber);
+  font-weight:600;
+  margin-bottom:3px;
+  word-break:break-word;
+}
+.proj span{font-size:13px;color:var(--sage);line-height:1.45}
+
+/* ---------- SKILL MAP ---------- */
+#tools{max-width:none;padding-left:0;padding-right:0}
+#tools > .section-label{
+  max-width:1040px;margin-left:auto;margin-right:auto;
+  padding-left:24px;padding-right:24px;
+}
+.skillmap-wrap{
+  position:relative;
+  overflow:hidden;
+}
+#skillmap{
+  display:block;
+  width:100%;
+  height:520px;
+  touch-action:none;
+}
+@media (max-width:600px){#skillmap{height:380px}}
+
+/* ---------- YOUTUBE ---------- */
+.yt-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+.yt{
+  display:block;text-decoration:none;
+  border:1px solid rgba(147,146,113,.22);
+  border-radius:12px;padding:20px;
+  background:rgba(87,73,56,.2);
+  transition:transform .25s,border-color .25s,background .25s;
+}
+.yt{will-change:transform}
+.yt:hover{transform:translateY(-4px);border-color:var(--amber);background:rgba(87,73,56,.4);box-shadow:0 12px 30px rgba(37,34,29,.45)}
+.yt b{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.yt:hover b{transform:translateX(4px)}
+.yt .yt-tag{color:var(--terracotta);font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:8px}
+.yt b{color:var(--cream);font-size:16px;display:block}
+.cta-link{
+  position:relative;overflow:hidden;
+  display:inline-block;color:var(--amber);text-decoration:none;
+  border:1px solid var(--amber);border-radius:999px;
+  padding:11px 26px;font-size:15px;
+  transition:color .35s,box-shadow .35s;
+  will-change:transform;
+}
+.cta-link::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:var(--amber);transform:translateY(101%);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.cta-link .arw{display:inline-block;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.cta-link:hover{color:var(--charcoal);box-shadow:0 10px 28px rgba(217,162,110,.25)}
+.cta-link:hover::before{transform:translateY(0)}
+.cta-link:hover .arw{transform:translateX(5px)}
+
+/* ---------- ABOUT ---------- */
+.about p{
+  font-size:clamp(17px,2vw,21px);
+  color:var(--olive);
+  max-width:720px;
+}
+.about strong{color:var(--cream);font-weight:600}
+
+/* ---------- CONTACTS ---------- */
+.contacts{text-align:center}
+.contact-links{
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+.contact-links a{
+  position:relative;
+  color:var(--cream);
+  text-decoration:none;
+  border:1px solid var(--wood);
+  border-radius:999px;
+  padding:12px 28px;
+  font-size:16px;
+  transition:border-color .35s,color .35s,box-shadow .35s;
+  will-change:transform;
+}
+.contact-links a::after{
+  content:"";
+  position:absolute;left:28px;right:28px;bottom:9px;height:1px;
+  background:var(--amber);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.contact-links a:hover{
+  border-color:var(--amber);
+  color:var(--amber);
+  box-shadow:0 8px 24px rgba(217,162,110,.18);
+}
+.contact-links a:hover::after{transform:scaleX(1)}
+/* ---------- ZEN (финальная картинка) ---------- */
+.zen{
+  position:relative;
+  z-index:1;
+  margin-top:40px;
+  overflow:hidden;
+}
+.zen-rain{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  z-index:2;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.6s ease;
+}
+.zen.visible .zen-rain{opacity:1}
+@media (prefers-reduced-motion:reduce){.zen-rain{display:none}}
+.zen img{
+  display:block;
+  width:100%;
+  height:auto;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 26%,#000 78%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 26%,#000 78%,transparent 100%);
+  opacity:0;
+  transform:scale(1.04);
+  transition:opacity 1.6s ease,transform 2.4s ease;
+}
+.zen.visible img{opacity:.92;transform:scale(1)}
+.zen::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(120% 90% at 50% 55%,transparent 55%,rgba(37,34,29,.55) 100%);
+  pointer-events:none;
+}
+.zen-caption{
+  position:absolute;
+  left:50%;
+  bottom:10%;
+  transform:translateX(-50%);
+  z-index:2;
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:clamp(11px,1.4vw,14px);
+  letter-spacing:.28em;
+  text-transform:lowercase;
+  color:var(--cream);
+  text-shadow:0 2px 16px rgba(37,34,29,.9);
+  opacity:.85;
+  white-space:nowrap;
+}
+.zen-caption .cursor{
+  display:inline-block;
+  width:.6em;height:1.1em;
+  background:var(--amber);
+  vertical-align:text-bottom;
+  margin-left:4px;
+  animation:blink 1.1s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+footer{
+  text-align:center;
+  padding:24px 24px 48px;
+  color:var(--sage);
+  font-size:13px;
+}
+</style>
+</head>
+<body>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<header class="hero">
+  <video autoplay muted loop playsinline preload="auto" src="assets/hero-loop.mp4"></video>
+  <div class="hero-content">
+    <h1>Raincoat</h1>
+    <p>Креатив &times; код: превращаю идеи в работающие проекты</p>
+    <a class="cta" href="#contacts">Написать мне</a>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</header>
+
+<section id="about" class="about">
+  <p class="section-label reveal">Обо мне</p>
+  <p class="reveal-words">Соло-предприниматель на фрилансе. Специализируюсь на <strong>видеомонтаже</strong>, <strong>ИИ-генерации контента</strong> и <strong>оркестрации агентов</strong>.</p>
+</section>
+
+<section id="tools">
+  <p class="section-label reveal">Инструменты</p>
+  <div class="skillmap-wrap reveal">
+    <canvas id="skillmap"></canvas>
+  </div>
+</section>
+
+<!-- YouTube-секция временно скрыта (страница youtube.html → youtube.html.bak)
+<section id="youtube">
+  <p class="section-label reveal">YouTube</p>
+  <h2 class="reveal-words">Каналы</h2>
+  <div class="yt-grid reveal">
+    <a class="yt" href="youtube.html" ><span class="yt-tag">Юмор</span><b>@RAINCOAT_Bread</b></a>
+    <a class="yt" href="youtube.html"><span class="yt-tag">Разговоры</span><b>@Raincoat_talk</b></a>
+    <a class="yt" href="youtube.html"><span class="yt-tag">Ambient музыка</span><b>@Ambient_Shelter_Music</b></a>
+    <a class="yt" href="youtube.html"><span class="yt-tag">Идеи</span><b>@Wideominder</b></a>
+  </div>
+  <p class="reveal" style="margin-top:22px"><a class="cta-link" href="youtube.html">Все каналы и популярные видео <span class="arw">&rarr;</span></a></p>
+</section>
+-->
+
+<section id="projects">
+  <p class="section-label reveal">Проекты</p>
+  <p class="reveal" style="max-width:1040px;margin:0 auto 28px;padding:0 24px"><a class="cta-link" href="projects.html">Все кейсы: проблема &rarr; решение &rarr; стек &rarr; результат <span class="arw">&rarr;</span></a></p>
+  <div class="marquee-wrap reveal">
+    <div class="marquee-row rtl">
+      <div class="proj"><b>bunny_survive_game</b><span>Игра про выживание кролика (voxel-survivor).</span></div>
+      <div class="proj"><b>obsidian_plagin</b><span>Плагин Obsidian: двухпанельный файл-менеджер с drag-and-drop.</span></div>
+      <div class="proj"><b>Youtube_pipeline_gen</b><span>Генератор YouTube-пайплайна: доска производства, pre-commit хук.</span></div>
+      <div class="proj"><b>youtube_video_optimizer</b><span>Оптимизатор видео: ffmpeg CLI + macOS droplet.</span></div>
+      <div class="proj"><b>polymarket_weather</b><span>Polymarket-бот на погоду: сканер, стратегии A/B, демон.</span></div>
+      <div class="proj"><b>Ai_Chat_bot_for_buisness</b><span>AI-чат-бот: RAG (pgvector), Telegram-webhook, handoff.</span></div>
+      <div class="proj"><b>polymarket-trade</b><span>Торговый бот для Polymarket; walk-forward OOS.</span></div>
+      <div class="proj"><b>SoulOS</b><span>Готовится distribution (.env.template для клиентских инстансов).</span></div>
+      <div class="proj"><b>music_visual_machine</b><span>Визуализация музыки, pnpm-монорепо; Phase 1.</span></div>
+      <div class="proj"><b>I-was-here</b><span>On-chain подтверждение посещения (Solidity).</span></div>
+      <div class="proj"><b>facebook-georgia-auto</b><span>Автоматизация Facebook (Грузия).</span></div>
+      <div class="proj"><b>anti_adhd_writer</b><span>Помощник письма против прокрастинации.</span></div>
+      <!-- дубликат для бесшовной прокрутки -->
+      <div class="proj" aria-hidden="true"><b>bunny_survive_game</b><span>Игра про выживание кролика (voxel-survivor).</span></div>
+      <div class="proj" aria-hidden="true"><b>obsidian_plagin</b><span>Плагин Obsidian: двухпанельный файл-менеджер с drag-and-drop.</span></div>
+      <div class="proj" aria-hidden="true"><b>Youtube_pipeline_gen</b><span>Генератор YouTube-пайплайна: доска производства, pre-commit хук.</span></div>
+      <div class="proj" aria-hidden="true"><b>youtube_video_optimizer</b><span>Оптимизатор видео: ffmpeg CLI + macOS droplet.</span></div>
+      <div class="proj" aria-hidden="true"><b>polymarket_weather</b><span>Polymarket-бот на погоду: сканер, стратегии A/B, демон.</span></div>
+      <div class="proj" aria-hidden="true"><b>Ai_Chat_bot_for_buisness</b><span>AI-чат-бот: RAG (pgvector), Telegram-webhook, handoff.</span></div>
+      <div class="proj" aria-hidden="true"><b>polymarket-trade</b><span>Торговый бот для Polymarket; walk-forward OOS.</span></div>
+      <div class="proj" aria-hidden="true"><b>SoulOS</b><span>Готовится distribution (.env.template для клиентских инстансов).</span></div>
+      <div class="proj" aria-hidden="true"><b>music_visual_machine</b><span>Визуализация музыки, pnpm-монорепо; Phase 1.</span></div>
+      <div class="proj" aria-hidden="true"><b>I-was-here</b><span>On-chain подтверждение посещения (Solidity).</span></div>
+      <div class="proj" aria-hidden="true"><b>facebook-georgia-auto</b><span>Автоматизация Facebook (Грузия).</span></div>
+      <div class="proj" aria-hidden="true"><b>anti_adhd_writer</b><span>Помощник письма против прокрастинации.</span></div>
+    </div>
+    <div class="marquee-row ltr">
+      <div class="proj"><b>Web_sites_small_buisness</b><span>Сайты для малого бизнеса.</span></div>
+      <div class="proj"><b>web_site_raincoat</b><span>Персональный сайт Raincoat (этот проект).</span></div>
+      <div class="proj"><b>world_intentions</b><span>Новая папка, ещё не под git.</span></div>
+      <div class="proj"><b>apr2025_tgaibot-main</b><span>Telegram AI-бот; STATUS.md с этапами.</span></div>
+      <div class="proj"><b>music_enchancer</b><span>Улучшение музыки на Python: DSP-пайплайн, smoke-тесты.</span></div>
+      <div class="proj"><b>suno-prompting</b><span>Промптинг для Suno: спринты 1–7 + фичи sunobuilder.</span></div>
+      <div class="proj"><b>beginning_the_jurney</b><span>Веб-бизнес в Грузии/Батуми: плейбуки, сценарии, FAQ.</span></div>
+      <div class="proj"><b>hyrricane-polymarket</b><span>Polymarket: ставки на ураганы.</span></div>
+      <div class="proj"><b>baseiwashere</b><span>Связан с I-was-here (Base).</span></div>
+      <div class="proj"><b>agency-agents-main</b><span>Агентство AI-агентов.</span></div>
+      <div class="proj"><b>aimusic_enchancer / ai_music</b><span>AI-улучшение и проверка музыки.</span></div>
+      <div class="proj"><b>procrastination-simulator</b><span>Браузерная игра, Next.js 14 + Tailwind.</span></div>
+      <!-- дубликат для бесшовной прокрутки -->
+      <div class="proj" aria-hidden="true"><b>Web_sites_small_buisness</b><span>Сайты для малого бизнеса.</span></div>
+      <div class="proj" aria-hidden="true"><b>web_site_raincoat</b><span>Персональный сайт Raincoat (этот проект).</span></div>
+      <div class="proj" aria-hidden="true"><b>world_intentions</b><span>Новая папка, ещё не под git.</span></div>
+      <div class="proj" aria-hidden="true"><b>apr2025_tgaibot-main</b><span>Telegram AI-бот; STATUS.md с этапами.</span></div>
+      <div class="proj" aria-hidden="true"><b>music_enchancer</b><span>Улучшение музыки на Python: DSP-пайплайн, smoke-тесты.</span></div>
+      <div class="proj" aria-hidden="true"><b>suno-prompting</b><span>Промптинг для Suno: спринты 1–7 + фичи sunobuilder.</span></div>
+      <div class="proj" aria-hidden="true"><b>beginning_the_jurney</b><span>Веб-бизнес в Грузии/Батуми: плейбуки, сценарии, FAQ.</span></div>
+      <div class="proj" aria-hidden="true"><b>hyrricane-polymarket</b><span>Polymarket: ставки на ураганы.</span></div>
+      <div class="proj" aria-hidden="true"><b>baseiwashere</b><span>Связан с I-was-here (Base).</span></div>
+      <div class="proj" aria-hidden="true"><b>agency-agents-main</b><span>Агентство AI-агентов.</span></div>
+      <div class="proj" aria-hidden="true"><b>aimusic_enchancer / ai_music</b><span>AI-улучшение и проверка музыки.</span></div>
+      <div class="proj" aria-hidden="true"><b>procrastination-simulator</b><span>Браузерная игра, Next.js 14 + Tailwind.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="contacts">
+  <p class="section-label reveal">Контакты</p>
+  <div class="contact-links reveal">
+    <a href="mailto:mns.nicholas2@gmail.com">Email</a>
+    <a href="https://github.com/N23eos" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://x.com/Raincoat_talk" target="_blank" rel="noopener">X (Twitter)</a>
+    <a href="https://www.youtube.com/@Raincoat_talk" target="_blank" rel="noopener">YouTube</a>
+  </div>
+</section>
+
+<div class="zen reveal">
+  <img src="assets/zen-cat.png" alt="Кот в дождевике медитирует под дождём" loading="lazy">
+  <canvas class="zen-rain" aria-hidden="true"></canvas>
+  <p class="zen-caption">// stay calm. ship things.<span class="cursor"></span></p>
+</div>
+
+<footer>Raincoat &copy; 2026</footer>
+
+<script>
+const io=new IntersectionObserver(entries=>{
+  for(const e of entries){
+    if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+  }
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- SPOTLIGHT НА КАРТОЧКАХ ---------- */
+document.addEventListener('pointermove',e=>{
+  const p=e.target.closest('.proj');
+  if(!p)return;
+  const r=p.getBoundingClientRect();
+  p.style.setProperty('--mx',(e.clientX-r.left)+'px');
+  p.style.setProperty('--my',(e.clientY-r.top)+'px');
+});
+
+/* ---------- ГОРОД НАВЫКОВ ---------- */
+(()=>{
+  const cv=document.getElementById('skillmap');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const AMBER='#D9A26E';
+
+  const CATS=[
+    {n:'ВИДЕО',tools:['Final Cut','Motion','Photoshop'],hf:.62},
+    {n:'AI-КОД',tools:['Claude Code','Cursor','Codex'],hf:.86},
+    {n:'AI-ГЕН',tools:['Kling AI','Midjourney','ElevenLabs'],hf:.72},
+    {n:'АГЕНТЫ',tools:['Hermes','OpenClaw'],hf:.5},
+  ];
+  const catImg=new Image();
+  catImg.src='assets/cat-umbrella.png';
+
+  const hash=(a,b,c)=>{const s=Math.sin(a*12.9898+b*78.233+c*37.719)*43758.5453;return s-Math.floor(s)};
+
+  let W,H,DPR,G,builds,back,rain,catPos;
+  function resize(){
+    DPR=devicePixelRatio||1;
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*DPR;cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    G=H-Math.max(54,H*.13);
+    const maxH=G-70;
+    /* передние здания: 2 слева, кот, 2 справа */
+    const bw=W*.175,gap=W*.035,m=W*.045,catW=W-2*m-4*bw-3*gap;
+    const xs=[m,m+bw+gap,m+2*(bw+gap)+catW,m+3*(bw+gap)+catW];
+    builds=CATS.map((c,i)=>({...c,x:xs[i],w:bw,h:Math.max(150,maxH*c.hf)}));
+    catPos={x:m+2*(bw+gap)+catW*.12,h:Math.min(120,H*.24)};
+    /* задний план */
+    back=[];
+    let bx=-20;
+    while(bx<W+20){
+      const w=40+hash(bx,1,2)*70,h=maxH*(.3+hash(bx,3,4)*.5);
+      back.push({x:bx,w,h});bx+=w+8+hash(bx,5,6)*30;
+    }
+    rain=Array.from({length:230},()=>({
+      x:Math.random()*(W+60),y:Math.random()*H,
+      v:4.5+Math.random()*4.5,l:9+Math.random()*10
+    }));
+  }
+  addEventListener('resize',resize);resize();
+
+  const mouse={x:-1,y:-1};
+  let hover=-1,t=0,last=performance.now();
+  cv.addEventListener('pointermove',e=>{
+    const r=cv.getBoundingClientRect();
+    mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;
+  });
+  cv.addEventListener('pointerleave',()=>{mouse.x=-1;mouse.y=-1});
+
+  function windows(b,i,on){
+    const cw=15,ch=19;
+    const cols=Math.floor((b.w-18)/cw),rows=Math.floor((b.h-46)/ch);
+    const ox=b.x+(b.w-cols*cw)/2+3,oy=G-b.h+30;
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      let lit=hash(r,c,i)>.42;
+      /* редкое мигание отдельных окон */
+      if(!reduceMotion&&hash(r,c,i+9)>.93)lit=Math.sin(t*(1+hash(r,c,i)*2)+r*c)>0;
+      ctx.fillStyle=lit
+        ?`rgba(217,162,110,${on?.95:.32})`
+        :'rgba(37,34,29,.65)';
+      ctx.fillRect(ox+c*cw,oy+r*ch,6,9);
+    }
+  }
+  function building(b,i,on,refl){
+    ctx.fillStyle=on?'#39322a':'#2c2721';
+    ctx.fillRect(b.x,G-b.h,b.w,b.h);
+    ctx.strokeStyle=on?'rgba(217,162,110,.35)':'rgba(87,73,56,.6)';
+    ctx.strokeRect(b.x+.5,G-b.h+.5,b.w-1,b.h-1);
+    /* крыша: парапет + антенна */
+    ctx.fillStyle=on?'#443b30':'#332d25';
+    ctx.fillRect(b.x-4,G-b.h-6,b.w+8,6);
+    if(i%2===0){
+      ctx.strokeStyle='rgba(147,146,113,.5)';
+      ctx.beginPath();ctx.moveTo(b.x+b.w*.78,G-b.h-6);ctx.lineTo(b.x+b.w*.78,G-b.h-24);ctx.stroke();
+      ctx.fillStyle=on?AMBER:'rgba(217,162,110,.5)';
+      ctx.beginPath();ctx.arc(b.x+b.w*.78,G-b.h-26,2,0,7);ctx.fill();
+    }
+    windows(b,i,on);
+    if(refl)return;
+    /* вывеска */
+    if(on){
+      const sy=G-b.h-46;
+      ctx.shadowColor=AMBER;ctx.shadowBlur=16;
+      ctx.fillStyle='rgba(217,162,110,.95)';
+      ctx.beginPath();ctx.roundRect(b.x+8,sy,b.w-16,26,5);ctx.fill();
+      ctx.shadowBlur=0;
+      ctx.fillStyle='#25221D';
+      ctx.font='700 13px ui-monospace,Menlo,monospace';
+      ctx.textAlign='center';
+      ctx.fillText(b.n,b.x+b.w/2,sy+17);
+      /* инструменты — светящиеся таблички на фасаде */
+      ctx.font='600 12px ui-monospace,Menlo,monospace';
+      b.tools.forEach((tl,j)=>{
+        const ty=G-b.h+52+j*30;
+        ctx.fillStyle='rgba(37,34,29,.82)';
+        ctx.beginPath();ctx.roundRect(b.x+10,ty-14,b.w-20,20,4);ctx.fill();
+        ctx.fillStyle=AMBER;
+        ctx.fillText(tl,b.x+b.w/2,ty);
+      });
+      ctx.textAlign='left';
+    }
+  }
+  function cat(refl){
+    if(!catImg.complete||!catImg.naturalWidth)return;
+    const h=catPos.h,w=h*catImg.naturalWidth/catImg.naturalHeight;
+    const bob=reduceMotion?0:Math.sin(t*1.4)*1.5;
+    const y=G-h+2+(refl?0:bob);
+    ctx.filter='brightness(.68) saturate(.82)';
+    ctx.drawImage(catImg,catPos.x,y,w,h);
+    ctx.filter='none';
+  }
+
+  function frame(now){
+    const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
+    ctx.clearRect(0,0,W,H);
+
+    /* небо */
+    let g=ctx.createLinearGradient(0,0,0,G);
+    g.addColorStop(0,'#25221D');g.addColorStop(1,'#32302a');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,G);
+
+    /* задний план с параллаксом */
+    const par=mouse.x>=0?(mouse.x-W/2)*.018:0;
+    ctx.save();ctx.translate(par,0);
+    ctx.fillStyle='rgba(87,73,56,.32)';
+    for(const b of back){
+      ctx.fillRect(b.x,G-b.h,b.w,b.h);
+      if(hash(b.x,7,8)>.5){ctx.fillRect(b.x+b.w*.3,G-b.h-10,b.w*.2,10);}
+    }
+    ctx.restore();
+
+    /* туман */
+    g=ctx.createLinearGradient(0,G-110,0,G);
+    g.addColorStop(0,'rgba(37,34,29,0)');
+    g.addColorStop(1,'rgba(147,146,113,.14)');
+    ctx.fillStyle=g;ctx.fillRect(0,G-110,W,110);
+
+    /* hover */
+    hover=-1;
+    if(mouse.x>=0)builds.forEach((b,i)=>{
+      if(mouse.x>b.x&&mouse.x<b.x+b.w&&mouse.y>G-b.h-52&&mouse.y<G)hover=i;
+    });
+    cv.style.cursor=hover>=0?'pointer':'default';
+
+    /* передний ряд + кот */
+    builds.forEach((b,i)=>building(b,i,i===hover,false));
+    cat(false);
+
+    /* мостовая */
+    g=ctx.createLinearGradient(0,G,0,H);
+    g.addColorStop(0,'#201d19');g.addColorStop(1,'#25221D');
+    ctx.fillStyle=g;ctx.fillRect(0,G,W,H-G);
+    ctx.fillStyle='rgba(209,201,151,.06)';ctx.fillRect(0,G,W,1.5);
+
+    /* отражения в мокром асфальте */
+    ctx.save();
+    ctx.beginPath();ctx.rect(0,G,W,H-G);ctx.clip();
+    ctx.translate(0,G);ctx.scale(1,-.55);ctx.translate(0,-G);
+    ctx.globalAlpha=.13;
+    builds.forEach((b,i)=>building(b,i,i===hover,true));
+    cat(true);
+    ctx.restore();
+    ctx.globalAlpha=1;
+    /* рябь */
+    if(!reduceMotion){
+      ctx.strokeStyle='rgba(209,201,151,.05)';
+      for(let i=0;i<3;i++){
+        const y=G+10+i*14+Math.sin(t*1.2+i)*2;
+        ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+      }
+    }
+
+    /* дождь */
+    if(!reduceMotion){
+      ctx.strokeStyle='rgba(174,174,135,.28)';ctx.lineWidth=1;
+      for(const d of rain){
+        ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d.x-2,d.y+d.l);ctx.stroke();
+        d.y+=d.v;d.x-=.5;
+        if(d.y>H){d.y=-14;d.x=Math.random()*(W+60);}
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ---------- WORD-REVEAL: \u0440\u0430\u0437\u0431\u0438\u0432\u043a\u0430 \u043d\u0430 \u0441\u043b\u043e\u0432\u0430 \u0441 \u043a\u0430\u0441\u043a\u0430\u0434\u043e\u043c ---------- */
+(()=>{
+  let i0;
+  function split(node,seq){
+    const kids=[...node.childNodes];
+    for(const n of kids){
+      if(n.nodeType===3){
+        const parts=n.textContent.split(/(\s+)/);
+        const frag=document.createDocumentFragment();
+        for(const p of parts){
+          if(p.trim()===''){frag.appendChild(document.createTextNode(p));continue;}
+          const s=document.createElement('span');
+          s.className='w';s.textContent=p;
+          s.style.setProperty('--d',(seq.i*0.055).toFixed(3)+'s');
+          seq.i++;
+          frag.appendChild(s);
+        }
+        node.replaceChild(frag,n);
+      }else if(n.nodeType===1){
+        split(n,seq);
+      }
+    }
+  }
+  const wr=document.querySelectorAll('.reveal-words');
+  wr.forEach(el=>split(el,{i:0}));
+  const wio=new IntersectionObserver(es=>{
+    for(const e of es){if(e.isIntersecting){e.target.classList.add('visible');wio.unobserve(e.target);}}
+  },{threshold:.25});
+  wr.forEach(el=>wio.observe(el));
+})();
+
+/* ---------- \u041a\u0410\u0421\u0422\u041e\u041c\u041d\u042b\u0419 \u041a\u0423\u0420\u0421\u041e\u0420 + \u041c\u0410\u0413\u041d\u0418\u0422\u041d\u042b\u0415 \u041a\u041d\u041e\u041f\u041a\u0418 ---------- */
+(()=>{
+  const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(reduceMotion||!fine)return;
+  const dot=document.querySelector('.cursor-dot');
+  const ring=document.querySelector('.cursor-ring');
+  if(!dot||!ring)return;
+  document.body.classList.add('has-cursor');
+  let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my,shown=false;
+  addEventListener('pointermove',e=>{
+    mx=e.clientX;my=e.clientY;
+    dot.style.left=mx+'px';dot.style.top=my+'px';
+    if(!shown){shown=true;dot.style.opacity=ring.style.opacity=1;}
+  });
+  addEventListener('pointerdown',()=>ring.classList.add('hot'));
+  addEventListener('pointerup',()=>ring.classList.remove('hot'));
+  const hot='a,.cta,.proj,button,.yt';
+  document.addEventListener('pointerover',e=>{if(e.target.closest(hot))ring.classList.add('hot');});
+  document.addEventListener('pointerout',e=>{if(e.target.closest(hot)&&!e.relatedTarget?.closest?.(hot))ring.classList.remove('hot');});
+  (function loop(){
+    rx+=(mx-rx)*.18;ry+=(my-ry)*.18;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+
+  /* \u043c\u0430\u0433\u043d\u0438\u0442\u043d\u044b\u0435 \u043a\u043d\u043e\u043f\u043a\u0438 */
+  document.querySelectorAll('.cta,.cta-link,.contact-links a').forEach(btn=>{
+    btn.addEventListener('pointermove',e=>{
+      const r=btn.getBoundingClientRect();
+      const dx=e.clientX-(r.left+r.width/2);
+      const dy=e.clientY-(r.top+r.height/2);
+      btn.style.transform=`translate(${dx*.28}px,${dy*.4}px)`;
+    });
+    btn.addEventListener('pointerleave',()=>{btn.style.transform='';btn.style.transition='transform .35s cubic-bezier(.2,.8,.2,1)';});
+    btn.addEventListener('pointerenter',()=>{btn.style.transition='transform .08s linear';});
+  });
+})();
+
+/* ---------- \u0414\u041e\u0416\u0414\u042c \u041d\u0410\u0414 \u041a\u041e\u0422\u041e\u041c ---------- */
+(()=>{
+  if(reduceMotion)return;
+  const zen=document.querySelector('.zen');
+  const cv=document.querySelector('.zen-rain');
+  if(!zen||!cv)return;
+  const ctx=cv.getContext('2d');
+  let W=0,H=0,DPR,drops=[],splashes=[],running=false,last=performance.now();
+  function resize(){
+    const w=zen.clientWidth,h=zen.clientHeight;
+    if(!w||!h)return;
+    DPR=devicePixelRatio||1;
+    W=w;H=h;
+    cv.width=W*DPR;cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    const target=Math.max(24,Math.round(W*.13));
+    while(drops.length<target)drops.push(mk());
+    drops.length=target;
+  }
+  function mk(){return{x:Math.random()*(W+80)-40,y:Math.random()*H,v:6+Math.random()*6,l:10+Math.random()*16,a:.1+Math.random()*.22};}
+  addEventListener('resize',resize);
+  if('ResizeObserver'in window)new ResizeObserver(resize).observe(zen);
+  const img=zen.querySelector('img');
+  if(img){if(img.complete)resize();else img.addEventListener('load',resize);}
+  const io=new IntersectionObserver(es=>{
+    for(const e of es){
+      const was=running;running=e.isIntersecting;
+      if(running&&!was){resize();last=performance.now();requestAnimationFrame(frame);}
+    }
+  },{threshold:.05});
+  io.observe(zen);
+  function frame(now){
+    if(!running)return;
+    if(!W){resize();requestAnimationFrame(frame);return;}
+    const dt=Math.min(2.2,(now-last)/16.7);last=now;
+    ctx.clearRect(0,0,W,H);
+    ctx.lineWidth=1;
+    for(const d of drops){
+      ctx.strokeStyle=`rgba(209,201,151,${d.a})`;
+      ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d.x-2.2,d.y+d.l);ctx.stroke();
+      d.y+=d.v*dt;d.x-=.9*dt;
+      if(d.y>H){
+        if(Math.random()<.5)splashes.push({x:d.x,y:H-4-Math.random()*H*.12,r:0,a:.3});
+        d.y=-16;d.x=Math.random()*(W+80)-40;d.v=6+Math.random()*6;d.a=.1+Math.random()*.22;
+      }
+    }
+    for(let i=splashes.length-1;i>=0;i--){
+      const s=splashes[i];
+      s.r+=.6*dt;s.a-=.012*dt;
+      if(s.a<=0){splashes.splice(i,1);continue;}
+      ctx.strokeStyle=`rgba(209,201,151,${s.a})`;
+      ctx.beginPath();ctx.ellipse(s.x,s.y,s.r*2.4,s.r,0,0,7);ctx.stroke();
+    }
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
