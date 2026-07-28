@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raincoat — креатив и код</title>
-<meta name="description" content="Raincoat: превращаю идеи в работающие проекты. Креатив, код, эксперименты.">
+<title data-i18n="meta.title">Raincoat — креатив и код</title>
+<meta name="description" data-i18n="meta.desc" data-i18n-attr="content" content="Raincoat: превращаю идеи в работающие проекты. Креатив, код, эксперименты.">
 <meta property="og:title" content="Raincoat">
-<meta property="og:description" content="Креатив и код">
+<meta property="og:description" data-i18n="meta.ogDesc" data-i18n-attr="content" content="Креатив и код">
 <style>
 :root{
   --charcoal:#25221D;
@@ -28,6 +28,40 @@ body{
 }
 .hero,section,footer{position:relative;z-index:1}
 ::selection{background:var(--terracotta);color:var(--cream)}
+
+/* ---------- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ---------- */
+.lang-switch{
+  position:fixed;
+  top:18px;right:20px;
+  z-index:60;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:6px 14px;
+  border:1px solid rgba(147,146,113,.35);
+  border-radius:999px;
+  background:rgba(37,34,29,.5);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  font-size:13px;
+  letter-spacing:.12em;
+}
+.lang-switch button{
+  background:none;
+  border:0;
+  padding:2px 5px;
+  font:inherit;
+  letter-spacing:inherit;
+  color:var(--sage);
+  cursor:pointer;
+  transition:color .25s;
+}
+.lang-switch button:hover{color:var(--cream)}
+.lang-switch button.active{color:var(--amber)}
+.lang-switch .sep{color:rgba(147,146,113,.45)}
+@media (max-width:600px){
+  .lang-switch{top:12px;right:12px;padding:5px 11px;font-size:12px}
+}
 
 /* ---------- HERO ---------- */
 .hero{
@@ -220,7 +254,7 @@ h2{
 @media (prefers-reduced-motion:reduce){.cursor-ring{animation:none}}
 @media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
 body.has-cursor{cursor:none}
-body.has-cursor a,body.has-cursor .cta,body.has-cursor .proj{cursor:none}
+body.has-cursor a,body.has-cursor .cta,body.has-cursor .proj,body.has-cursor .lang-switch button{cursor:none}
 
 /* ---------- PROJECTS ---------- */
 .grid{
@@ -524,23 +558,29 @@ footer{
 <div class="cursor-ring" aria-hidden="true"></div>
 <div class="cursor-dot" aria-hidden="true"></div>
 
+<div class="lang-switch" role="group" aria-label="Language / Язык">
+  <button type="button" data-lang="ru">RU</button>
+  <span class="sep" aria-hidden="true">|</span>
+  <button type="button" data-lang="en">EN</button>
+</div>
+
 <header class="hero">
   <video autoplay muted loop playsinline preload="auto" poster="assets/poster.jpg" src="assets/hero-loop.mp4"></video>
   <div class="hero-content">
     <h1>Raincoat</h1>
-    <p>Креатив &times; код: превращаю идеи в работающие проекты</p>
-    <a class="cta" href="#contacts">Написать мне</a>
+    <p data-i18n="hero.tagline">Креатив &times; код: превращаю идеи в работающие проекты</p>
+    <a class="cta" href="#contacts" data-i18n="hero.cta">Написать мне</a>
   </div>
-  <div class="scroll-hint">scroll</div>
+  <div class="scroll-hint" data-i18n="hero.scroll">scroll</div>
 </header>
 
 <section id="about" class="about">
-  <p class="section-label reveal">Обо мне</p>
-  <p class="reveal-words">Соло-предприниматель на фрилансе. Специализируюсь на <strong>видеомонтаже</strong>, <strong>ИИ-генерации контента</strong> и <strong>оркестрации агентов</strong>.</p>
+  <p class="section-label reveal" data-i18n="about.label">Обо мне</p>
+  <p class="reveal-words" data-i18n="about.text" data-i18n-html>Соло-предприниматель на фрилансе. Специализируюсь на <strong>видеомонтаже</strong>, <strong>ИИ-генерации контента</strong> и <strong>оркестрации агентов</strong>.</p>
 </section>
 
 <section id="tools">
-  <p class="section-label reveal">Инструменты</p>
+  <p class="section-label reveal" data-i18n="tools.label">Инструменты</p>
   <div class="skillmap-wrap reveal">
     <canvas id="skillmap"></canvas>
   </div>
@@ -561,68 +601,68 @@ footer{
 -->
 
 <section id="projects">
-  <p class="section-label reveal">Проекты</p>
-  <p class="reveal" style="max-width:1040px;margin:0 auto 28px;padding:0 24px"><a class="cta-link" href="projects.html">Все кейсы: проблема &rarr; решение &rarr; стек &rarr; результат <span class="arw">&rarr;</span></a></p>
+  <p class="section-label reveal" data-i18n="projects.label">Проекты</p>
+  <p class="reveal" style="max-width:1040px;margin:0 auto 28px;padding:0 24px"><a class="cta-link" href="projects.html"><span data-i18n="projects.cta">Все кейсы: проблема &rarr; решение &rarr; стек &rarr; результат</span> <span class="arw">&rarr;</span></a></p>
   <div class="marquee-wrap reveal">
     <div class="marquee-row rtl">
-      <div class="proj"><b>bunny_survive_game</b><span>Игра про выживание кролика (voxel-survivor).</span></div>
-      <div class="proj"><b>obsidian_plagin</b><span>Плагин Obsidian: двухпанельный файл-менеджер с drag-and-drop.</span></div>
-      <div class="proj"><b>Youtube_pipeline_gen</b><span>Генератор YouTube-пайплайна: доска производства, pre-commit хук.</span></div>
-      <div class="proj"><b>youtube_video_optimizer</b><span>Оптимизатор видео: ffmpeg CLI + macOS droplet.</span></div>
-      <div class="proj"><b>polymarket_weather</b><span>Polymarket-бот на погоду: сканер, стратегии A/B, демон.</span></div>
-      <div class="proj"><b>Ai_Chat_bot_for_buisness</b><span>AI-чат-бот: RAG (pgvector), Telegram-webhook, handoff.</span></div>
-      <div class="proj"><b>polymarket-trade</b><span>Торговый бот для Polymarket; walk-forward OOS.</span></div>
-      <div class="proj"><b>SoulOS</b><span>Готовится distribution (.env.template для клиентских инстансов).</span></div>
-      <div class="proj"><b>music_visual_machine</b><span>Визуализация музыки, pnpm-монорепо; Phase 1.</span></div>
-      <div class="proj"><b>I-was-here</b><span>On-chain подтверждение посещения (Solidity).</span></div>
-      <div class="proj"><b>facebook-georgia-auto</b><span>Автоматизация Facebook (Грузия).</span></div>
-      <div class="proj"><b>anti_adhd_writer</b><span>Помощник письма против прокрастинации.</span></div>
+      <div class="proj"><b>bunny_survive_game</b><span data-i18n="proj.bunny">Игра про выживание кролика (voxel-survivor).</span></div>
+      <div class="proj"><b>obsidian_plagin</b><span data-i18n="proj.obsidian">Плагин Obsidian: двухпанельный файл-менеджер с drag-and-drop.</span></div>
+      <div class="proj"><b>Youtube_pipeline_gen</b><span data-i18n="proj.ytPipeline">Генератор YouTube-пайплайна: доска производства, pre-commit хук.</span></div>
+      <div class="proj"><b>youtube_video_optimizer</b><span data-i18n="proj.ytOptimizer">Оптимизатор видео: ffmpeg CLI + macOS droplet.</span></div>
+      <div class="proj"><b>polymarket_weather</b><span data-i18n="proj.pmWeather">Polymarket-бот на погоду: сканер, стратегии A/B, демон.</span></div>
+      <div class="proj"><b>Ai_Chat_bot_for_buisness</b><span data-i18n="proj.aiChatbot">AI-чат-бот: RAG (pgvector), Telegram-webhook, handoff.</span></div>
+      <div class="proj"><b>polymarket-trade</b><span data-i18n="proj.pmTrade">Торговый бот для Polymarket; walk-forward OOS.</span></div>
+      <div class="proj"><b>SoulOS</b><span data-i18n="proj.soulos">Готовится distribution (.env.template для клиентских инстансов).</span></div>
+      <div class="proj"><b>music_visual_machine</b><span data-i18n="proj.musicVisual">Визуализация музыки, pnpm-монорепо; Phase 1.</span></div>
+      <div class="proj"><b>I-was-here</b><span data-i18n="proj.iwashere">On-chain подтверждение посещения (Solidity).</span></div>
+      <div class="proj"><b>facebook-georgia-auto</b><span data-i18n="proj.fbGeorgia">Автоматизация Facebook (Грузия).</span></div>
+      <div class="proj"><b>anti_adhd_writer</b><span data-i18n="proj.antiAdhd">Помощник письма против прокрастинации.</span></div>
       <!-- дубликат для бесшовной прокрутки -->
-      <div class="proj" aria-hidden="true"><b>bunny_survive_game</b><span>Игра про выживание кролика (voxel-survivor).</span></div>
-      <div class="proj" aria-hidden="true"><b>obsidian_plagin</b><span>Плагин Obsidian: двухпанельный файл-менеджер с drag-and-drop.</span></div>
-      <div class="proj" aria-hidden="true"><b>Youtube_pipeline_gen</b><span>Генератор YouTube-пайплайна: доска производства, pre-commit хук.</span></div>
-      <div class="proj" aria-hidden="true"><b>youtube_video_optimizer</b><span>Оптимизатор видео: ffmpeg CLI + macOS droplet.</span></div>
-      <div class="proj" aria-hidden="true"><b>polymarket_weather</b><span>Polymarket-бот на погоду: сканер, стратегии A/B, демон.</span></div>
-      <div class="proj" aria-hidden="true"><b>Ai_Chat_bot_for_buisness</b><span>AI-чат-бот: RAG (pgvector), Telegram-webhook, handoff.</span></div>
-      <div class="proj" aria-hidden="true"><b>polymarket-trade</b><span>Торговый бот для Polymarket; walk-forward OOS.</span></div>
-      <div class="proj" aria-hidden="true"><b>SoulOS</b><span>Готовится distribution (.env.template для клиентских инстансов).</span></div>
-      <div class="proj" aria-hidden="true"><b>music_visual_machine</b><span>Визуализация музыки, pnpm-монорепо; Phase 1.</span></div>
-      <div class="proj" aria-hidden="true"><b>I-was-here</b><span>On-chain подтверждение посещения (Solidity).</span></div>
-      <div class="proj" aria-hidden="true"><b>facebook-georgia-auto</b><span>Автоматизация Facebook (Грузия).</span></div>
-      <div class="proj" aria-hidden="true"><b>anti_adhd_writer</b><span>Помощник письма против прокрастинации.</span></div>
+      <div class="proj" aria-hidden="true"><b>bunny_survive_game</b><span data-i18n="proj.bunny">Игра про выживание кролика (voxel-survivor).</span></div>
+      <div class="proj" aria-hidden="true"><b>obsidian_plagin</b><span data-i18n="proj.obsidian">Плагин Obsidian: двухпанельный файл-менеджер с drag-and-drop.</span></div>
+      <div class="proj" aria-hidden="true"><b>Youtube_pipeline_gen</b><span data-i18n="proj.ytPipeline">Генератор YouTube-пайплайна: доска производства, pre-commit хук.</span></div>
+      <div class="proj" aria-hidden="true"><b>youtube_video_optimizer</b><span data-i18n="proj.ytOptimizer">Оптимизатор видео: ffmpeg CLI + macOS droplet.</span></div>
+      <div class="proj" aria-hidden="true"><b>polymarket_weather</b><span data-i18n="proj.pmWeather">Polymarket-бот на погоду: сканер, стратегии A/B, демон.</span></div>
+      <div class="proj" aria-hidden="true"><b>Ai_Chat_bot_for_buisness</b><span data-i18n="proj.aiChatbot">AI-чат-бот: RAG (pgvector), Telegram-webhook, handoff.</span></div>
+      <div class="proj" aria-hidden="true"><b>polymarket-trade</b><span data-i18n="proj.pmTrade">Торговый бот для Polymarket; walk-forward OOS.</span></div>
+      <div class="proj" aria-hidden="true"><b>SoulOS</b><span data-i18n="proj.soulos">Готовится distribution (.env.template для клиентских инстансов).</span></div>
+      <div class="proj" aria-hidden="true"><b>music_visual_machine</b><span data-i18n="proj.musicVisual">Визуализация музыки, pnpm-монорепо; Phase 1.</span></div>
+      <div class="proj" aria-hidden="true"><b>I-was-here</b><span data-i18n="proj.iwashere">On-chain подтверждение посещения (Solidity).</span></div>
+      <div class="proj" aria-hidden="true"><b>facebook-georgia-auto</b><span data-i18n="proj.fbGeorgia">Автоматизация Facebook (Грузия).</span></div>
+      <div class="proj" aria-hidden="true"><b>anti_adhd_writer</b><span data-i18n="proj.antiAdhd">Помощник письма против прокрастинации.</span></div>
     </div>
     <div class="marquee-row ltr">
-      <div class="proj"><b>Web_sites_small_buisness</b><span>Сайты для малого бизнеса.</span></div>
-      <div class="proj"><b>web_site_raincoat</b><span>Персональный сайт Raincoat (этот проект).</span></div>
-      <div class="proj"><b>world_intentions</b><span>Новая папка, ещё не под git.</span></div>
-      <div class="proj"><b>apr2025_tgaibot-main</b><span>Telegram AI-бот; STATUS.md с этапами.</span></div>
-      <div class="proj"><b>music_enchancer</b><span>Улучшение музыки на Python: DSP-пайплайн, smoke-тесты.</span></div>
-      <div class="proj"><b>suno-prompting</b><span>Промптинг для Suno: спринты 1–7 + фичи sunobuilder.</span></div>
-      <div class="proj"><b>beginning_the_jurney</b><span>Веб-бизнес в Грузии/Батуми: плейбуки, сценарии, FAQ.</span></div>
-      <div class="proj"><b>hyrricane-polymarket</b><span>Polymarket: ставки на ураганы.</span></div>
-      <div class="proj"><b>baseiwashere</b><span>Связан с I-was-here (Base).</span></div>
-      <div class="proj"><b>agency-agents-main</b><span>Агентство AI-агентов.</span></div>
-      <div class="proj"><b>aimusic_enchancer / ai_music</b><span>AI-улучшение и проверка музыки.</span></div>
-      <div class="proj"><b>procrastination-simulator</b><span>Браузерная игра, Next.js 14 + Tailwind.</span></div>
+      <div class="proj"><b>Web_sites_small_buisness</b><span data-i18n="proj.smbSites">Сайты для малого бизнеса.</span></div>
+      <div class="proj"><b>web_site_raincoat</b><span data-i18n="proj.thisSite">Персональный сайт Raincoat (этот проект).</span></div>
+      <div class="proj"><b>world_intentions</b><span data-i18n="proj.worldIntentions">Новая папка, ещё не под git.</span></div>
+      <div class="proj"><b>apr2025_tgaibot-main</b><span data-i18n="proj.tgaibot">Telegram AI-бот; STATUS.md с этапами.</span></div>
+      <div class="proj"><b>music_enchancer</b><span data-i18n="proj.musicEnhancer">Улучшение музыки на Python: DSP-пайплайн, smoke-тесты.</span></div>
+      <div class="proj"><b>suno-prompting</b><span data-i18n="proj.suno">Промптинг для Suno: спринты 1–7 + фичи sunobuilder.</span></div>
+      <div class="proj"><b>beginning_the_jurney</b><span data-i18n="proj.journey">Веб-бизнес в Грузии/Батуми: плейбуки, сценарии, FAQ.</span></div>
+      <div class="proj"><b>hyrricane-polymarket</b><span data-i18n="proj.hurricane">Polymarket: ставки на ураганы.</span></div>
+      <div class="proj"><b>baseiwashere</b><span data-i18n="proj.baseiwashere">Связан с I-was-here (Base).</span></div>
+      <div class="proj"><b>agency-agents-main</b><span data-i18n="proj.agency">Агентство AI-агентов.</span></div>
+      <div class="proj"><b>aimusic_enchancer / ai_music</b><span data-i18n="proj.aiMusic">AI-улучшение и проверка музыки.</span></div>
+      <div class="proj"><b>procrastination-simulator</b><span data-i18n="proj.procrastination">Браузерная игра, Next.js 14 + Tailwind.</span></div>
       <!-- дубликат для бесшовной прокрутки -->
-      <div class="proj" aria-hidden="true"><b>Web_sites_small_buisness</b><span>Сайты для малого бизнеса.</span></div>
-      <div class="proj" aria-hidden="true"><b>web_site_raincoat</b><span>Персональный сайт Raincoat (этот проект).</span></div>
-      <div class="proj" aria-hidden="true"><b>world_intentions</b><span>Новая папка, ещё не под git.</span></div>
-      <div class="proj" aria-hidden="true"><b>apr2025_tgaibot-main</b><span>Telegram AI-бот; STATUS.md с этапами.</span></div>
-      <div class="proj" aria-hidden="true"><b>music_enchancer</b><span>Улучшение музыки на Python: DSP-пайплайн, smoke-тесты.</span></div>
-      <div class="proj" aria-hidden="true"><b>suno-prompting</b><span>Промптинг для Suno: спринты 1–7 + фичи sunobuilder.</span></div>
-      <div class="proj" aria-hidden="true"><b>beginning_the_jurney</b><span>Веб-бизнес в Грузии/Батуми: плейбуки, сценарии, FAQ.</span></div>
-      <div class="proj" aria-hidden="true"><b>hyrricane-polymarket</b><span>Polymarket: ставки на ураганы.</span></div>
-      <div class="proj" aria-hidden="true"><b>baseiwashere</b><span>Связан с I-was-here (Base).</span></div>
-      <div class="proj" aria-hidden="true"><b>agency-agents-main</b><span>Агентство AI-агентов.</span></div>
-      <div class="proj" aria-hidden="true"><b>aimusic_enchancer / ai_music</b><span>AI-улучшение и проверка музыки.</span></div>
-      <div class="proj" aria-hidden="true"><b>procrastination-simulator</b><span>Браузерная игра, Next.js 14 + Tailwind.</span></div>
+      <div class="proj" aria-hidden="true"><b>Web_sites_small_buisness</b><span data-i18n="proj.smbSites">Сайты для малого бизнеса.</span></div>
+      <div class="proj" aria-hidden="true"><b>web_site_raincoat</b><span data-i18n="proj.thisSite">Персональный сайт Raincoat (этот проект).</span></div>
+      <div class="proj" aria-hidden="true"><b>world_intentions</b><span data-i18n="proj.worldIntentions">Новая папка, ещё не под git.</span></div>
+      <div class="proj" aria-hidden="true"><b>apr2025_tgaibot-main</b><span data-i18n="proj.tgaibot">Telegram AI-бот; STATUS.md с этапами.</span></div>
+      <div class="proj" aria-hidden="true"><b>music_enchancer</b><span data-i18n="proj.musicEnhancer">Улучшение музыки на Python: DSP-пайплайн, smoke-тесты.</span></div>
+      <div class="proj" aria-hidden="true"><b>suno-prompting</b><span data-i18n="proj.suno">Промптинг для Suno: спринты 1–7 + фичи sunobuilder.</span></div>
+      <div class="proj" aria-hidden="true"><b>beginning_the_jurney</b><span data-i18n="proj.journey">Веб-бизнес в Грузии/Батуми: плейбуки, сценарии, FAQ.</span></div>
+      <div class="proj" aria-hidden="true"><b>hyrricane-polymarket</b><span data-i18n="proj.hurricane">Polymarket: ставки на ураганы.</span></div>
+      <div class="proj" aria-hidden="true"><b>baseiwashere</b><span data-i18n="proj.baseiwashere">Связан с I-was-here (Base).</span></div>
+      <div class="proj" aria-hidden="true"><b>agency-agents-main</b><span data-i18n="proj.agency">Агентство AI-агентов.</span></div>
+      <div class="proj" aria-hidden="true"><b>aimusic_enchancer / ai_music</b><span data-i18n="proj.aiMusic">AI-улучшение и проверка музыки.</span></div>
+      <div class="proj" aria-hidden="true"><b>procrastination-simulator</b><span data-i18n="proj.procrastination">Браузерная игра, Next.js 14 + Tailwind.</span></div>
     </div>
   </div>
 </section>
 
 <section id="philosophy">
-  <p class="section-label reveal">Интересы &amp; философия</p>
+  <p class="section-label reveal" data-i18n="philo.label">Интересы &amp; философия</p>
   <div class="philo-wrap reveal">
     <canvas id="cloud"></canvas>
     <div class="philo-terminal"><span id="philoLine"></span><span class="cursor"></span></div>
@@ -630,7 +670,7 @@ footer{
 </section>
 
 <section id="contacts" class="contacts">
-  <p class="section-label reveal">Контакты</p>
+  <p class="section-label reveal" data-i18n="contacts.label">Контакты</p>
   <div class="contact-links reveal">
     <a href="mailto:mns.nicholas2@gmail.com">Email</a>
     <a href="https://github.com/N23eos" target="_blank" rel="noopener">GitHub</a>
@@ -640,13 +680,14 @@ footer{
 </section>
 
 <div class="zen reveal">
-  <img src="assets/zen-cat.png" alt="Кот в дождевике медитирует под дождём" loading="lazy">
+  <img src="assets/zen-cat.png" data-i18n="zen.alt" data-i18n-attr="alt" alt="Кот в дождевике медитирует под дождём" loading="lazy">
   <canvas class="zen-rain" aria-hidden="true"></canvas>
   <p class="zen-caption">// stay calm. ship things.<span class="cursor"></span></p>
 </div>
 
 <footer>Raincoat &copy; 2026</footer>
 
+<script src="i18n.js"></script>
 <script>
 const io=new IntersectionObserver(entries=>{
   for(const e of entries){
@@ -673,11 +714,12 @@ document.addEventListener('pointermove',e=>{
   const ctx=cv.getContext('2d');
   const AMBER='#D9A26E';
 
+  /* n — ключ в словаре i18n.js: подпись здания зависит от языка */
   const CATS=[
-    {n:'ВИДЕО',tools:['Final Cut','CapCut','Motion','DaVinci Resolve','YT-pipeline'],hf:.78},
-    {n:'AI-КОД',tools:['Claude Code','Cursor','Codex','Windsurf','Claude Agent SDK'],hf:.92},
-    {n:'AI-ГЕН',tools:['Midjourney','Kling AI','Flux','Runway','ElevenLabs','Suno'],hf:.84},
-    {n:'АГЕНТЫ/АВТО',tools:['Hermes','OpenClaw','n8n','LangGraph','Make'],hf:.7},
+    {n:'tools.cat.video',tools:['Final Cut','CapCut','Motion','DaVinci Resolve','YT-pipeline'],hf:.78},
+    {n:'tools.cat.aicode',tools:['Claude Code','Cursor','Codex','Windsurf','Claude Agent SDK'],hf:.92},
+    {n:'tools.cat.aigen',tools:['Midjourney','Kling AI','Flux','Runway','ElevenLabs','Suno'],hf:.84},
+    {n:'tools.cat.agents',tools:['Hermes','OpenClaw','n8n','LangGraph','Make'],hf:.7},
   ];
   const catImg=new Image();
   catImg.src='assets/cat-umbrella.png';
@@ -787,7 +829,7 @@ document.addEventListener('pointermove',e=>{
       ctx.fillStyle=col;
       ctx.font='700 13px ui-monospace,Menlo,monospace';
       ctx.textAlign='center';
-      ctx.fillText(b.n,b.x+b.w/2,sy+17);
+      ctx.fillText(i18n.t(b.n),b.x+b.w/2,sy+17);
       ctx.globalAlpha=1;ctx.shadowBlur=0;
       /* лужа неонового света под зданием */
       const pg=ctx.createRadialGradient(b.x+b.w/2,G,0,b.x+b.w/2,G,b.w*.8);
@@ -1042,17 +1084,18 @@ document.addEventListener('pointermove',e=>{
   /* \u043f\u0435\u0447\u0430\u0442\u0430\u044e\u0449\u0438\u0439\u0441\u044f \u0442\u0435\u0440\u043c\u0438\u043d\u0430\u043b \u0444\u0438\u043b\u043e\u0441\u043e\u0444\u0438\u0438 */
   const line=document.getElementById('philoLine');
   if(!line)return;
-  const LINES=[
-    '// stay calm. ship things.',
-    '// \u0438\u0434\u0435\u044f \u0431\u0435\u0437 \u0440\u0435\u043b\u0438\u0437\u0430 \u2014 \u043f\u0440\u043e\u0441\u0442\u043e \u043c\u044b\u0441\u043b\u044c',
-    '// \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b \u043c\u0435\u043d\u044f\u044e\u0442\u0441\u044f, \u043b\u044e\u0431\u043e\u043f\u044b\u0442\u0441\u0442\u0432\u043e \u043e\u0441\u0442\u0430\u0451\u0442\u0441\u044f',
-    '// \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0437\u0438\u0440\u0443\u0439 \u0441\u043a\u0443\u0447\u043d\u043e\u0435 \u2014 \u043e\u0441\u0432\u043e\u0431\u043e\u0434\u0438 \u0432\u0440\u0435\u043c\u044f \u0434\u043b\u044f \u0441\u0442\u0440\u0430\u043d\u043d\u043e\u0433\u043e',
-    '// \u043c\u0435\u043d\u044c\u0448\u0435, \u043d\u043e \u0433\u043b\u0443\u0431\u0436\u0435'
-  ];
-  if(reduceMotion){line.textContent=LINES[0];return;}
+  /* \u0441\u0430\u043c\u0438 \u0441\u0442\u0440\u043e\u043a\u0438 \u043b\u0435\u0436\u0430\u0442 \u0432 \u0441\u043b\u043e\u0432\u0430\u0440\u0435 i18n.js \u2014 \u0437\u0434\u0435\u0441\u044c \u0442\u043e\u043b\u044c\u043a\u043e \u0438\u0445 \u043a\u043b\u044e\u0447\u0438 */
+  const LINE_KEYS=['philo.l1','philo.l2','philo.l3','philo.l4','philo.l5'];
+  if(reduceMotion){
+    line.textContent=i18n.t(LINE_KEYS[0]);
+    document.addEventListener('langchange',()=>{line.textContent=i18n.t(LINE_KEYS[0])});
+    return;
+  }
   let li=0,ci=0,del=false;
+  /* \u0441\u043c\u0435\u043d\u0430 \u044f\u0437\u044b\u043a\u0430 \u2014 \u043d\u0430\u0447\u0438\u043d\u0430\u0435\u043c \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0441 \u043f\u0435\u0440\u0432\u043e\u0439 \u0441\u0442\u0440\u043e\u043a\u0438 \u0437\u0430\u043d\u043e\u0432\u043e */
+  document.addEventListener('langchange',()=>{li=0;ci=0;del=false;line.textContent='';});
   (function type(){
-    const s=LINES[li];
+    const s=i18n.t(LINE_KEYS[li]);
     if(!del){
       ci++;line.textContent=s.slice(0,ci);
       if(ci===s.length){del=true;setTimeout(type,2600);return;}
@@ -1090,6 +1133,8 @@ document.addEventListener('pointermove',e=>{
   }
   const wr=document.querySelectorAll('.reveal-words');
   wr.forEach(el=>split(el,{i:0}));
+  /* при смене языка текст заменяется целиком — разбиваем на слова заново */
+  document.addEventListener('langchange',()=>{wr.forEach(el=>split(el,{i:0}))});
   const wio=new IntersectionObserver(es=>{
     for(const e of es){if(e.isIntersecting){e.target.classList.add('visible');wio.unobserve(e.target);}}
   },{threshold:.25});
