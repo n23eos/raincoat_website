@@ -31,6 +31,7 @@
     "nav.about": "Обо мне",
     "nav.tools": "Инструменты",
     "nav.projects": "Проекты",
+    "nav.blog": "Блог",
     "nav.contacts": "Контакты",
 
     /* первый экран */
@@ -92,6 +93,15 @@
     "contacts.label": "Контакты",
     "contacts.h2": "Есть идея? Обсудим",
     "zen.alt": "Кот в дождевике медитирует под дождём",
+
+    /* блог */
+    "blog.meta.title": "Блог — Raincoat",
+    "blog.meta.desc": "Эссе Raincoat: инструменты и агенты, созерцательная практика, проекты и релизы.",
+    "blog.label": "Блог",
+    "blog.h1": "Эссе",
+    "blog.lede": "Тексты, которые пишутся медленно: инструменты и агенты, созерцательная практика, проекты и релизы.",
+    "blog.backToList": "← ко всем эссе",
+    "blog.empty": "// эссе скоро появятся",
 
     /* страница кейсов: обвязка */
     "projects.meta.title": "Проекты — Raincoat",
@@ -221,6 +231,7 @@
     "nav.about": "About",
     "nav.tools": "Tools",
     "nav.projects": "Projects",
+    "nav.blog": "Blog",
     "nav.contacts": "Contacts",
 
     /* первый экран */
@@ -282,6 +293,15 @@
     "contacts.label": "Contacts",
     "contacts.h2": "Got an idea? Let's talk",
     "zen.alt": "A cat in a raincoat meditating in the rain",
+
+    /* блог */
+    "blog.meta.title": "Blog — Raincoat",
+    "blog.meta.desc": "Raincoat essays: tools and agents, contemplative practice, projects and releases.",
+    "blog.label": "Blog",
+    "blog.h1": "Essays",
+    "blog.lede": "Texts that are written slowly: tools and agents, contemplative practice, projects and releases.",
+    "blog.backToList": "← all essays",
+    "blog.empty": "// essays coming soon",
 
     /* страница кейсов: обвязка */
     "projects.meta.title": "Projects — Raincoat",
