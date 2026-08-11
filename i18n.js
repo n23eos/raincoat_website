@@ -142,6 +142,8 @@
     "case.web3tools.solution": "CLI-перебор с паттернами «начинается / заканчивается / содержит»; один адрес работает во всех EVM-сетях.",
     "case.web3tools.result": "Опубликованный пакет с CI-тестами на GitHub Actions, MIT.",
     "case.githubLink": "GitHub: открытый репозиторий",
+    "case.pluginLink": "Obsidian: страница плагина",
+    "case.siteLink": "Открыть проект",
     "case.receptionist.one": "AI-бот для малого бизнеса: отвечает клиентам по базе знаний, собирает заявки, передаёт оператору.",
     "case.receptionist.problem": "Малый бизнес теряет клиентов, потому что не успевает отвечать в мессенджерах: ночь, выходные, поток однотипных вопросов.",
     "case.receptionist.solution": "Бот в Telegram/WhatsApp с RAG по базе знаний бизнеса (pgvector), сбор заявок, запись на услуги и handoff сложных диалогов живому оператору. Дашборд для владельца.",
@@ -324,6 +326,8 @@
     "cell.solution": "Solution",
     "cell.result": "Result",
     "case.githubLink": "GitHub: open repository",
+    "case.pluginLink": "Obsidian: plugin page",
+    "case.siteLink": "Open the project",
 
     /* страница кейсов: сами кейсы */
     "case.iwashere.one": "Gasless proof-of-attendance NFT on Base — a guest scans a QR code and gets a badge without paying gas.",
