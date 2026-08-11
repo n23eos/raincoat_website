@@ -5,7 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="projects.meta.title">Проекты — Raincoat</title>
 <meta name="description" data-i18n="projects.meta.desc" data-i18n-attr="content" content="Кейсы Raincoat: проблема → решение → стек → результат. Продукты, плагины Obsidian, музыка и видео, трейдинг и web3.">
+<meta property="og:title" content="Raincoat — Projects">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='47' fill='%2325221D'/%3E%3Cpath d='M50 20c-17 0-29 13-29 25h58c0-12-12-25-29-25z' fill='%23D9A26E'/%3E%3Cpath d='M50 45v25a8 8 0 0 1-16 0' stroke='%23D9A26E' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
+@font-face{
+  font-family:'Unbounded';
+  font-style:normal;
+  font-weight:200 900;
+  font-display:swap;
+  src:url(assets/fonts/unbounded-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Unbounded';
+  font-style:normal;
+  font-weight:200 900;
+  font-display:swap;
+  src:url(assets/fonts/unbounded-cyrillic.woff2) format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
 :root{
   --charcoal:#25221D;
   --wood:#574938;
@@ -26,20 +47,40 @@ body{
 }
 ::selection{background:var(--terracotta);color:var(--cream)}
 
-/* ---------- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ---------- */
-.lang-switch{
+/* ---------- НАВИГАЦИЯ ---------- */
+.site-nav{
   position:fixed;
-  top:18px;right:20px;
+  top:0;left:0;right:0;
   z-index:60;
   display:flex;
   align-items:center;
+  gap:28px;
+  padding:14px 24px;
+  background:rgba(37,34,29,.55);
+  border-bottom:1px solid rgba(147,146,113,.16);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.brand{
+  font-family:'Unbounded',"Helvetica Neue",sans-serif;
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:.02em;
+  color:var(--cream);
+  text-decoration:none;
+  transition:color .3s;
+}
+.brand:hover{color:var(--amber)}
+.site-nav .lang-switch{margin-left:auto}
+
+/* ---------- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ---------- */
+.lang-switch{
+  display:flex;
+  align-items:center;
   gap:4px;
-  padding:6px 14px;
+  padding:5px 12px;
   border:1px solid rgba(147,146,113,.35);
   border-radius:999px;
-  background:rgba(37,34,29,.5);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
   font-size:13px;
   letter-spacing:.12em;
 }
@@ -56,14 +97,11 @@ body{
 .lang-switch button:hover{color:var(--cream)}
 .lang-switch button.active{color:var(--amber)}
 .lang-switch .sep{color:rgba(147,146,113,.45)}
-@media (max-width:600px){
-  .lang-switch{top:12px;right:12px;padding:5px 11px;font-size:12px}
-}
 
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 
 /* ---------- HEADER ---------- */
-header.page{padding:56px 0 0}
+header.page{padding:96px 0 0}
 .back{
   display:inline-block;
   color:var(--sage);
@@ -82,9 +120,10 @@ header.page{padding:56px 0 0}
   margin-bottom:14px;
 }
 h1{
-  font-size:clamp(34px,5.5vw,58px);
-  font-weight:700;
-  letter-spacing:-.02em;
+  font-family:'Unbounded',"Helvetica Neue",sans-serif;
+  font-size:clamp(30px,4.6vw,52px);
+  font-weight:600;
+  letter-spacing:-.01em;
   color:var(--cream);
 }
 .lede{
@@ -225,11 +264,14 @@ footer{
 </head>
 <body>
 
-<div class="lang-switch" role="group" aria-label="Language / Язык">
-  <button type="button" data-lang="ru">RU</button>
-  <span class="sep" aria-hidden="true">|</span>
-  <button type="button" data-lang="en">EN</button>
-</div>
+<nav class="site-nav">
+  <a class="brand" href="index.html">Raincoat</a>
+  <div class="lang-switch" role="group" aria-label="Language / Язык">
+    <button type="button" data-lang="ru">RU</button>
+    <span class="sep" aria-hidden="true">|</span>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</nav>
 
 <div class="wrap">
 
@@ -300,7 +342,7 @@ footer{
 
 <details class="case reveal" data-cat="trade tools">
   <summary>
-    <span class="name">web3-tools</span>
+    <span class="name">Web3 Tools</span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.web3tools.one">Генератор EVM-кошельков и vanity-адресов: адрес, начинающийся с выбранного паттерна.</span>
   </summary>
@@ -464,7 +506,7 @@ footer{
 
 <details class="case reveal" data-cat="obsidian tools">
   <summary>
-    <span class="name">vault-mirror</span>
+    <span class="name">Vault Mirror</span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.vaultMirror.one">Твои заметки уже знают, кто ты. Это заставляет их рассказать: 16 отчётов-зеркал из твоего vault.</span>
   </summary>
@@ -551,7 +593,7 @@ footer{
 
 <details class="case reveal" data-cat="media tools">
   <summary>
-    <span class="name">youtube_video_optimizer</span>
+    <span class="name">Video Optimizer</span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.ytOptimizer.one">Сжатие видео для загрузки на YouTube: пресеты ffmpeg + macOS droplet «перетащил — готово».</span>
   </summary>

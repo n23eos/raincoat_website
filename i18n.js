@@ -27,6 +27,12 @@
     "meta.desc": "Raincoat: превращаю идеи в работающие проекты. Креатив, код, эксперименты.",
     "meta.ogDesc": "Креатив и код",
 
+    /* навигация */
+    "nav.about": "Обо мне",
+    "nav.tools": "Инструменты",
+    "nav.projects": "Проекты",
+    "nav.contacts": "Контакты",
+
     /* первый экран */
     "hero.tagline": "Креатив × код: превращаю идеи в работающие проекты",
     "hero.cta": "Написать мне",
@@ -34,10 +40,11 @@
 
     /* обо мне */
     "about.label": "Обо мне",
-    "about.text": "Соло-предприниматель на фрилансе. Специализируюсь на <strong>видеомонтаже</strong>, <strong>ИИ-генерации контента</strong> и <strong>оркестрации агентов</strong>.",
+    "about.text": "Соло-предприниматель и инженер. Строю продукты на стыке <strong>видеопродакшна</strong>, <strong>ИИ-генерации контента</strong> и <strong>агентных систем</strong> — от плагинов Obsidian и десктоп-утилит до торговых ботов и контент-фабрик для YouTube. Принцип простой: идея не считается, пока не доехала до релиза — <strong>20+ проектов</strong> доведены до работающего состояния.",
 
     /* инструменты (в т.ч. подписи на зданиях в canvas) */
     "tools.label": "Инструменты",
+    "tools.h2": "Город, в котором я работаю",
     "tools.cat.video": "ВИДЕО",
     "tools.cat.aicode": "AI-КОД",
     "tools.cat.aigen": "AI-ГЕН",
@@ -45,34 +52,36 @@
 
     /* проекты: заголовок и карточки маркизы */
     "projects.label": "Проекты",
+    "projects.h2": "Отгружено и работает",
     "projects.cta": "Все кейсы: проблема → решение → стек → результат",
-    "proj.bunny": "Игра про выживание кролика (voxel-survivor).",
-    "proj.obsidian": "Плагин Obsidian: двухпанельный файл-менеджер с drag-and-drop.",
-    "proj.ytPipeline": "Генератор YouTube-пайплайна: доска производства, pre-commit хук.",
-    "proj.ytOptimizer": "Оптимизатор видео: ffmpeg CLI + macOS droplet.",
-    "proj.pmWeather": "Polymarket-бот на погоду: сканер, стратегии A/B, демон.",
-    "proj.aiChatbot": "AI-чат-бот: RAG (pgvector), Telegram-webhook, handoff.",
-    "proj.pmTrade": "Торговый бот для Polymarket; walk-forward OOS.",
-    "proj.soulos": "Готовится distribution (.env.template для клиентских инстансов).",
-    "proj.musicVisual": "Визуализация музыки, pnpm-монорепо; Phase 1.",
-    "proj.iwashere": "On-chain подтверждение посещения (Solidity).",
-    "proj.fbGeorgia": "Автоматизация Facebook (Грузия).",
-    "proj.antiAdhd": "Помощник письма против прокрастинации.",
-    "proj.smbSites": "Сайты для малого бизнеса.",
-    "proj.thisSite": "Персональный сайт Raincoat (этот проект).",
-    "proj.worldIntentions": "Новая папка, ещё не под git.",
-    "proj.tgaibot": "Telegram AI-бот; STATUS.md с этапами.",
-    "proj.musicEnhancer": "Улучшение музыки на Python: DSP-пайплайн, smoke-тесты.",
-    "proj.suno": "Промптинг для Suno: спринты 1–7 + фичи sunobuilder.",
-    "proj.journey": "Веб-бизнес в Грузии/Батуми: плейбуки, сценарии, FAQ.",
-    "proj.hurricane": "Polymarket: ставки на ураганы.",
-    "proj.baseiwashere": "Связан с I-was-here (Base).",
-    "proj.agency": "Агентство AI-агентов.",
-    "proj.aiMusic": "AI-улучшение и проверка музыки.",
-    "proj.procrastination": "Браузерная игра, Next.js 14 + Tailwind.",
+    "proj.iwashere": "Gasless proof-of-attendance NFT. Живёт в Base mainnet.",
+    "proj.graphView": "Граф Obsidian: 10 000+ узлов при 50+ FPS.",
+    "proj.receptionist": "AI-бот для бизнеса: RAG, заявки, handoff оператору.",
+    "proj.mvm": "Audio-reactive визуализатор под управлением AI-агентов.",
+    "proj.pmWeather": "Метеомодели против толпы на погодных рынках.",
+    "proj.flowspeech": "Локальная диктовка для macOS: whisper + LLM-чистка текста.",
+    "proj.timeslot": "Букинг-платформа внутри Telegram, без комиссий.",
+    "proj.columnExplorer": "Файл-менеджер для Obsidian в стиле Finder.",
+    "proj.wavHumanizer": "DSP-процессор: квантованное аудио звучит как живое.",
+    "proj.ytPipeline": "Контент-фабрика: идеи → сценарии → промпты → метаданные.",
+    "proj.soulos": "Изолированный AI-агент на каждого клиента бизнеса.",
+    "proj.graphExplorer": "Заметки как галактика: игра, улучшающая реальный vault.",
+    "proj.caspervpn": "DPI-устойчивый VPN: живучесть через разнообразие транспортов.",
+    "proj.tgBridge": "Telegram → daily note Obsidian. Ноль инфраструктуры.",
+    "proj.sunoHub": "Конструктор промптов для Suno с пакетной генерацией.",
+    "proj.pmBtc": "Исследование edge на 5-минутных ставках BTC. Честный ответ: нет.",
+    "proj.promptManager": "Менеджер промптов для macOS с MCP-сервером.",
+    "proj.aiMusicChecker": "Детект AI-музыки прямо в браузере, без бэкенда.",
+    "proj.vaultAgent": "LLM-воркфлоу в Obsidian с ревью каждого изменения.",
+    "proj.vaultMirror": "16 отчётов-зеркал из твоих заметок. Просто промпты.",
+    "proj.ytOptimizer": "Пресеты ffmpeg + macOS droplet для сжатия видео.",
+    "proj.web3tools": "Генератор vanity-адресов для EVM-сетей.",
+    "proj.hermesPack": "Каталог skill-паков для Hermes Agent.",
+    "proj.thisSite": "Этот сайт: ноль зависимостей, два языка, canvas-сцены.",
 
     /* интересы и строки печатающегося терминала */
     "philo.label": "Интересы & философия",
+    "philo.h2": "Чем живу вне кода",
     "philo.l1": "// stay calm. ship things.",
     "philo.l2": "// идея без релиза — просто мысль",
     "philo.l3": "// инструменты меняются, любопытство остаётся",
@@ -81,6 +90,7 @@
 
     /* контакты и картинка с котом */
     "contacts.label": "Контакты",
+    "contacts.h2": "Есть идея? Обсудим",
     "zen.alt": "Кот в дождевике медитирует под дождём",
 
     /* страница кейсов: обвязка */
@@ -207,6 +217,12 @@
     "meta.desc": "Raincoat: I turn ideas into working projects. Creative, code, experiments.",
     "meta.ogDesc": "Creative & code",
 
+    /* навигация */
+    "nav.about": "About",
+    "nav.tools": "Tools",
+    "nav.projects": "Projects",
+    "nav.contacts": "Contacts",
+
     /* первый экран */
     "hero.tagline": "Creative × code: turning ideas into working projects",
     "hero.cta": "Get in touch",
@@ -214,10 +230,11 @@
 
     /* обо мне */
     "about.label": "About",
-    "about.text": "Solo freelance entrepreneur. I specialize in <strong>video editing</strong>, <strong>AI content generation</strong> and <strong>agent orchestration</strong>.",
+    "about.text": "Solo entrepreneur and engineer. I build products at the intersection of <strong>video production</strong>, <strong>AI content generation</strong> and <strong>agentic systems</strong> — from Obsidian plugins and desktop utilities to trading bots and YouTube content factories. One simple rule: an idea doesn't count until it ships — <strong>20+ projects</strong> brought to a working state.",
 
     /* инструменты (в т.ч. подписи на зданиях в canvas) */
     "tools.label": "Tools",
+    "tools.h2": "The city I work in",
     "tools.cat.video": "VIDEO",
     "tools.cat.aicode": "AI-CODE",
     "tools.cat.aigen": "AI-GEN",
@@ -225,34 +242,36 @@
 
     /* проекты: заголовок и карточки маркизы */
     "projects.label": "Projects",
+    "projects.h2": "Shipped and running",
     "projects.cta": "All case studies: problem → solution → stack → result",
-    "proj.bunny": "Rabbit survival game (voxel-survivor).",
-    "proj.obsidian": "Obsidian plugin: dual-pane file manager with drag-and-drop.",
-    "proj.ytPipeline": "YouTube pipeline generator: production board, pre-commit hook.",
-    "proj.ytOptimizer": "Video optimizer: ffmpeg CLI + macOS droplet.",
-    "proj.pmWeather": "Polymarket weather bot: scanner, A/B strategies, daemon.",
-    "proj.aiChatbot": "AI chatbot: RAG (pgvector), Telegram webhook, handoff.",
-    "proj.pmTrade": "Trading bot for Polymarket; walk-forward OOS.",
-    "proj.soulos": "Distribution in progress (.env.template for client instances).",
-    "proj.musicVisual": "Music visualization, pnpm monorepo; Phase 1.",
-    "proj.iwashere": "On-chain proof of attendance (Solidity).",
-    "proj.fbGeorgia": "Facebook automation (Georgia).",
-    "proj.antiAdhd": "Writing assistant against procrastination.",
-    "proj.smbSites": "Websites for small business.",
-    "proj.thisSite": "Raincoat personal site (this project).",
-    "proj.worldIntentions": "New folder, not under git yet.",
-    "proj.tgaibot": "Telegram AI bot; STATUS.md with milestones.",
-    "proj.musicEnhancer": "Music enhancement in Python: DSP pipeline, smoke tests.",
-    "proj.suno": "Prompting for Suno: sprints 1–7 + sunobuilder features.",
-    "proj.journey": "Web business in Georgia/Batumi: playbooks, scripts, FAQ.",
-    "proj.hurricane": "Polymarket: hurricane markets.",
-    "proj.baseiwashere": "Related to I-was-here (Base).",
-    "proj.agency": "AI agent agency.",
-    "proj.aiMusic": "AI music enhancement and checking.",
-    "proj.procrastination": "Browser game, Next.js 14 + Tailwind.",
+    "proj.iwashere": "Gasless proof-of-attendance NFT. Live on Base mainnet.",
+    "proj.graphView": "Obsidian graph: 10,000+ nodes at 50+ FPS.",
+    "proj.receptionist": "AI bot for business: RAG, lead capture, operator handoff.",
+    "proj.mvm": "Audio-reactive visualizer driven by AI agents.",
+    "proj.pmWeather": "Weather models against the crowd on prediction markets.",
+    "proj.flowspeech": "Local dictation for macOS: whisper + LLM cleanup.",
+    "proj.timeslot": "Booking platform inside Telegram, no fees.",
+    "proj.columnExplorer": "Finder-style file manager for Obsidian.",
+    "proj.wavHumanizer": "DSP processor: quantized audio sounds alive.",
+    "proj.ytPipeline": "Content factory: ideas → scripts → prompts → metadata.",
+    "proj.soulos": "An isolated AI agent per business client.",
+    "proj.graphExplorer": "Notes as a galaxy: a game that improves the real vault.",
+    "proj.caspervpn": "DPI-resistant VPN: survival through transport diversity.",
+    "proj.tgBridge": "Telegram → Obsidian daily note. Zero infrastructure.",
+    "proj.sunoHub": "Prompt builder for Suno with batch generation.",
+    "proj.pmBtc": "Edge research on 5-minute BTC bets. Honest answer: no.",
+    "proj.promptManager": "Prompt manager for macOS with an MCP server.",
+    "proj.aiMusicChecker": "AI music detection right in the browser, no backend.",
+    "proj.vaultAgent": "LLM workflows in Obsidian with review of every change.",
+    "proj.vaultMirror": "16 mirror reports from your notes. Just prompts.",
+    "proj.ytOptimizer": "ffmpeg presets + a macOS droplet for video compression.",
+    "proj.web3tools": "Vanity address generator for EVM networks.",
+    "proj.hermesPack": "A catalog of skill packs for Hermes Agent.",
+    "proj.thisSite": "This site: zero dependencies, two languages, canvas scenes.",
 
     /* интересы и строки печатающегося терминала */
     "philo.label": "Interests & philosophy",
+    "philo.h2": "Life beyond code",
     "philo.l1": "// stay calm. ship things.",
     "philo.l2": "// an idea without a release is just a thought",
     "philo.l3": "// tools change, curiosity stays",
@@ -261,6 +280,7 @@
 
     /* контакты и картинка с котом */
     "contacts.label": "Contacts",
+    "contacts.h2": "Got an idea? Let's talk",
     "zen.alt": "A cat in a raincoat meditating in the rain",
 
     /* страница кейсов: обвязка */
