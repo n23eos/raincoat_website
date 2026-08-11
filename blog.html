@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="blog.meta.title">Блог — Raincoat</title>
+<meta name="description" data-i18n="blog.meta.desc" data-i18n-attr="content" content="Эссе Raincoat: инструменты и агенты, созерцательная практика, проекты и релизы.">
+<meta property="og:title" content="Raincoat — Blog">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='47' fill='%2325221D'/%3E%3Cpath d='M50 20c-17 0-29 13-29 25h58c0-12-12-25-29-25z' fill='%23D9A26E'/%3E%3Cpath d='M50 45v25a8 8 0 0 1-16 0' stroke='%23D9A26E' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+@font-face{
+  font-family:'Unbounded';
+  font-style:normal;
+  font-weight:200 900;
+  font-display:swap;
+  src:url(assets/fonts/unbounded-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Unbounded';
+  font-style:normal;
+  font-weight:200 900;
+  font-display:swap;
+  src:url(assets/fonts/unbounded-cyrillic.woff2) format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+:root{
+  --charcoal:#25221D;
+  --wood:#574938;
+  --sage:#939271;
+  --olive:#AEAE87;
+  --cream:#D1C997;
+  --amber:#D9A26E;
+  --terracotta:#965E2F;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--charcoal);
+  color:var(--cream);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--terracotta);color:var(--cream)}
+
+/* ---------- НАВИГАЦИЯ ---------- */
+.site-nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:60;
+  display:flex;
+  align-items:center;
+  gap:28px;
+  padding:14px 24px;
+  background:rgba(37,34,29,.55);
+  border-bottom:1px solid rgba(147,146,113,.16);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.brand{
+  font-family:'Unbounded',"Helvetica Neue",sans-serif;
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:.02em;
+  color:var(--cream);
+  text-decoration:none;
+  transition:color .3s;
+}
+.brand:hover{color:var(--amber)}
+.site-nav .lang-switch{margin-left:auto}
+
+/* ---------- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ---------- */
+.lang-switch{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:5px 12px;
+  border:1px solid rgba(147,146,113,.35);
+  border-radius:999px;
+  font-size:13px;
+  letter-spacing:.12em;
+}
+.lang-switch button{
+  background:none;
+  border:0;
+  padding:2px 5px;
+  font:inherit;
+  letter-spacing:inherit;
+  color:var(--sage);
+  cursor:pointer;
+  transition:color .25s;
+}
+.lang-switch button:hover{color:var(--cream)}
+.lang-switch button.active{color:var(--amber)}
+.lang-switch .sep{color:rgba(147,146,113,.45)}
+
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+/* ---------- HEADER ---------- */
+header.page{padding:96px 0 0}
+.back{
+  display:inline-block;
+  color:var(--sage);
+  text-decoration:none;
+  font-size:14px;
+  letter-spacing:.08em;
+  transition:color .3s;
+}
+.back:hover{color:var(--amber)}
+.page-title{padding:48px 0 18px}
+.section-label{
+  color:var(--terracotta);
+  font-size:14px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+h1{
+  font-family:'Unbounded',"Helvetica Neue",sans-serif;
+  font-size:clamp(30px,4.6vw,52px);
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--cream);
+}
+.lede{
+  margin-top:14px;
+  max-width:640px;
+  color:var(--olive);
+  font-size:clamp(15px,1.8vw,18px);
+}
+
+/* ---------- СПИСОК ЭССЕ ---------- */
+.essays{display:flex;flex-direction:column;padding:26px 0 90px}
+.essay-item{
+  display:block;
+  text-decoration:none;
+  padding:26px 4px;
+  border-bottom:1px solid rgba(147,146,113,.18);
+  transition:padding-left .3s,border-color .3s;
+}
+.essay-item:first-child{border-top:1px solid rgba(147,146,113,.18)}
+.essay-item:hover{padding-left:14px;border-color:rgba(217,162,110,.5)}
+.essay-item time{
+  display:block;
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:12.5px;
+  color:var(--sage);
+  letter-spacing:.06em;
+  margin-bottom:6px;
+}
+.essay-item h2{
+  font-family:'Unbounded',"Helvetica Neue",sans-serif;
+  font-size:clamp(19px,2.5vw,26px);
+  font-weight:500;
+  color:var(--cream);
+  transition:color .3s;
+  line-height:1.3;
+}
+.essay-item:hover h2{color:var(--amber)}
+.essay-item p{
+  margin-top:8px;
+  color:var(--olive);
+  font-size:15px;
+  max-width:640px;
+}
+.empty-state{
+  padding:60px 0 90px;
+  color:var(--sage);
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:14px;
+}
+
+/* ---------- ЧИТАЛКА ---------- */
+.reader{display:none;max-width:720px;margin:0 auto;padding:34px 0 100px}
+.reader.active{display:block}
+.list-view.hidden{display:none}
+.reader time{
+  display:block;
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:13px;
+  color:var(--sage);
+  letter-spacing:.06em;
+  margin-bottom:14px;
+}
+.reader-content{
+  color:var(--olive);
+  font-size:clamp(16.5px,1.9vw,18.5px);
+  line-height:1.75;
+}
+.reader-content h1{
+  font-size:clamp(28px,4vw,44px);
+  margin-bottom:26px;
+  line-height:1.2;
+}
+.reader-content h2{
+  font-family:'Unbounded',"Helvetica Neue",sans-serif;
+  font-size:clamp(20px,2.6vw,27px);
+  font-weight:500;
+  color:var(--cream);
+  margin:44px 0 16px;
+  line-height:1.3;
+}
+.reader-content h3{
+  font-size:18px;
+  font-weight:600;
+  color:var(--cream);
+  margin:34px 0 12px;
+}
+.reader-content p{margin:0 0 20px}
+.reader-content strong{color:var(--cream);font-weight:600}
+.reader-content em{font-style:italic}
+.reader-content a{
+  color:var(--amber);
+  text-decoration:none;
+  border-bottom:1px solid rgba(217,162,110,.4);
+  transition:border-color .3s;
+}
+.reader-content a:hover{border-color:var(--amber)}
+.reader-content ul,.reader-content ol{margin:0 0 20px;padding-left:26px}
+.reader-content li{margin-bottom:8px}
+.reader-content blockquote{
+  margin:28px 0;
+  padding:4px 0 4px 22px;
+  border-left:2px solid var(--amber);
+  color:var(--cream);
+  font-style:italic;
+}
+.reader-content blockquote p:last-child{margin-bottom:0}
+.reader-content code{
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:.88em;
+  background:rgba(87,73,56,.4);
+  border-radius:5px;
+  padding:2px 7px;
+  color:var(--cream);
+}
+.reader-content pre{
+  margin:0 0 20px;
+  padding:18px 20px;
+  background:rgba(87,73,56,.28);
+  border:1px solid rgba(147,146,113,.25);
+  border-radius:10px;
+  overflow-x:auto;
+}
+.reader-content pre code{background:none;padding:0;font-size:14px;line-height:1.6}
+.reader-content hr{
+  border:0;
+  height:1px;
+  background:rgba(147,146,113,.3);
+  margin:36px 0;
+}
+.reader-content img{max-width:100%;height:auto;border-radius:10px;margin:8px 0 20px}
+.reader-back{margin-bottom:30px}
+.reader-footer{
+  margin-top:56px;
+  padding-top:24px;
+  border-top:1px solid rgba(147,146,113,.2);
+}
+
+footer{
+  text-align:center;
+  color:var(--sage);
+  font-size:13px;
+  padding:40px 0 46px;
+}
+@media(max-width:560px){
+  .essay-item{padding:20px 2px}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="brand" href="index.html">Raincoat</a>
+  <div class="lang-switch" role="group" aria-label="Language / Язык">
+    <button type="button" data-lang="ru">RU</button>
+    <span class="sep" aria-hidden="true">|</span>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="page">
+  <a class="back" href="index.html" data-i18n="projects.back">&larr; на главную</a>
+</header>
+
+<div class="list-view" id="listView">
+  <div class="page-title">
+    <p class="section-label" data-i18n="blog.label">Блог</p>
+    <h1 data-i18n="blog.h1">Эссе</h1>
+    <p class="lede" data-i18n="blog.lede">Тексты, которые пишутся медленно: инструменты и агенты, созерцательная практика, проекты и релизы.</p>
+  </div>
+  <div class="essays" id="essays"></div>
+</div>
+
+<article class="reader" id="reader">
+  <p class="reader-back"><a class="back" href="blog.html" id="readerBack" data-i18n="blog.backToList">&larr; ко всем эссе</a></p>
+  <time id="readerDate"></time>
+  <div class="reader-content" id="readerContent"></div>
+  <p class="reader-footer"><a class="back" href="blog.html" data-i18n="blog.backToList">&larr; ко всем эссе</a></p>
+</article>
+
+<footer>Raincoat &copy; 2026 &middot; <a class="back" href="index.html" data-i18n="projects.backShort">на главную</a></footer>
+
+</div><!-- /wrap -->
+
+<script src="i18n.js"></script>
+<script>
+(()=>{
+'use strict';
+
+/* ---------- мини-рендерер Markdown (без зависимостей) ---------- */
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function inline(s){
+  return s
+    .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,'<img src="$2" alt="$1" loading="lazy">')
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>');
+}
+function renderMd(md){
+  const lines=md.replace(/\r\n/g,'\n').split('\n');
+  const out=[];
+  let i=0,para=[],listType=null,listBuf=[],quoteBuf=[];
+  const flushPara=()=>{if(para.length){out.push('<p>'+inline(para.join(' '))+'</p>');para=[];}};
+  const flushList=()=>{if(listType){out.push('<'+listType+'>'+listBuf.map(x=>'<li>'+inline(x)+'</li>').join('')+'</'+listType+'>');listType=null;listBuf=[];}};
+  const flushQuote=()=>{if(quoteBuf.length){out.push('<blockquote><p>'+quoteBuf.map(inline).join('</p><p>')+'</p></blockquote>');quoteBuf=[];}};
+  const flushAll=()=>{flushPara();flushList();flushQuote();};
+  while(i<lines.length){
+    const raw=lines[i];
+    /* блок кода ``` */
+    if(/^```/.test(raw)){
+      flushAll();
+      const buf=[];i++;
+      while(i<lines.length&&!/^```/.test(lines[i])){buf.push(lines[i]);i++;}
+      out.push('<pre><code>'+esc(buf.join('\n'))+'</code></pre>');
+      i++;continue;
+    }
+    const l=esc(raw);
+    let m;
+    if(!l.trim()){flushAll();i++;continue;}
+    if(m=l.match(/^(#{1,3})\s+(.*)/)){flushAll();const n=m[1].length;out.push('<h'+n+'>'+inline(m[2])+'</h'+n+'>');i++;continue;}
+    if(/^(---|\*\*\*)\s*$/.test(l)){flushAll();out.push('<hr>');i++;continue;}
+    if(m=l.match(/^&gt;\s?(.*)/)){flushPara();flushList();quoteBuf.push(m[1]);i++;continue;}
+    if(m=l.match(/^[-*]\s+(.*)/)){flushPara();flushQuote();if(listType!=='ul'){flushList();listType='ul';}listBuf.push(m[1]);i++;continue;}
+    if(m=l.match(/^\d+\.\s+(.*)/)){flushPara();flushQuote();if(listType!=='ol'){flushList();listType='ol';}listBuf.push(m[1]);i++;continue;}
+    flushList();flushQuote();para.push(l.trim());i++;
+  }
+  flushAll();
+  return out.join('\n');
+}
+
+/* ---------- данные и роутинг ---------- */
+const listView=document.getElementById('listView');
+const reader=document.getElementById('reader');
+const essaysEl=document.getElementById('essays');
+
+function fmtDate(iso){
+  try{
+    return new Intl.DateTimeFormat(i18n.lang==='ru'?'ru-RU':'en-US',{day:'numeric',month:'long',year:'numeric'}).format(new Date(iso+'T00:00:00'));
+  }catch(e){return iso;}
+}
+
+let POSTS=[];
+
+function renderList(){
+  if(!POSTS.length){
+    essaysEl.innerHTML='<p class="empty-state">'+i18n.t('blog.empty')+'</p>';
+    return;
+  }
+  essaysEl.innerHTML=POSTS.map(p=>
+    '<a class="essay-item" href="blog.html?post='+encodeURIComponent(p.slug)+'">'+
+      '<time datetime="'+p.date+'">'+fmtDate(p.date)+'</time>'+
+      '<h2>'+esc(p.title)+'</h2>'+
+      (p.desc?'<p>'+esc(p.desc)+'</p>':'')+
+    '</a>'
+  ).join('');
+}
+
+function showPost(slug){
+  const meta=POSTS.find(p=>p.slug===slug);
+  fetch('posts/'+slug+'.md')
+    .then(r=>{if(!r.ok)throw 0;return r.text();})
+    .then(md=>{
+      listView.classList.add('hidden');
+      reader.classList.add('active');
+      document.getElementById('readerDate').textContent=meta?fmtDate(meta.date):'';
+      document.getElementById('readerContent').innerHTML=renderMd(md);
+      if(meta)document.title=meta.title+' — Raincoat';
+      scrollTo(0,0);
+    })
+    .catch(()=>{location.href='blog.html';});
+}
+
+fetch('posts/index.json')
+  .then(r=>r.json())
+  .then(posts=>{
+    POSTS=posts.sort((a,b)=>b.date.localeCompare(a.date));
+    const slug=new URLSearchParams(location.search).get('post');
+    if(slug){renderList();showPost(slug);}
+    else renderList();
+  })
+  .catch(()=>{
+    essaysEl.innerHTML='<p class="empty-state">'+i18n.t('blog.empty')+'</p>';
+  });
+
+/* даты в списке зависят от языка */
+document.addEventListener('langchange',()=>{
+  renderList();
+  const slug=new URLSearchParams(location.search).get('post');
+  if(slug){
+    const meta=POSTS.find(p=>p.slug===slug);
+    if(meta)document.getElementById('readerDate').textContent=fmtDate(meta.date);
+  }
+});
+})();
+</script>
+</body>
+</html>
