@@ -239,6 +239,86 @@ details[open] summary .chev{transform:rotate(90deg)}
 }
 .case-link a:hover{border-color:var(--amber)}
 
+/* ---------- TOOLBAR: ПОИСК И СТАТУСЫ ---------- */
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;
+  margin:-26px 0 10px;
+}
+.search{
+  flex:1 1 260px;
+  max-width:420px;
+  font:inherit;
+  font-size:14px;
+  color:var(--cream);
+  background:rgba(87,73,56,.28);
+  border:1px solid var(--wood);
+  border-radius:999px;
+  padding:9px 18px;
+  outline:none;
+  transition:border-color .25s,background .25s;
+}
+.search::placeholder{color:var(--sage)}
+.search:focus{border-color:var(--amber);background:rgba(87,73,56,.45)}
+.status-chips{display:flex;flex-wrap:wrap;gap:10px}
+.status-chips button{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font:inherit;
+  font-size:13px;
+  color:var(--sage);
+  background:transparent;
+  border:1px solid var(--wood);
+  border-radius:999px;
+  padding:7px 16px;
+  cursor:pointer;
+  transition:color .25s,border-color .25s,background .25s;
+}
+.status-chips button:hover{color:var(--amber);border-color:var(--amber)}
+.status-chips button.active{
+  color:var(--charcoal);
+  background:var(--amber);
+  border-color:var(--amber);
+}
+.status-chips button.active .dot{box-shadow:none}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.d-live{background:#9DC183;box-shadow:0 0 6px rgba(157,193,131,.8)}
+.d-wip{background:var(--amber);box-shadow:0 0 6px rgba(217,162,110,.8)}
+.d-done{background:var(--sage)}
+.count{color:var(--sage);font-size:13px;margin:0 0 18px}
+.count b{color:var(--olive);font-weight:600}
+.empty{
+  display:none;
+  color:var(--olive);
+  font-size:15px;
+  padding:36px 0 60px;
+}
+.empty.show{display:block}
+
+/* ---------- СТАТУС-БЕЙДЖИ ---------- */
+.status{
+  display:inline-block;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px solid;
+  border-radius:999px;
+  padding:2px 10px;
+  margin-left:10px;
+  vertical-align:2px;
+  white-space:nowrap;
+}
+.s-live{color:#9DC183;border-color:rgba(157,193,131,.5);background:rgba(157,193,131,.08)}
+.s-wip{color:var(--amber);border-color:rgba(217,162,110,.5);background:rgba(217,162,110,.08)}
+.s-done{color:var(--sage);border-color:rgba(147,146,113,.5);background:rgba(147,146,113,.10)}
+@media(max-width:560px){
+  .status{margin-left:6px;font-size:10px;padding:1px 8px}
+}
+
 /* ---------- REVEAL ---------- */
 .reveal{
   opacity:0;
@@ -294,13 +374,30 @@ footer{
   <button data-f="tools" data-i18n="filter.tools">Инструменты</button>
 </nav>
 
+<div class="toolbar">
+  <input id="search" class="search" type="search" autocomplete="off"
+         placeholder="Поиск: название, стек, описание…"
+         data-i18n="projects.search" data-i18n-attr="placeholder"
+         aria-label="Поиск по проектам">
+  <div class="status-chips" id="statusChips" role="group" aria-label="Статус">
+    <button class="active" data-s="all" data-i18n="filter.statusAll">все статусы</button>
+    <button data-s="live"><i class="dot d-live"></i> <span data-i18n="status.live">в проде</span></button>
+    <button data-s="wip"><i class="dot d-wip"></i> <span data-i18n="status.wip">в работе</span></button>
+    <button data-s="done"><i class="dot d-done"></i> <span data-i18n="status.done">готово</span></button>
+  </div>
+</div>
+
+<p class="count"><span data-i18n="projects.shown">Показано:</span> <b id="count">31</b></p>
+
+<div class="empty" id="empty" data-i18n="projects.empty">Ничего не найдено. Попробуй другой запрос или сбрось фильтры.</div>
+
 <div class="cases" id="cases">
 
 <!-- ===== ТРЕЙДИНГ И WEB3 ===== -->
 
-<details class="case reveal" data-cat="trade" open>
+<details class="case reveal" data-status="live" data-cat="trade" open>
   <summary>
-    <span class="name">I Was Here</span>
+    <span class="name">I Was Here <span class="status s-live" data-i18n="status.live">в проде</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.iwashere.one">Gasless proof-of-attendance NFT на Base — гость сканирует QR и получает бейдж, не платя за газ.</span>
   </summary>
@@ -312,9 +409,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="trade">
+<details class="case reveal" data-status="done" data-cat="trade">
   <summary>
-    <span class="name">Polymarket BTC 5m Bot</span>
+    <span class="name">Polymarket BTC 5m Bot <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.pmBtc.one">Исследовательский бот: есть ли edge против рынка на 5-минутных ставках BTC. Честный ответ: нет.</span>
   </summary>
@@ -326,9 +423,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="trade">
+<details class="case reveal" data-status="wip" data-cat="trade">
   <summary>
-    <span class="name">Polymarket Weather Bot</span>
+    <span class="name">Polymarket Weather Bot <span class="status s-wip" data-i18n="status.wip">в работе</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.pmWeather.one">Автономный бот на рынках дневной максимальной температуры: метеомодели против толпы.</span>
   </summary>
@@ -340,9 +437,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="trade tools">
+<details class="case reveal" data-status="live" data-cat="trade tools">
   <summary>
-    <span class="name">Web3 Tools</span>
+    <span class="name">Web3 Tools <span class="status s-live" data-i18n="status.live">в проде</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.web3tools.one">Генератор EVM-кошельков и vanity-адресов: адрес, начинающийся с выбранного паттерна.</span>
   </summary>
@@ -357,9 +454,9 @@ footer{
 
 <!-- ===== ПРОДУКТЫ ===== -->
 
-<details class="case reveal" data-cat="product">
+<details class="case reveal" data-status="wip" data-cat="product">
   <summary>
-    <span class="name">AI Receptionist SMB</span>
+    <span class="name">AI Receptionist SMB <span class="status s-wip" data-i18n="status.wip">в работе</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.receptionist.one">AI-бот для малого бизнеса: отвечает клиентам по базе знаний, собирает заявки, передаёт оператору.</span>
   </summary>
@@ -371,9 +468,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="product">
+<details class="case reveal" data-status="wip" data-cat="product">
   <summary>
-    <span class="name">TimeSlot</span>
+    <span class="name">TimeSlot <span class="status s-wip" data-i18n="status.wip">в работе</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.timeslot.one">Telegram-first букинг-платформа для нишевых сервисов: подписка, без комиссий.</span>
   </summary>
@@ -385,9 +482,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="product">
+<details class="case reveal" data-status="wip" data-cat="product">
   <summary>
-    <span class="name">SoulOS</span>
+    <span class="name">SoulOS <span class="status s-wip" data-i18n="status.wip">в работе</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.soulos.one">AI-операционка для бизнеса: изолированный агент-инстанс на каждого клиента, управление из Telegram.</span>
   </summary>
@@ -399,9 +496,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="product">
+<details class="case reveal" data-status="wip" data-cat="product">
   <summary>
-    <span class="name">CasperVPN</span>
+    <span class="name">CasperVPN <span class="status s-wip" data-i18n="status.wip">в работе</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.caspervpn.one">VPN-сервис, устойчивый к DPI-блокировкам: живучесть через разнообразие транспортов, а не «шифрование посильнее».</span>
   </summary>
@@ -413,9 +510,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="product tools">
+<details class="case reveal" data-status="done" data-cat="product tools">
   <summary>
-    <span class="name">FlowSpeech</span>
+    <span class="name">FlowSpeech <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.flowspeech.one">Локальная альтернатива Wispr Flow для macOS: зажал клавишу — надиктовал — чистый текст у курсора.</span>
   </summary>
@@ -428,9 +525,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="product tools">
+<details class="case reveal" data-status="done" data-cat="product tools">
   <summary>
-    <span class="name">FloatPlayer</span>
+    <span class="name">FloatPlayer <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.floatplayer.one">Мини-плеер YouTube поверх всех окон: смотришь видео и Shorts, пока работаешь в других приложениях.</span>
   </summary>
@@ -446,9 +543,9 @@ footer{
 
 <!-- ===== OBSIDIAN ===== -->
 
-<details class="case reveal" data-cat="obsidian">
+<details class="case reveal" data-status="done" data-cat="obsidian">
   <summary>
-    <span class="name">Advanced Graph View</span>
+    <span class="name">Advanced Graph View <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.graphView.one">Граф Obsidian для больших vault (5–50 тыс. заметок): из «комка волос» — в инструмент анализа.</span>
   </summary>
@@ -461,9 +558,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="obsidian">
+<details class="case reveal" data-status="done" data-cat="obsidian">
   <summary>
-    <span class="name">Column Explorer</span>
+    <span class="name">Column Explorer <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.columnExplorer.one">Файл-менеджер для Obsidian в стиле Finder: Miller columns, drag &amp; drop, календарь заметок.</span>
   </summary>
@@ -476,9 +573,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="obsidian">
+<details class="case reveal" data-status="done" data-cat="obsidian">
   <summary>
-    <span class="name">Vault Telegram Bridge</span>
+    <span class="name">Vault Telegram Bridge <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.tgBridge.one">Написал себе в Telegram — заметка сама появилась в daily note Obsidian. Без сервера.</span>
   </summary>
@@ -491,9 +588,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="obsidian">
+<details class="case reveal" data-status="done" data-cat="obsidian">
   <summary>
-    <span class="name">Graph Explorer</span>
+    <span class="name">Graph Explorer <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.graphExplorer.one">Граф заметок как галактика: летаешь на звездолёте, а каждая игровая награда реально улучшает vault.</span>
   </summary>
@@ -505,9 +602,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="obsidian">
+<details class="case reveal" data-status="done" data-cat="obsidian">
   <summary>
-    <span class="name">Vault Agent Dashboard</span>
+    <span class="name">Vault Agent Dashboard <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.vaultAgent.one">Агентские LLM-воркфлоу прямо внутри Obsidian: по расписанию, по событиям, с ревью каждого изменения.</span>
   </summary>
@@ -519,9 +616,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="obsidian tools">
+<details class="case reveal" data-status="done" data-cat="obsidian tools">
   <summary>
-    <span class="name">Vault Mirror</span>
+    <span class="name">Vault Mirror <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.vaultMirror.one">Твои заметки уже знают, кто ты. Это заставляет их рассказать: 16 отчётов-зеркал из твоего vault.</span>
   </summary>
@@ -534,11 +631,25 @@ footer{
   </div>
 </details>
 
+<details class="case reveal" data-status="done" data-cat="obsidian">
+  <summary>
+    <span class="name">Liquid Glass (Blue Topaz Alt) <span class="status s-done" data-i18n="status.done">готово</span></span>
+    <span class="chev">&rarr;</span>
+    <span class="one" data-i18n="case.liquidGlass.one">Минималистичная glass-тема для Obsidian: одна сильная идея вместо тысяч строк CSS.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b data-i18n="cell.problem">Проблема</b><p data-i18n="case.liquidGlass.problem">Популярные темы Obsidian разрастаются в тысячи строк переопределений: эффектно на скриншоте, но шумно после трёх часов письма и ломается с каждым обновлением приложения.</p></div>
+    <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.liquidGlass.solution">Форк Blue Topaz, переписанный от критерия успеха: всё на нативных CSS-переменных Obsidian, центр темы — контраст текста и спокойные поверхности, а не blur ради blur. Антицели прописаны в плане до первой строки кода.</p></div>
+    <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.liquidGlass.result">Тема + сниппеты и демо-vault (TIPS) для проверки на реальных заметках.</p></div>
+    <div class="stack"><span>CSS</span><span>Obsidian API</span><span>design system</span></div>
+  </div>
+</details>
+
 <!-- ===== МУЗЫКА И ВИДЕО ===== -->
 
-<details class="case reveal" data-cat="media">
+<details class="case reveal" data-status="done" data-cat="media">
   <summary>
-    <span class="name">Music Visual Machine</span>
+    <span class="name">Music Visual Machine <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.mvm.one">Audio-reactive визуализатор, которым управляют AI-агенты: «сделай визуал под этот трек» → готовое видео.</span>
   </summary>
@@ -550,9 +661,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="media">
+<details class="case reveal" data-status="done" data-cat="media">
   <summary>
-    <span class="name">WAV Humanizer</span>
+    <span class="name">WAV Humanizer <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.wavHumanizer.one">DSP-процессор, который заставляет квантованное аудио звучать как живое исполнение.</span>
   </summary>
@@ -564,9 +675,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="media">
+<details class="case reveal" data-status="done" data-cat="media">
   <summary>
-    <span class="name">Suno Prompt Hub</span>
+    <span class="name">Suno Prompt Hub <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.sunoHub.one">Блочный конструктор промптов для Suno: собери стиль, крути слот-машину тегов, генерируй пачками.</span>
   </summary>
@@ -578,9 +689,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="media tools">
+<details class="case reveal" data-status="done" data-cat="media tools">
   <summary>
-    <span class="name">YouTube Pipeline Gen</span>
+    <span class="name">YouTube Pipeline Gen <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.ytPipeline.one">Контент-фабрика для YouTube-каналов: идеи, сценарии, промпты для Suno/Midjourney/Runway, метаданные.</span>
   </summary>
@@ -592,9 +703,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="media tools">
+<details class="case reveal" data-status="done" data-cat="media tools">
   <summary>
-    <span class="name">AI Music Checker</span>
+    <span class="name">AI Music Checker <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.aiMusicChecker.one">Проверка mp3/wav на признаки AI-генерации — целиком в браузере, файлы никуда не уходят.</span>
   </summary>
@@ -606,9 +717,9 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="media tools">
+<details class="case reveal" data-status="live" data-cat="media tools">
   <summary>
-    <span class="name">Video Optimizer</span>
+    <span class="name">Video Optimizer <span class="status s-live" data-i18n="status.live">в проде</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.ytOptimizer.one">Сжатие видео для загрузки на YouTube: пресеты ffmpeg + macOS droplet «перетащил — готово».</span>
   </summary>
@@ -624,9 +735,9 @@ footer{
 <!-- ===== ИНСТРУМЕНТЫ / ИГРЫ ===== -->
 
 
-<details class="case reveal" data-cat="tools">
+<details class="case reveal" data-status="done" data-cat="tools">
   <summary>
-    <span class="name">Prompt Manager</span>
+    <span class="name">Prompt Manager <span class="status s-done" data-i18n="status.done">готово</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.promptManager.one">Менеджер промптов для macOS: menu bar, Spotlight-палитра, шаблоны с переменными и MCP-сервер.</span>
   </summary>
@@ -638,9 +749,37 @@ footer{
   </div>
 </details>
 
-<details class="case reveal" data-cat="product">
+<details class="case reveal" data-status="live" data-cat="tools">
   <summary>
-    <span class="name">Hermes Skill Pack</span>
+    <span class="name">prize-scout <span class="status s-live" data-i18n="status.live">в проде</span></span>
+    <span class="chev">&rarr;</span>
+    <span class="one" data-i18n="case.prizeScout.one">Автономный скаут акций и розыгрышей: собирает, отсеивает мусор через Claude и шлёт дайджест в Telegram.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b data-i18n="cell.problem">Проблема</b><p data-i18n="case.prizeScout.problem">Конкурсы и акции разбросаны по сайтам, RSS и каналам; вручную это часы просмотра, а среди находок половина — скам или уже закончилось.</p></div>
+    <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.prizeScout.solution">Пайплайн fetch → dedupe → insert → score → finalize: источники настраиваются в конфиге, дубликаты отсекаются, Claude API оценивает релевантность и безопасность. SQLite на Railway-волюме, express-эндпоинт /digest, n8n превращает его в ежедневное сообщение в Telegram.</p></div>
+    <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.prizeScout.result" data-i18n-html>Репозиторий управляется агентом: <strong>npm run verify</strong> (doctor + тесты + offline-smoke) — один гейт, exit 0 значит «работает». Есть Hermes-скилл для операций и деплой на Railway.</p></div>
+    <div class="stack"><span>Node.js 20</span><span>SQLite</span><span>Claude API</span><span>n8n</span><span>Railway</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-status="done" data-cat="tools">
+  <summary>
+    <span class="name">Claude Prompts <span class="status s-done" data-i18n="status.done">готово</span></span>
+    <span class="chev">&rarr;</span>
+    <span class="one" data-i18n="case.claudePrompts.one">Система, которая промптит сама себя: библиотека, которая растёт от использования, а не пишется заново.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b data-i18n="cell.problem">Проблема</b><p data-i18n="case.claudePrompts.problem">Каждый раз писать промпт с нуля — это терять и контекст, и удачные формулировки. Хорошие промпты оседают в чатах и больше не находятся.</p></div>
+    <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.claudePrompts.solution">Четыре части вместо ручного труда: CLAUDE.md как постоянный контекст папки, skill prompt-generator (собирает полный промпт по короткому описанию задачи), context/ со стабильными блоками под prompt cache и prompts/ — библиотека, куда сохраняется каждый удачный промпт.</p></div>
+    <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.claudePrompts.result">Подключается глобально копированием скилла в ~/.claude/skills — обратимо, без зависимостей.</p></div>
+    <div class="stack"><span>Claude Code</span><span>Skills</span><span>Markdown</span><span>prompt cache</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-status="wip" data-cat="product">
+  <summary>
+    <span class="name">Hermes Skill Pack <span class="status s-wip" data-i18n="status.wip">в работе</span></span>
     <span class="chev">&rarr;</span>
     <span class="one" data-i18n="case.hermesPack.one">Коммерческий каталог outcome-ориентированных skill-паков для Hermes Agent: MVP с проверкой спроса.</span>
   </summary>
@@ -649,6 +788,62 @@ footer{
     <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.hermesPack.solution">Evidence-driven MVP: сначала фаза 0 — валидация спроса, платный пак за гейтом. Бесплатные скиллы публикуются в отдельный публичный tap-репозиторий через allowlist-бандл; факты о Hermes пинятся к конкретной версии.</p></div>
     <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.hermesPack.result">Инфраструктура каталога: сайт, формат пакетов, threat model, стратегия тестирования.</p></div>
     <div class="stack"><span>Node 22</span><span>Python 3.12</span><span>Hermes Agent</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-status="done" data-cat="product">
+  <summary>
+    <span class="name">Bunny Runner <span class="status s-done" data-i18n="status.done">готово</span></span>
+    <span class="chev">&rarr;</span>
+    <span class="one" data-i18n="case.bunnyRunner.one">Эндлесс-раннер для Яндекс Игр на Three.js: заяц, красный куб и полный чек-лист модерации.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b data-i18n="cell.problem">Проблема</b><p data-i18n="case.bunnyRunner.problem">Игру на платформу мало написать — её заворачивают на модерации: SDK-вызовы без фолбэков, реклама не в тех местах, сейвы, которые ломаются при обновлении, отсутствие локализации.</p></div>
+    <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.bunnyRunner.solution">Чистый JS без фреймворков: Three.js на визуал, Howler на звук, мета-слой из монет, скинов, питомцев, миссий и daily-бонуса. Каждый вызов Yandex Games SDK — в try/catch с mock-режимом, так что игра целиком работает и без авторизации; версионированная схема сейвов, ru/en-словари проверяются тестом.</p></div>
+    <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.bunnyRunner.result" data-i18n-html>Собранные билды v1.0.0 и v1.0.1 под требования площадки (~1.6 МБ), <strong>135 тестов</strong> на vitest, чек-лист модерации закрыт по пунктам.</p></div>
+    <div class="stack"><span>Three.js</span><span>Howler</span><span>Vite</span><span>Vitest</span><span>Yandex Games SDK</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-status="wip" data-cat="product">
+  <summary>
+    <span class="name">Social Deduction Portal <span class="status s-wip" data-i18n="status.wip">в работе</span></span>
+    <span class="chev">&rarr;</span>
+    <span class="one" data-i18n="case.socialDeduction.one">Вертикальный портал по играм на социальную дедукцию: подбор под компанию, а не очередная база данных.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b data-i18n="cell.problem">Проблема</b><p data-i18n="case.socialDeduction.problem">Выбор игры для конкретной компании (сколько людей, сколько времени, насколько злая механика) сводится к перебору обзоров — общие каталоги на этот вопрос не отвечают.</p></div>
+    <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.socialDeduction.solution">Static-first Next.js (App Router) + TypeScript: каталог, finder-рекомендатор на первом экране, SEO-гайды в MDX и страницы сравнений. Данные игр — типизированные JSON/YAML без базы и аккаунтов, все контент-файлы валидируются схемами Zod на этапе сборки, поэтому битую мету нельзя задеплоить.</p></div>
+    <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.socialDeduction.result">Проект ведётся агентом по CLAUDE_DESIGN.md как единому источнику правды; на момент последней сверки — Cycle 11, контент EN + RU.</p></div>
+    <div class="stack"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>MDX</span><span>Zod</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-status="done" data-cat="product">
+  <summary>
+    <span class="name">Протокол <span class="status s-done" data-i18n="status.done">готово</span></span>
+    <span class="chev">&rarr;</span>
+    <span class="one" data-i18n="case.protocol.one">Интерактивный стол для мафии: ведёт живую партию и тренирует дедукцию на задачах.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b data-i18n="cell.problem">Проблема</b><p data-i18n="case.protocol.problem">За столом всё держится на памяти ведущего и игроков: кто как голосовал, кто кого проверял, какие связи всплывали. Тренироваться в дедукции между партиями вообще негде.</p></div>
+    <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.protocol.solution">Два режима в одном приложении: трекер живой партии (голоса, роли, проверки, связи, доверие, заметки и аргументы) и режим задач, где по готовому протоколу нужно вычислить трёх мафиози.</p></div>
+    <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.protocol.result">Работает без сборки и без сервера, данные остаются в браузере — открыл файл и играешь.</p></div>
+    <div class="stack"><span>JavaScript</span><span>HTML/CSS</span><span>localStorage</span></div>
+  </div>
+</details>
+
+<details class="case reveal" data-status="live" data-cat="product">
+  <summary>
+    <span class="name">Procrastination Simulator <span class="status s-live" data-i18n="status.live">в проде</span></span>
+    <span class="chev">&rarr;</span>
+    <span class="one" data-i18n="case.procrastSim.one">Браузерная игра про то, как не сделать задачу. Маленькая, законченная, выложенная.</span>
+  </summary>
+  <div class="case-body">
+    <div class="cell"><b data-i18n="cell.problem">Проблема</b><p data-i18n="case.procrastSim.problem">Большие проекты умирают на середине. Нужен формат, который проверяет идею целиком: от механики до релиза, но за считанные дни.</p></div>
+    <div class="cell"><b data-i18n="cell.solution">Решение</b><p data-i18n="case.procrastSim.solution">Next.js 14 + Tailwind, вся игра — на клиенте, без бэкенда и аккаунтов. Тесты на vitest, деплой статикой.</p></div>
+    <div class="cell"><b data-i18n="cell.result">Результат</b><p data-i18n="case.procrastSim.result">Доведено до конца и опубликовано — редкий и потому ценный статус «готово».</p></div>
+    <div class="stack"><span>Next.js 14</span><span>React</span><span>Tailwind</span><span>Vitest</span></div>
   </div>
 </details>
 
@@ -666,18 +861,46 @@ const io=new IntersectionObserver(es=>{
 },{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// filters
-const btns=document.querySelectorAll('#filters button');
-btns.forEach(b=>b.addEventListener('click',()=>{
-  btns.forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  const f=b.dataset.f;
-  document.querySelectorAll('details.case').forEach(c=>{
-    const show=f==='all'||c.dataset.cat.split(' ').includes(f);
+// фильтрация: категория ∧ статус ∧ поисковый запрос
+const state={cat:'all',status:'all',q:''};
+const allCases=[...document.querySelectorAll('details.case')];
+const countEl=document.getElementById('count');
+const emptyEl=document.getElementById('empty');
+
+function applyFilters(){
+  let shown=0;
+  for(const c of allCases){
+    const okCat=state.cat==='all'||c.dataset.cat.split(' ').includes(state.cat);
+    const okStatus=state.status==='all'||c.dataset.status===state.status;
+    const okQuery=!state.q||c.textContent.toLowerCase().includes(state.q);
+    const show=okCat&&okStatus&&okQuery;
     c.classList.toggle('hide',!show);
-    if(show)c.classList.add('visible');
-  });
-}));
+    if(show){c.classList.add('visible');shown++;}
+  }
+  countEl.textContent=shown;
+  emptyEl.classList.toggle('show',shown===0);
+}
+
+function bindChips(container,prop,dataAttr){
+  const chips=container.querySelectorAll('button');
+  chips.forEach(b=>b.addEventListener('click',()=>{
+    chips.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    state[prop]=b.dataset[dataAttr];
+    applyFilters();
+  }));
+}
+bindChips(document.getElementById('filters'),'cat','f');
+bindChips(document.getElementById('statusChips'),'status','s');
+
+document.getElementById('search').addEventListener('input',e=>{
+  state.q=e.target.value.trim().toLowerCase();
+  applyFilters();
+});
+
+// при смене языка перезапускаем поиск — textContent карточек меняется
+document.addEventListener('langchange',applyFilters);
+applyFilters();
 </script>
 </body>
 </html>
