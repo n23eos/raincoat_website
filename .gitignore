@@ -11,3 +11,13 @@ Untitled-*.png
 ChatGPT Image*.png
 PLAN.md
 .plan.md
+
+# Архивы планов
+.plan.archive-*.md
+
+# Рабочая папка скриптов рендеринга
+.tmp/
+
+# Исходники и результат генерации баннера (на сайте не подключены,
+# пересобираются скриптом scripts/render-tbilisi-gif.sh)
+assets/tbilisi-*
