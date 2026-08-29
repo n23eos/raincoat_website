@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="hire.meta.title">Для команд — Raincoat, Product Engineer</title>
+<meta name="description" data-i18n="hire.meta.desc" data-i18n-attr="content" content="Product Engineer: опыт, стек и формат работы. Самостоятельно довожу продукты до релиза.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='47' fill='%2325221D'/%3E%3Cpath d='M50 20c-17 0-29 13-29 25h58c0-12-12-25-29-25z' fill='%23D9A26E'/%3E%3Cpath d='M50 45v25a8 8 0 0 1-16 0' stroke='%23D9A26E' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+@font-face{
+  font-family:'Unbounded';font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(assets/fonts/unbounded-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Unbounded';font-style:normal;font-weight:200 900;font-display:swap;
+  src:url(assets/fonts/unbounded-cyrillic.woff2) format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+:root{--charcoal:#25221D;--wood:#574938;--sage:#939271;--olive:#AEAE87;--cream:#D1C997;--amber:#D9A26E;--terracotta:#965E2F}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--charcoal);color:var(--cream);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--terracotta);color:var(--cream)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:28px;padding:14px 24px;background:rgba(37,34,29,.55);border-bottom:1px solid rgba(147,146,113,.16);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.brand{font-family:'Unbounded',sans-serif;font-weight:600;font-size:15px;color:var(--cream);text-decoration:none}
+.brand:hover{color:var(--amber)}
+.nav-links{display:flex;gap:22px;margin-left:auto}
+.nav-links a{color:var(--sage);text-decoration:none;font-size:13.5px;letter-spacing:.06em;transition:color .25s}
+.nav-links a:hover{color:var(--amber)}
+.lang-switch{display:flex;align-items:center;gap:4px;padding:5px 12px;border:1px solid rgba(147,146,113,.35);border-radius:999px;font-size:13px;letter-spacing:.12em}
+.lang-switch button{background:none;border:0;padding:2px 5px;font:inherit;letter-spacing:inherit;color:var(--sage);cursor:pointer}
+.lang-switch button.active{color:var(--amber)}
+.lang-switch .sep{color:rgba(147,146,113,.45)}
+@media (max-width:720px){.nav-links{display:none}.site-nav{gap:0}.site-nav .lang-switch{margin-left:auto}}
+main{max-width:880px;margin:0 auto;padding:130px 24px 80px}
+.section-label{color:var(--terracotta);font-size:14px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:14px}
+h1{font-family:'Unbounded',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:600;line-height:1.15;margin-bottom:18px}
+h2{font-family:'Unbounded',sans-serif;font-size:clamp(18px,2.6vw,26px);font-weight:600;margin:56px 0 18px;color:var(--cream)}
+p.lede{font-size:clamp(16px,2vw,19px);color:var(--olive);max-width:680px}
+ul{list-style:none}
+li{position:relative;padding-left:22px;margin-bottom:12px;color:var(--olive);font-size:16px}
+li::before{content:"—";position:absolute;left:0;color:var(--amber)}
+li strong,p strong{color:var(--cream);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.chips span{border:1px solid var(--wood);border-radius:999px;padding:6px 16px;font-size:14px;color:var(--olive)}
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:6px}
+.proof a{display:block;padding:16px 18px;border:1px solid rgba(147,146,113,.22);border-radius:10px;background:rgba(87,73,56,.2);text-decoration:none;transition:border-color .25s,transform .25s}
+.proof a:hover{border-color:var(--amber);transform:translateY(-3px)}
+.proof b{display:block;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:14px;color:var(--amber);margin-bottom:4px}
+.proof span{font-size:13px;color:var(--sage)}
+.cta-final{margin-top:64px;text-align:center;padding:40px;border:1px solid rgba(217,162,110,.35);border-radius:14px;background:rgba(87,73,56,.2)}
+.cta-final p{color:var(--olive);margin-bottom:20px}
+.cta-final a{display:inline-block;margin:0 8px 8px;padding:12px 30px;border:1px solid var(--amber);border-radius:999px;color:var(--amber);text-decoration:none;transition:background .3s,color .3s}
+.cta-final a:hover{background:var(--amber);color:var(--charcoal)}
+footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a class="brand" href="index.html">Raincoat</a>
+  <div class="nav-links">
+    <a href="index.html#products" data-i18n="nav.products">Продукты</a>
+    <a href="index.html#experiments" data-i18n="nav.experiments">Эксперименты</a>
+    <a href="index.html#about" data-i18n="nav.about">Обо мне</a>
+    <a href="blog.html" data-i18n="nav.blog">Блог</a>
+    <a href="team.html" data-i18n="nav.hire">Для команд</a>
+    <a href="build.html" data-i18n="nav.build">Заказать MVP</a>
+    <a href="index.html#contacts" data-i18n="nav.contacts">Контакты</a>
+  </div>
+  <div class="lang-switch" role="group" aria-label="Language / Язык">
+    <button type="button" data-lang="ru">RU</button>
+    <span class="sep" aria-hidden="true">|</span>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</nav>
+
+<main>
+  <p class="section-label" data-i18n="hire.label">Для рекрутеров и команд</p>
+  <h1 data-i18n="hire.h1">Product Engineer, который доводит до релиза</h1>
+  <p class="lede" data-i18n="hire.lede">Беру неструктурированную задачу и превращаю её в работающий релиз: уточняю сценарий, проектирую UX, пишу frontend и backend, добавляю тесты и выпускаю. Соло — без менеджера сверху.</p>
+
+  <h2 data-i18n="hire.whatH">Что я закрываю</h2>
+  <ul>
+    <li data-i18n="hire.what1" data-i18n-html><strong>Продукт:</strong> гипотеза, сценарии, скоуп MVP, приоритеты.</li>
+    <li data-i18n="hire.what2" data-i18n-html><strong>Разработка:</strong> frontend, backend, базы данных, деплой.</li>
+    <li data-i18n="hire.what3" data-i18n-html><strong>AI-интеграции:</strong> LLM-пайплайны, агенты, RAG, MCP.</li>
+    <li data-i18n="hire.what4" data-i18n-html><strong>Выпуск:</strong> тесты, модерация в каталогах, релиз, поддержка.</li>
+  </ul>
+
+  <h2 data-i18n="hire.stackH">Стек</h2>
+  <div class="chips">
+    <span>TypeScript</span><span>Python</span><span>Go</span><span>Solidity</span>
+    <span>Next.js</span><span>NestJS</span><span>PostgreSQL</span><span>Docker</span>
+    <span>Telegram Bot API</span><span>LLM / RAG</span><span>MCP</span><span>Three.js / WebGL</span>
+  </div>
+
+  <h2 data-i18n="hire.proofH">Доказательства</h2>
+  <div class="proof">
+    <a href="https://community.obsidian.md/plugins/graph-insight" target="_blank" rel="noopener"><b>Advanced Graph View</b><span data-i18n="hire.proof1">~3 000 установок, публичный каталог Obsidian</span></a>
+    <a href="https://community.obsidian.md/plugins/column-explorer" target="_blank" rel="noopener"><b>Column Explorer</b><span data-i18n="hire.proof2">13 публичных релизов одного продукта</span></a>
+    <a href="https://yandex.ru/games/app/rabbit-run-529339" target="_blank" rel="noopener"><b>Rabbit Run</b><span data-i18n="hire.proof3">Игра в сторе: экономика, SDK, модерация, 135 тестов</span></a>
+    <a href="https://i-was-here-tau.vercel.app" target="_blank" rel="noopener"><b>I Was Here</b><span data-i18n="hire.proof4">Контракт в Base mainnet, gasless UX</span></a>
+    <a href="https://github.com/n23eos" target="_blank" rel="noopener"><b>GitHub</b><span data-i18n="hire.proof5">18 открытых репозиториев, 4 языка</span></a>
+  </div>
+
+  <h2 data-i18n="hire.formatH">Формат работы</h2>
+  <ul>
+    <li data-i18n="hire.format1">Full-time / part-time, удалённо. Часовой пояс — GMT+4 (Тбилиси).</li>
+    <li data-i18n="hire.format2">Языки: русский, английский.</li>
+    <li data-i18n="hire.format3">Комфортнее всего там, где надо быстро проверять продуктовые гипотезы: стартапы, новые направления, внутренние инструменты.</li>
+  </ul>
+
+  <div class="cta-final">
+    <p data-i18n="hire.ctaP">Расскажите про команду и задачу — отвечу быстро.</p>
+    <a href="mailto:mns.nicholas@gmail.com">Email</a>
+    <a href="https://github.com/n23eos" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://x.com/Raincoat_talk" target="_blank" rel="noopener">X (Twitter)</a>
+  </div>
+</main>
+
+<footer>Raincoat &copy; 2026</footer>
+<script src="i18n.js?v=2"></script>
+</body>
+</html>

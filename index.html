@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="meta.title">Raincoat — креатив и код</title>
-<meta name="description" data-i18n="meta.desc" data-i18n-attr="content" content="Raincoat: превращаю идеи в работающие проекты. Креатив, код, эксперименты.">
-<meta property="og:title" content="Raincoat">
-<meta property="og:description" data-i18n="meta.ogDesc" data-i18n-attr="content" content="Креатив и код">
+<title data-i18n="meta.title">Raincoat — Product Engineer</title>
+<meta name="description" data-i18n="meta.desc" data-i18n-attr="content" content="Product Engineer: превращаю идеи в работающие продукты — от первого прототипа до релиза. Web, AI-инструменты, desktop, автоматизация.">
+<meta property="og:title" content="Raincoat — Product Engineer">
+<meta property="og:description" data-i18n="meta.ogDesc" data-i18n-attr="content" content="Превращаю идеи в работающие продукты — от прототипа до релиза">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -532,16 +532,157 @@ footer{
   color:var(--sage);
   font-size:13px;
 }
+
+/* ---------- HERO: роль и группа CTA ---------- */
+.hero .role{
+  margin-top:6px;
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:clamp(13px,1.6vw,16px);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--amber);
+  text-shadow:0 2px 20px rgba(37,34,29,.8);
+  opacity:0;transform:translateY(26px);
+  animation:heroUp .9s cubic-bezier(.2,.8,.2,1) .3s forwards;
+}
+.hero .sub{
+  margin-top:10px;
+  font-size:clamp(14px,1.7vw,17px);
+  color:var(--sage);
+  max-width:640px;
+  text-shadow:0 2px 20px rgba(37,34,29,.8);
+  opacity:0;transform:translateY(26px);
+  animation:heroUp .9s cubic-bezier(.2,.8,.2,1) .52s forwards;
+}
+.hero .cta-row{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  opacity:0;transform:translateY(26px);
+  animation:heroUp .9s cubic-bezier(.2,.8,.2,1) .62s forwards;
+}
+.hero .cta.ghost{border-color:rgba(209,201,151,.45);color:var(--cream)}
+.hero .cta.ghost::before{background:var(--cream)}
+@media (prefers-reduced-motion:reduce){
+  .hero .role,.hero .sub,.hero .cta-row{opacity:1;transform:none;animation:none}
+}
+
+/* ---------- ПРОДУКТЫ (витрина) ---------- */
+.prod-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:22px;
+}
+.prod{
+  display:flex;flex-direction:column;
+  background:rgba(87,73,56,.28);
+  border:1px solid rgba(147,146,113,.25);
+  border-radius:14px;
+  padding:26px;
+  transition:transform .3s,border-color .3s,background .3s;
+}
+.prod:hover{
+  transform:translateY(-6px);
+  border-color:var(--amber);
+  background:rgba(87,73,56,.45);
+}
+.prod .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.prod h3{color:var(--cream);font-size:20px;font-weight:600}
+.badge{
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 10px;border-radius:999px;border:1px solid;
+}
+.badge.live{color:#9fd08c;border-color:rgba(159,208,140,.5)}
+.badge.released{color:var(--amber);border-color:rgba(217,162,110,.5)}
+.badge.beta{color:var(--cream);border-color:rgba(209,201,151,.4)}
+.badge.research{color:var(--sage);border-color:rgba(147,146,113,.5)}
+.prod .fact{
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:13px;color:var(--amber);margin-bottom:12px;
+}
+.prod p{color:var(--olive);font-size:15px;flex:1}
+.prod .links{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.prod .links a{
+  color:var(--amber);text-decoration:none;font-size:14px;
+  border:1px solid var(--amber);border-radius:999px;padding:7px 18px;
+  transition:background .3s,color .3s;
+}
+.prod .links a:hover{background:var(--amber);color:var(--charcoal)}
+.prod .links a.gh{
+  border-color:transparent;color:var(--sage);padding:7px 4px;
+}
+.prod .links a.gh:hover{background:none;color:var(--cream)}
+
+/* ---------- ПОЛОСА ЦИФР ---------- */
+.stats{
+  display:flex;justify-content:center;gap:14px 40px;flex-wrap:wrap;
+  margin-top:44px;padding-top:28px;
+  border-top:1px solid rgba(147,146,113,.2);
+}
+.stats div{text-align:center}
+.stats b{
+  display:block;
+  font-family:'Unbounded',"Helvetica Neue",sans-serif;
+  font-size:clamp(20px,2.6vw,30px);font-weight:600;color:var(--amber);
+}
+.stats span{font-size:13px;color:var(--sage);letter-spacing:.05em}
+
+/* ---------- ЭКСПЕРИМЕНТЫ ---------- */
+.exp-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:14px;
+}
+.exp{
+  display:block;
+  padding:16px 18px;
+  border:1px solid rgba(147,146,113,.18);
+  border-radius:10px;
+  background:rgba(87,73,56,.18);
+  text-decoration:none;
+  transition:border-color .25s,background .25s,transform .25s;
+}
+a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:translateY(-3px)}
+.exp b{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  font-family:"SF Mono",ui-monospace,Menlo,monospace;
+  font-size:14px;color:var(--amber);font-weight:600;margin-bottom:4px;
+}
+.exp .badge{font-size:10px;padding:2px 8px}
+.exp span{font-size:13px;color:var(--sage);line-height:1.45}
+
+/* ---------- ПРОЦЕСС ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.step{padding:22px;border:1px solid rgba(147,146,113,.22);border-radius:12px;background:rgba(87,73,56,.18)}
+.step .num{
+  font-family:'Unbounded',sans-serif;font-size:24px;color:var(--terracotta);font-weight:600;
+}
+.step h3{color:var(--cream);font-size:16px;margin:8px 0 6px}
+.step p{color:var(--olive);font-size:14px}
+
+/* ---------- ДВА МАРШРУТА ---------- */
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.route{
+  display:block;padding:30px;border-radius:14px;text-decoration:none;
+  border:1px solid rgba(217,162,110,.4);
+  background:rgba(87,73,56,.24);
+  transition:transform .3s,border-color .3s,background .3s;
+}
+.route:hover{transform:translateY(-6px);border-color:var(--amber);background:rgba(87,73,56,.42)}
+.route h3{color:var(--amber);font-size:20px;margin-bottom:8px}
+.route p{color:var(--olive);font-size:15px}
+.route .arw{display:inline-block;margin-top:14px;color:var(--cream);transition:transform .3s}
+.route:hover .arw{transform:translateX(6px)}
 </style>
 </head>
 <body>
 <nav class="site-nav">
   <a class="brand" href="#">Raincoat</a>
   <div class="nav-links">
+    <a href="#products" data-i18n="nav.products">Продукты</a>
+    <a href="#experiments" data-i18n="nav.experiments">Эксперименты</a>
     <a href="#about" data-i18n="nav.about">Обо мне</a>
-    <a href="#tools" data-i18n="nav.tools">Инструменты</a>
-    <a href="#projects" data-i18n="nav.projects">Проекты</a>
     <a href="blog.html" data-i18n="nav.blog">Блог</a>
+    <a href="team.html" data-i18n="nav.hire">Для команд</a>
+    <a href="build.html" data-i18n="nav.build">Заказать MVP</a>
     <a href="#contacts" data-i18n="nav.contacts">Контакты</a>
   </div>
   <div class="lang-switch" role="group" aria-label="Language / Язык">
@@ -555,11 +696,88 @@ footer{
   <video autoplay muted loop playsinline preload="auto" poster="assets/poster.jpg" src="assets/hero-loop.mp4"></video>
   <div class="hero-content">
     <h1>Raincoat</h1>
-    <p data-i18n="hero.tagline">Креатив &times; код: превращаю идеи в работающие проекты</p>
-    <a class="cta" href="#contacts" data-i18n="hero.cta">Написать мне</a>
+    <p class="role">Product Engineer</p>
+    <p data-i18n="hero.tagline">Превращаю идеи в работающие продукты — от первого прототипа до релиза</p>
+    <p class="sub" data-i18n="hero.sub">Web-приложения, AI-инструменты, desktop-продукты и автоматизация. Самостоятельно закрываю продукт, интерфейс, разработку и запуск.</p>
+    <div class="cta-row">
+      <a class="cta" href="#products" data-i18n="hero.ctaProducts">Работающие продукты</a>
+      <a class="cta ghost" href="team.html" data-i18n="hero.ctaHire">Для команд</a>
+      <a class="cta ghost" href="build.html" data-i18n="hero.ctaBuild">Обсудить MVP</a>
+    </div>
   </div>
   <div class="scroll-hint" data-i18n="hero.scroll">scroll</div>
 </header>
+
+<section id="products">
+  <p class="section-label reveal" data-i18n="products.label">Продукты</p>
+  <h2 class="reveal" data-i18n="products.h2">Работающие — можно потрогать</h2>
+  <div class="prod-grid reveal">
+
+    <div class="prod">
+      <div class="head"><h3>Advanced Graph View</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
+      <div class="fact" data-i18n="prod.agv.fact">~3 000 установок · Obsidian community</div>
+      <p data-i18n="prod.agv.text">Штатный граф Obsidian умирает на больших хранилищах. Собрал 3D-граф на WebGL и Web Workers: 10 000+ заметок, кластеры, семантические связи — без тормозов.</p>
+      <div class="links">
+        <a href="https://n23eos.github.io/advanced_graph_view/" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
+        <a href="https://community.obsidian.md/plugins/graph-insight" target="_blank" rel="noopener" data-i18n="link.store">В каталоге</a>
+      </div>
+    </div>
+
+    <div class="prod">
+      <div class="head"><h3>Column Explorer</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
+      <div class="fact" data-i18n="prod.ce.fact">400+ загрузок · v1.13</div>
+      <p data-i18n="prod.ce.text">Навигация по vault через дерево — медленно. Сделал двухпанельный файл-менеджер в стиле Finder внутри Obsidian и довёл его через 13 публичных релизов.</p>
+      <div class="links">
+        <a href="https://community.obsidian.md/plugins/column-explorer" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
+        <a class="gh" href="https://github.com/N23eos/column_explorer" target="_blank" rel="noopener">GitHub &rarr;</a>
+      </div>
+    </div>
+
+    <div class="prod">
+      <div class="head"><h3>Prompt Manager</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
+      <div class="fact" data-i18n="prod.pm.fact">Desktop · локальные данные · MCP</div>
+      <p data-i18n="prod.pm.text">Промпты расползаются по заметкам и чатам. Собрал desktop-менеджер промптов: всё хранится локально, а MCP-сервер отдаёт библиотеку прямо AI-агентам.</p>
+      <div class="links">
+        <a href="https://github.com/n23eos/prompt_manager_with_mpc" target="_blank" rel="noopener" data-i18n="link.code">Код</a>
+      </div>
+    </div>
+
+    <div class="prod">
+      <div class="head"><h3>Kaidzen</h3><span class="badge beta" data-i18n="badge.beta">Beta</span></div>
+      <div class="fact" data-i18n="prod.kaidzen.fact">Multi-agent · research loop</div>
+      <p data-i18n="prod.kaidzen.text">Сырая идея — ещё не продукт. Kaidzen полирует её фактами из веб-поиска через пайплайн агентов и эволюционирует собственные инструкции после каждого прогона.</p>
+      <div class="links">
+        <a href="https://github.com/n23eos/kaidzen" target="_blank" rel="noopener" data-i18n="link.code">Код</a>
+      </div>
+    </div>
+
+    <div class="prod">
+      <div class="head"><h3>I Was Here</h3><span class="badge live">Live</span></div>
+      <div class="fact" data-i18n="prod.iwh.fact">Base mainnet · газ платит paymaster</div>
+      <p data-i18n="prod.iwh.text">NFT-бейджи за посещение событий отпугивают: нужен кошелёк и ETH на газ. Сделал gasless-клейм: гость сканирует QR, входит по email и получает бейдж, не заплатив ни цента.</p>
+      <div class="links">
+        <a href="https://i-was-here-tau.vercel.app" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
+      </div>
+    </div>
+
+    <div class="prod">
+      <div class="head"><h3>FlowSpeech</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
+      <div class="fact" data-i18n="prod.fs.fact">macOS · Whisper on-device · приватно</div>
+      <p data-i18n="prod.fs.text">Облачная диктовка платная и шлёт голос на сервер. Собрал локальную альтернативу: зажал клавишу — надиктовал — чистый текст у курсора. Whisper на устройстве + LLM-очистка.</p>
+      <div class="links">
+        <a class="gh" href="https://github.com/N23eos/flowspeech" target="_blank" rel="noopener">GitHub &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="stats reveal">
+    <div><b>4</b><span data-i18n="stats.plugins">Obsidian-плагина в каталоге</span></div>
+    <div><b>3&nbsp;600+</b><span data-i18n="stats.downloads">загрузок плагинов</span></div>
+    <div><b>18</b><span data-i18n="stats.repos">открытых репозиториев</span></div>
+    <div><b>TS·Py·Go·Sol</b><span data-i18n="stats.langs">TypeScript / Python / Go / Solidity</span></div>
+  </div>
+</section>
 
 <section id="about" class="about">
   <p class="section-label reveal" data-i18n="about.label">Обо мне</p>
@@ -574,9 +792,56 @@ footer{
   </div>
 </section>
 
+<section id="experiments">
+  <p class="section-label reveal" data-i18n="exp.label">Лаборатория</p>
+  <h2 class="reveal" data-i18n="exp.h2">Ещё эксперименты</h2>
+  <div class="exp-grid reveal">
+    <a class="exp" href="https://i-was-here-tau.vercel.app" target="_blank" rel="noopener"><b>I Was Here <span class="badge live">Live</span></b><span data-i18n="exp.iwashere">Gasless NFT-бейджи в Base mainnet: QR → клейм, газ платит paymaster.</span></a>
+    <a class="exp" href="https://yandex.ru/games/app/rabbit-run-529339" target="_blank" rel="noopener"><b>Rabbit Run <span class="badge live">Live</span></b><span data-i18n="exp.rabbitRun">Эндлесс-раннер в Яндекс Играх: Three.js, 135 тестов. Ещё 8 игр на модерации.</span></a>
+    <a class="exp" href="https://n23eos.github.io/floatplayer-site/" target="_blank" rel="noopener"><b>FloatPlayer <span class="badge live">Live</span></b><span data-i18n="exp.floatplayer">YouTube поверх всех окон: Chrome-расширение + свой лендинг.</span></a>
+    <a class="exp" href="https://github.com/N23eos/flowspeech" target="_blank" rel="noopener"><b>FlowSpeech <span class="badge released" data-i18n="badge.released">Released</span></b><span data-i18n="exp.flowspeech">Локальная диктовка для macOS: Whisper на устройстве + LLM-очистка текста.</span></a>
+    <a class="exp" href="https://community.obsidian.md/plugins/vault-telegram-bridge" target="_blank" rel="noopener"><b>Vault Telegram Bridge <span class="badge released" data-i18n="badge.released">Released</span></b><span data-i18n="exp.tgBridge">Заметки в Obsidian прямо из Telegram. Ноль инфраструктуры.</span></a>
+    <a class="exp" href="https://github.com/n23eos/obsidian-vault-sunburst" target="_blank" rel="noopener"><b>Vault Sunburst <span class="badge released" data-i18n="badge.released">Released</span></b><span data-i18n="exp.sunburst">Disk-usage диаграмма для vault: что раздувает хранилище.</span></a>
+    <a class="exp" href="https://github.com/N23eos/vault-mirror" target="_blank" rel="noopener"><b>Vault Mirror</b><span data-i18n="exp.vaultMirror">16 отчётов-зеркал из твоих заметок. Просто промпты, agent-agnostic.</span></a>
+    <a class="exp" href="https://github.com/n23eos/obsidian-agents-bridge" target="_blank" rel="noopener"><b>Agents Bridge</b><span data-i18n="exp.agentsBridge">AI-агенты внутри Obsidian: мост между vault и LLM-воркфлоу.</span></a>
+    <a class="exp" href="https://github.com/N23eos/web3-tools" target="_blank" rel="noopener"><b>Web3 Tools</b><span data-i18n="exp.web3tools">Генератор vanity-адресов для EVM: CI, MIT, опубликованный пакет.</span></a>
+    <div class="exp"><b>Polymarket BTC Bot <span class="badge research" data-i18n="badge.research">Research</span></b><span data-i18n="exp.pmBtc">Есть ли edge на 5-минутных ставках BTC? Честный ответ после walk-forward: нет. Деньги не потеряны.</span></div>
+    <div class="exp"><b>Polymarket Weather <span class="badge research" data-i18n="badge.research">Research</span></b><span data-i18n="exp.pmWeather">Ансамбль GFS против толпы на погодных рынках. Симуляция с тестами.</span></div>
+    <a class="exp" href="https://github.com/n23eos/CasperVPN" target="_blank" rel="noopener"><b>CasperVPN <span class="badge research" data-i18n="badge.research">Research</span></b><span data-i18n="exp.caspervpn">DPI-устойчивый VPN: Go-монорепо из 6 сервисов, ядро sing-box, ADR-доки.</span></a>
+    <a class="exp" href="https://github.com/n23eos/eye-rest-20-20-20" target="_blank" rel="noopener"><b>Eye Rest 20-20-20</b><span data-i18n="exp.eyeRest">Chrome-расширение: напоминания по правилу 20-20-20 для глаз.</span></a>
+    <a class="exp" href="https://github.com/N23eos/youtube_video_optimizer" target="_blank" rel="noopener"><b>Video Optimizer</b><span data-i18n="exp.ytOptimizer">Пресеты ffmpeg + macOS droplet: сжатие видео перетаскиванием.</span></a>
+  </div>
+</section>
+
+<section id="process">
+  <p class="section-label reveal" data-i18n="process.label">Процесс</p>
+  <h2 class="reveal" data-i18n="process.h2">Как идея становится продуктом</h2>
+  <div class="steps reveal">
+    <div class="step"><div class="num">01</div><h3 data-i18n="process.s1h">Разбор задачи</h3><p data-i18n="process.s1p">Неясную идею превращаю в сценарии и продуктовую гипотезу. Фиксирую, что проверяем и что считается успехом.</p></div>
+    <div class="step"><div class="num">02</div><h3 data-i18n="process.s2h">Прототип</h3><p data-i18n="process.s2p">Кликабельный скелет за дни: UX, интерфейс, ключевой сценарий end-to-end. Смотрим на живое, а не на макет.</p></div>
+    <div class="step"><div class="num">03</div><h3 data-i18n="process.s3h">Итерации с тестами</h3><p data-i18n="process.s3p">Код, интеграции, AI — с тестами: 135 тестов в Rabbit Run, walk-forward валидация в торговых ботах.</p></div>
+    <div class="step"><div class="num">04</div><h3 data-i18n="process.s4h">Релиз</h3><p data-i18n="process.s4p">Публикация и передача: каталоги Obsidian и Chrome, Яндекс Игры, mainnet, docker compose одной командой.</p></div>
+  </div>
+</section>
+
+<section id="routes">
+  <div class="routes reveal">
+    <a class="route" href="team.html">
+      <h3 data-i18n="route.hireH">Инженер в команду &rarr;</h3>
+      <p data-i18n="route.hireP">Ищете Product Engineer / Fullstack-разработчика, который самостоятельно доводит фичи до релиза? Опыт, стек и формат работы.</p>
+      <span class="arw" data-i18n="route.hireA">Для рекрутеров и команд</span>
+    </a>
+    <a class="route" href="build.html">
+      <h3 data-i18n="route.buildH">Заказать MVP &rarr;</h3>
+      <p data-i18n="route.buildP">Есть идея продукта? Соберу рабочий инструмент или сервис за 2–4 недели. Типы MVP, процесс и первый этап.</p>
+      <span class="arw" data-i18n="route.buildA">Для стартапов и бизнеса</span>
+    </a>
+  </div>
+</section>
+
 <section id="projects">
-  <p class="section-label reveal" data-i18n="projects.label">Проекты</p>
-  <h2 class="reveal" data-i18n="projects.h2">Отгружено и работает</h2>
+  <p class="section-label reveal" data-i18n="archive.label">Архив</p>
+  <h2 class="reveal" data-i18n="archive.h2">И ещё 30+ проектов</h2>
   <p class="reveal" style="max-width:1040px;margin:0 auto 28px;padding:0 24px"><a class="cta-link" href="projects.html"><span data-i18n="projects.cta">Все кейсы: проблема &rarr; решение &rarr; стек &rarr; результат</span> <span class="arw">&rarr;</span></a></p>
   <div class="marquee-wrap reveal">
     <div class="marquee-row rtl">
@@ -663,7 +928,7 @@ footer{
   <p class="section-label reveal" data-i18n="contacts.label">Контакты</p>
   <h2 class="reveal" data-i18n="contacts.h2">Есть идея? Обсудим</h2>
   <div class="contact-links reveal">
-    <a href="mailto:mns.nicholas2@gmail.com">Email</a>
+    <a href="mailto:mns.nicholas@gmail.com">Email</a>
     <a href="https://github.com/N23eos" target="_blank" rel="noopener">GitHub</a>
     <a href="https://x.com/Raincoat_talk" target="_blank" rel="noopener">X (Twitter)</a>
   </div>
@@ -677,7 +942,7 @@ footer{
 
 <footer>Raincoat &copy; 2026</footer>
 
-<script src="i18n.js"></script>
+<script src="i18n.js?v=2"></script>
 <script>
 const io=new IntersectionObserver(entries=>{
   for(const e of entries){
