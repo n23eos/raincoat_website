@@ -4,5 +4,17 @@
     "date": "2026-08-11",
     "title": "Зачем этот блог",
     "desc": "Короткое эссе о том, зачем писать в эпоху, когда за тебя может написать машина."
+  },
+  {
+    "slug": "tool-of-all-tools",
+    "date": "2026-08-29",
+    "title": "Инструмент всех инструментов",
+    "desc": "Эссе о техно-оптимизме: почему AGI — волшебная палочка, а не только угроза, и какие две задачи осталось решить."
+  },
+  {
+    "slug": "tool-of-all-tools-en",
+    "date": "2026-08-29",
+    "title": "The Tool of All Tools",
+    "desc": "Techno-optimism essay: why AGI is a magic wand, not just a threat. Auto-translated from Russian by AI."
   }
 ]
