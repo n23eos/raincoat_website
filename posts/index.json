@@ -9,12 +9,9 @@
     "slug": "tool-of-all-tools",
     "date": "2026-08-29",
     "title": "Инструмент всех инструментов",
-    "desc": "Эссе о техно-оптимизме: почему AGI — волшебная палочка, а не только угроза, и какие две задачи осталось решить."
-  },
-  {
-    "slug": "tool-of-all-tools-en",
-    "date": "2026-08-29",
-    "title": "The Tool of All Tools",
-    "desc": "Techno-optimism essay: why AGI is a magic wand, not just a threat. Auto-translated from Russian by AI."
+    "desc": "Эссе о техно-оптимизме: почему AGI — волшебная палочка, а не только угроза, и какие две задачи осталось решить.",
+    "en": true,
+    "title_en": "The Tool of All Tools",
+    "desc_en": "A techno-optimism essay: why AGI is a magic wand, not just a threat — and the two problems left to solve."
   }
 ]

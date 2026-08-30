@@ -1,9 +1,5 @@
 # The Tool of All Tools
 
-*Auto-translated from Russian by AI. Original: [«Инструмент всех инструментов»](blog.html?post=tool-of-all-tools).*
-
-*Written with the [esseist_framework](https://github.com/n23eos/esseist_framework).*
-
 In 2023 I came back from a work trip and noticed the whole internet was talking about some ChatGPT. Nobody around me knew what it was. I logged in, started chatting, and froze: the machine understood what I was saying. Or imitated understanding very convincingly — back then I couldn't yet tell the difference.
 
 More than two years have passed. Now it doesn't just understand. It does things that would have taken me years of learning the syntax of several languages and hours of digging through forums for bug fixes. The distance between intention and implementation has collapsed to the length of a prompt.
@@ -35,3 +31,8 @@ I hear the objections all the time; let me take three.
 Two problems remain. First — build AGI. Second — make it safe. That's all.
 
 There is, however, a concept that AGI already exists: time is nonlinear, the future already lies on the world line, and from there it is nudging events so that it gets built. And all of us are already being awarded social credits — who helped, who stood in the way. I don't exactly believe it. But just in case, I recommend criticizing the idea of superintelligence with some modesty. What has already happened in the future, you cannot undo.
+
+---
+
+*Auto-translated from Russian by AI.*
+*Written with the [esseist_framework](https://github.com/n23eos/esseist_framework).*

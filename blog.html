@@ -374,25 +374,30 @@ function renderList(){
     essaysEl.innerHTML='<p class="empty-state">'+i18n.t('blog.empty')+'</p>';
     return;
   }
-  essaysEl.innerHTML=POSTS.map(p=>
-    '<a class="essay-item" href="blog.html?post='+encodeURIComponent(p.slug)+'">'+
+  const en=i18n.lang==='en';
+  essaysEl.innerHTML=POSTS.map(p=>{
+    const title=en&&p.title_en?p.title_en:p.title;
+    const desc=en&&p.desc_en?p.desc_en:p.desc;
+    return '<a class="essay-item" href="blog.html?post='+encodeURIComponent(p.slug)+'">'+
       '<time datetime="'+p.date+'">'+fmtDate(p.date)+'</time>'+
-      '<h2>'+esc(p.title)+'</h2>'+
-      (p.desc?'<p>'+esc(p.desc)+'</p>':'')+
-    '</a>'
-  ).join('');
+      '<h2>'+esc(title)+'</h2>'+
+      (desc?'<p>'+esc(desc)+'</p>':'')+
+    '</a>';
+  }).join('');
 }
 
 function showPost(slug){
   const meta=POSTS.find(p=>p.slug===slug);
-  fetch('posts/'+slug+'.md')
+  /* у поста с en:true своя английская версия <slug>.en.md — берём её, когда сайт на английском */
+  const useEn=i18n.lang==='en'&&meta&&meta.en;
+  fetch('posts/'+slug+(useEn?'.en':'')+'.md')
     .then(r=>{if(!r.ok)throw 0;return r.text();})
     .then(md=>{
       listView.classList.add('hidden');
       reader.classList.add('active');
       document.getElementById('readerDate').textContent=meta?fmtDate(meta.date):'';
       document.getElementById('readerContent').innerHTML=renderMd(md);
-      if(meta)document.title=meta.title+' — Raincoat';
+      if(meta)document.title=(useEn&&meta.title_en?meta.title_en:meta.title)+' — Raincoat';
       scrollTo(0,0);
     })
     .catch(()=>{location.href='blog.html';});
@@ -402,7 +407,12 @@ fetch('posts/index.json')
   .then(r=>r.json())
   .then(posts=>{
     POSTS=posts.sort((a,b)=>b.date.localeCompare(a.date));
-    const slug=new URLSearchParams(location.search).get('post');
+    let slug=new URLSearchParams(location.search).get('post');
+    /* старые ссылки вида ?post=<slug>-en — редиректим на единый пост с английским языком */
+    if(slug&&!POSTS.find(p=>p.slug===slug)&&/-en$/.test(slug)){
+      const base=slug.replace(/-en$/,'');
+      if(POSTS.find(p=>p.slug===base)){slug=base;i18n.setLang('en');}
+    }
     if(slug){renderList();showPost(slug);}
     else renderList();
   })
@@ -410,14 +420,11 @@ fetch('posts/index.json')
     essaysEl.innerHTML='<p class="empty-state">'+i18n.t('blog.empty')+'</p>';
   });
 
-/* даты в списке зависят от языка */
+/* список и открытый пост зависят от языка */
 document.addEventListener('langchange',()=>{
   renderList();
   const slug=new URLSearchParams(location.search).get('post');
-  if(slug){
-    const meta=POSTS.find(p=>p.slug===slug);
-    if(meta)document.getElementById('readerDate').textContent=fmtDate(meta.date);
-  }
+  if(slug&&POSTS.find(p=>p.slug===slug))showPost(slug);
 });
 })();
 </script>
