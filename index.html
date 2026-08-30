@@ -8,7 +8,8 @@
 <meta property="og:title" content="Raincoat — Product Engineer">
 <meta property="og:description" data-i18n="meta.ogDesc" data-i18n-attr="content" content="Превращаю идеи в работающие продукты — от прототипа до релиза">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/poster.jpg">
+<meta property="og:image" content="https://n23eos.github.io/raincoat_website/assets/og.png">
+<meta name="twitter:image" content="https://n23eos.github.io/raincoat_website/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='47' fill='%2325221D'/%3E%3Cpath d='M50 20c-17 0-29 13-29 25h58c0-12-12-25-29-25z' fill='%23D9A26E'/%3E%3Cpath d='M50 45v25a8 8 0 0 1-16 0' stroke='%23D9A26E' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -584,6 +585,13 @@ footer{
   border-color:var(--amber);
   background:rgba(87,73,56,.45);
 }
+.prod .shot{
+  margin:-26px -26px 18px;
+  border-radius:14px 14px 0 0;
+  overflow:hidden;
+  border-bottom:1px solid rgba(147,146,113,.25);
+}
+.prod .shot img{display:block;width:100%;height:170px;object-fit:cover;object-position:top;filter:saturate(.92)}
 .prod .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
 .prod h3{color:var(--cream);font-size:20px;font-weight:600}
 .badge{
@@ -714,6 +722,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
   <div class="prod-grid reveal">
 
     <div class="prod">
+      <div class="shot"><img src="assets/shots/agv.jpg" alt="Advanced Graph View — 3D-граф на 10 000+ заметок" loading="lazy" width="800" height="516"></div>
       <div class="head"><h3>Advanced Graph View</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
       <div class="fact" data-i18n="prod.agv.fact">~3 000 установок · Obsidian community</div>
       <p data-i18n="prod.agv.text">Штатный граф Obsidian умирает на больших хранилищах. Собрал 3D-граф на WebGL и Web Workers: 10 000+ заметок, кластеры, семантические связи — без тормозов.</p>
@@ -724,6 +733,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
     </div>
 
     <div class="prod">
+      <div class="shot"><img src="assets/shots/column-explorer.jpg" alt="Column Explorer — двухпанельный файл-менеджер в Obsidian" loading="lazy" width="800" height="500"></div>
       <div class="head"><h3>Column Explorer</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
       <div class="fact" data-i18n="prod.ce.fact">400+ загрузок · v1.13</div>
       <p data-i18n="prod.ce.text">Навигация по vault через дерево — медленно. Сделал двухпанельный файл-менеджер в стиле Finder внутри Obsidian и довёл его через 13 публичных релизов.</p>
@@ -752,6 +762,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
     </div>
 
     <div class="prod">
+      <div class="shot"><img src="assets/shots/i-was-here.jpg" alt="I Was Here — gasless NFT-бейджи на Base" loading="lazy" width="800" height="500"></div>
       <div class="head"><h3>I Was Here</h3><span class="badge live">Live</span></div>
       <div class="fact" data-i18n="prod.iwh.fact">Base mainnet · газ платит paymaster</div>
       <p data-i18n="prod.iwh.text">NFT-бейджи за посещение событий отпугивают: нужен кошелёк и ETH на газ. Сделал gasless-клейм: гость сканирует QR, входит по email и получает бейдж, не заплатив ни цента.</p>
@@ -930,7 +941,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
   <div class="contact-links reveal">
     <a href="mailto:mns.nicholas@gmail.com">Email</a>
     <a href="https://github.com/N23eos" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://x.com/Raincoat_talk" target="_blank" rel="noopener">X (Twitter)</a>
+    <a href="https://x.com/Raincoat_t" target="_blank" rel="noopener">X (Twitter)</a>
   </div>
 </section>
 

@@ -71,7 +71,10 @@ body{
   transition:color .3s;
 }
 .brand:hover{color:var(--amber)}
-.site-nav .lang-switch{margin-left:auto}
+.nav-links{display:flex;gap:22px;margin-left:auto}
+.nav-links a{color:var(--sage);text-decoration:none;font-size:13.5px;letter-spacing:.06em;transition:color .25s}
+.nav-links a:hover{color:var(--amber)}
+@media (max-width:720px){.nav-links{display:none}.site-nav{gap:0}.site-nav .lang-switch{margin-left:auto}}
 
 /* ---------- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ---------- */
 .lang-switch{
@@ -276,6 +279,15 @@ footer{
 
 <nav class="site-nav">
   <a class="brand" href="index.html">Raincoat</a>
+  <div class="nav-links">
+    <a href="index.html#products" data-i18n="nav.products">Продукты</a>
+    <a href="index.html#experiments" data-i18n="nav.experiments">Эксперименты</a>
+    <a href="index.html#about" data-i18n="nav.about">Обо мне</a>
+    <a href="blog.html" data-i18n="nav.blog">Блог</a>
+    <a href="team.html" data-i18n="nav.hire">Для команд</a>
+    <a href="build.html" data-i18n="nav.build">Заказать MVP</a>
+    <a href="index.html#contacts" data-i18n="nav.contacts">Контакты</a>
+  </div>
   <div class="lang-switch" role="group" aria-label="Language / Язык">
     <button type="button" data-lang="ru">RU</button>
     <span class="sep" aria-hidden="true">|</span>
