@@ -411,7 +411,11 @@ fetch('posts/index.json')
     /* старые ссылки вида ?post=<slug>-en — редиректим на единый пост с английским языком */
     if(slug&&!POSTS.find(p=>p.slug===slug)&&/-en$/.test(slug)){
       const base=slug.replace(/-en$/,'');
-      if(POSTS.find(p=>p.slug===base)){slug=base;i18n.setLang('en');}
+      if(POSTS.find(p=>p.slug===base)){
+        slug=base;
+        i18n.setLang('en');
+        try{history.replaceState(null,'','blog.html?post='+encodeURIComponent(base));}catch(e){}
+      }
     }
     if(slug){renderList();showPost(slug);}
     else renderList();
