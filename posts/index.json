@@ -13,5 +13,14 @@
     "en": true,
     "title_en": "The Tool of All Tools",
     "desc_en": "A techno-optimism essay: why AGI is a magic wand, not just a threat — and the two problems left to solve."
+  },
+  {
+    "slug": "pustota-plohoy-perevod",
+    "date": "2026-08-31",
+    "title": "Пустота — плохой перевод",
+    "desc": "Эссе о шуньяте: почему «пустота» не значит «ничего нет», чем она отличается от эмерджентности и что из этого следует для стресса и свободы воли.",
+    "en": true,
+    "title_en": "Emptiness Is a Bad Translation",
+    "desc_en": "An essay on śūnyatā: why emptiness doesn't mean nothing exists, how it differs from emergence, and what follows for stress and free will."
   }
 ]
