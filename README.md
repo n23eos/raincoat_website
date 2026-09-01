@@ -1,6 +1,12 @@
 # Raincoat
 
-Статический сайт-портфолио. Без сборки и зависимостей: HTML + CSS + vanilla JS.
+**Raincoat is a static portfolio and blog site with no build step and no dependencies, written in HTML, CSS and vanilla JavaScript.** Essays are Markdown files in posts/ listed by posts/index.json, parsed and rendered in the browser, and each one is reachable at blog.html?post=slug. Posts carry a Russian and an English version with an in-page language switch. It is served from GitHub Pages on the custom domain raincoat.cc.
+
+<div align="center">
+
+[![Star on GitHub](https://img.shields.io/github/stars/n23eos/raincoat_website?style=for-the-badge&logo=github&label=Star%20this%20repo&color=FFD700&labelColor=1a1a1a)](https://github.com/n23eos/raincoat_website)
+
+</div>
 
 ## Как добавить эссе в блог
 
