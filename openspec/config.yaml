@@ -1,0 +1,30 @@
+schema: spec-driven
+
+context: |
+  Language: Russian. Write artifacts in Russian; keep OpenSpec structural headings
+  and SHALL/MUST keywords in English.
+  Raincoat is an existing static portfolio and blog served by GitHub Pages.
+  Stack: HTML, CSS and vanilla JavaScript; no build step or npm runtime dependencies.
+  Pages: index.html, projects.html, team.html, build.html, blog.html.
+  CSS and page scripts are mostly inline. Shared localization is in i18n.js (RU/EN).
+  Blog content: posts/index.json and posts/*.md, with optional *.en.md translations.
+  Assets live in assets/. CNAME defines the custom domain.
+  scripts/render-tbilisi-gif.sh is an optional asset-generation helper, not a site build.
+  No automated test runner is configured. Preview with python3 -m http.server 8000.
+  Preserve existing architecture and unrelated uncommitted changes.
+  Directories named !notes contain private user notes; never publish their contents.
+  Use OpenSpec for future features; do not retroactively rewrite existing code.
+
+rules:
+  proposal:
+    - Describe user-visible behavior, scope, non-goals and acceptance criteria.
+  specs:
+    - Use SHALL/MUST requirements and concrete WHEN/THEN scenarios.
+    - Cover RU/EN behavior and narrow screens when relevant to the feature.
+  design:
+    - Identify affected files and reuse existing vanilla JavaScript and CSS patterns.
+    - Explain new dependencies or build steps if the feature requires them.
+  tasks:
+    - Include implementation, relevant verification and final diff review.
+    - For UI changes, run a local HTTP server and verify the affected flow in a browser, including narrow screens and errors.
+    - For documentation-only changes, check the diff and run OpenSpec strict validation.

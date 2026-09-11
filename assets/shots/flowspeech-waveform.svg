@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">FlowSpeech waveform</title>
+  <desc id="desc">Dark card with a stylized audio waveform for FlowSpeech.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1b27"/>
+      <stop offset="100%" stop-color="#142b3d"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2de0a7"/>
+      <stop offset="100%" stop-color="#5dd8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="48" y="70" width="1104" height="540" rx="28" fill="rgba(255,255,255,0.04)"/>
+  <line x1="180" y1="410" x2="1020" y2="410" stroke="#2f485f" stroke-width="8" stroke-linecap="round"/>
+  <path d="M180 410 C210 410,220 160,250 160 S305 530,335 530 380 260,410 260 460 470,495 470 545 290,585 290 630 520,660 520 700 220,735 220 780 490,820 490 860 320,900 320 950 540,980 540 1030 410" fill="none" stroke="url(#wave)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="none" stroke="#7de7ff" stroke-linecap="round" stroke-width="8">
+    <path d="M235 250 v320"/>
+    <path d="M320 170 v480"/>
+    <path d="M405 190 v440"/>
+    <path d="M490 240 v340"/>
+    <path d="M575 180 v460"/>
+    <path d="M660 220 v380"/>
+    <path d="M745 130 v560"/>
+    <path d="M830 210 v400"/>
+    <path d="M915 180 v460"/>
+    <path d="M1000 250 v320"/>
+  </g>
+  <g fill="#2f485f">
+    <circle cx="180" cy="410" r="26"/>
+    <path d="M190 390 L232 410 L190 430Z" fill="#d0eefc"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#c6d8ec" text-anchor="middle">
+    <text x="600" y="120" font-size="38" font-weight="700">FlowSpeech waveform</text>
+    <text x="600" y="164" font-size="24" fill="#86c7e6">live dictation · live waveform</text>
+  </g>
+</svg>
