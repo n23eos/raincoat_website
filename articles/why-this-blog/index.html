@@ -470,7 +470,7 @@ document.addEventListener('langchange',()=>{
   renderList();
   const slug=entrySlug||new URLSearchParams(location.search).get('post');
   const meta=POSTS.find(p=>p.slug===slug);
-  if(entrySlug&&meta&&meta.en){
+  if(entrySlug&&entryLang){
     const route='articles/'+encodeURIComponent(slug)+'/'+(i18n.lang==='en'?'en/':'');
     location.href=route;
     return;

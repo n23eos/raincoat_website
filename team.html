@@ -60,17 +60,17 @@ li strong,p strong{color:var(--cream);font-weight:600}
 .cta-final a:hover{background:var(--amber);color:var(--charcoal)}
 footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
 </style>
+<link rel="stylesheet" href="assets/hiring.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="canonical" href="https://raincoat.cc/team.html">
 </head>
 <body>
 <nav class="site-nav">
   <a class="brand" href="index.html">Raincoat</a>
   <div class="nav-links">
-    <a href="index.html#products" data-i18n="nav.products">Продукты</a>
-    <a href="index.html#experiments" data-i18n="nav.experiments">Эксперименты</a>
-    <a href="index.html#about" data-i18n="nav.about">Обо мне</a>
+    <a href="case-studies.html" data-i18n="nav.cases">Кейсы</a>
+    <a href="team.html" data-i18n="nav.hire" aria-current="page">Для команд</a>
     <a href="blog.html" data-i18n="nav.blog">Блог</a>
-    <a href="team.html" data-i18n="nav.hire">Для команд</a>
-    <a href="build.html" data-i18n="nav.build">Заказать MVP</a>
     <a href="index.html#contacts" data-i18n="nav.contacts">Контакты</a>
   </div>
   <div class="lang-switch" role="group" aria-label="Language / Язык">
@@ -80,10 +80,26 @@ footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
   </div>
 </nav>
 
-<main>
+<main class="team-main">
+  <div class="team-intro">
   <p class="section-label" data-i18n="hire.label">Для рекрутеров и команд</p>
   <h1 data-i18n="hire.h1">Nikolai Menzhiliy - независимый разработчик</h1>
   <p class="lede" data-i18n="hire.lede">Проектный опыт в Python, AI-инструментах и HTML5-играх для браузера. Ищу junior/associate роль с полной удалёнкой из Батуми, Грузия (UTC+4).</p>
+
+    <div class="team-actions">
+      <a href="mailto:mns.nicholas@gmail.com" data-i18n="hire.contact">Обсудить роль →</a>
+      <a href="assets/resume/nikolai-menzhiliy-ru.pdf" data-resume download data-i18n="resume.download">Резюме PDF ↓</a>
+      <a href="case-studies.html" data-i18n="hire.cases">Три инженерных разбора →</a>
+    </div>
+    <p class="team-note" data-i18n="hire.note">Мой опыт основан на собственных проектах. На странице кейсов можно проверить решения, ограничения и исходный код.</p>
+  </div>
+
+  <h2 data-i18n="hire.tasksH">С какими задачами могу помочь</h2>
+  <ul>
+    <li data-i18n="hire.task1">Python-инструменты и интеграции с моделями: локальная обработка, API, обработка ошибок. Пример: FlowSpeech.</li>
+    <li data-i18n="hire.task2">Автоматизация AI-процессов: сравнение вариантов, метрики качества, сохранение и продолжение запусков. Пример: Kaidzen.</li>
+    <li data-i18n="hire.task3">Интерфейсы и инструменты для работы с данными: TypeScript, навигация, визуализация. Примеры: Column Explorer и Advanced Graph View.</li>
+  </ul>
 
   <h2 data-i18n="hire.whatH">Проектный опыт</h2>
   <ul>
@@ -100,6 +116,12 @@ footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
   </div>
 
   <h2 data-i18n="hire.proofH">Доказательства</h2>
+  <p class="team-note" data-i18n="hire.caseNote">Подробные разборы: устройство, принятые решения и ограничения.</p>
+  <div class="team-actions">
+    <a href="case-studies.html#flowspeech">FlowSpeech →</a>
+    <a href="case-studies.html#graph">Advanced Graph View →</a>
+    <a href="case-studies.html#kaidzen">Kaidzen →</a>
+  </div>
   <div class="proof">
     <a href="https://github.com/n23eos/flowspeech" target="_blank" rel="noopener"><b>FlowSpeech</b><span data-i18n="hire.proof1">Публичный репозиторий Python-приложения для локальной диктовки и AI-обработки текста</span></a>
     <a href="https://github.com/n23eos/kaidzen" target="_blank" rel="noopener"><b>Kaidzen</b><span data-i18n="hire.proof2">Python CLI: сравнение изменений промптов по метрикам, возобновляемые запуски и отчёты</span></a>
@@ -124,6 +146,8 @@ footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
 </main>
 
 <footer>Raincoat &copy; 2026</footer>
-<script src="i18n.js?v=2"></script>
+<script src="i18n.js?v=3"></script>
+<script src="assets/site.js"></script>
+<script src="assets/hiring.js"></script>
 </body>
 </html>
