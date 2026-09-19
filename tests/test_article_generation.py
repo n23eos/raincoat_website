@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import html
 import subprocess
 import unittest
 from pathlib import Path
@@ -33,10 +34,11 @@ class ArticleGenerationTest(unittest.TestCase):
                 with self.subTest(slug=post["slug"], language=language):
                     source = path.read_text()
                     title = post.get("title_en") if language == "en" else post["title"]
+                    generated_title = html.escape(title.replace("\u2013", "-").replace("\u2014", "-"), quote=True)
                     self.assertIn(f'<meta property="og:url" content="https://raincoat.cc/articles/', source)
                     self.assertIn('<meta property="og:image" content="https://raincoat.cc/', source)
                     self.assertIn('<meta name="twitter:image" content="https://raincoat.cc/', source)
-                    self.assertIn(f'<meta property="og:title" content="{title}', source)
+                    self.assertIn(f'<meta property="og:title" content="{generated_title}', source)
                     self.assertIn("<noscript>", source)
                     self.assertIn(f'data-post="{post["slug"]}"', source)
                     self.assertNotIn('data-i18n="blog.meta.title"', source)

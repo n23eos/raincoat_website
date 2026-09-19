@@ -117,6 +117,7 @@ def render(meta: dict[str, object], language: str) -> str:
     fallback = "\n".join(
         [
             "<noscript>",
+            "  <style>.list-view, header.page, footer { display: none; }</style>",
             '  <article class="reader active static-article-summary">',
             f'    <div class="reader-content"><h1>{html.escape(title)}</h1><p>{description_html}</p></div>',
             f'    <p><a class="back" href="posts/{slug}{source_suffix}">{source_label}</a></p>',
@@ -164,4 +165,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
