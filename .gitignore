@@ -25,3 +25,5 @@ assets/tbilisi-*
 
 # Личные заметки (на любой глубине)
 \!notes/
+__pycache__/
+*.py[cod]
