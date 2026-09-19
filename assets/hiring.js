@@ -15,7 +15,7 @@
   if (!video || !toggle) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var desktop = window.matchMedia('(min-width: 901px)');
-  var requestedPlayback = false;
+  var requestedPlayback = true;
   function label() {
     var en = window.i18n && window.i18n.lang === 'en';
     toggle.textContent = video.paused ? (en ? 'Play rain' : 'Включить дождь') : (en ? 'Pause rain' : 'Остановить дождь');
@@ -33,8 +33,7 @@
       if (video.getAttribute('src')) { video.removeAttribute('src'); video.load(); }
       requestedPlayback = false;
     } else {
-      // Video is deliberately opt-in; the poster is sufficient for first paint.
-      label();
+      if (requestedPlayback) play(); else label();
     }
   }
   toggle.addEventListener('click', function () {
