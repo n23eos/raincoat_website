@@ -31,14 +31,19 @@
 
     if (!links.id) links.id = 'site-nav-links-' + (index + 1);
 
-    var button = document.createElement('button');
+    var button = nav.querySelector('.nav-toggle');
+    if (!button) {
+      button = document.createElement('button');
+      button.className = 'nav-toggle';
+      nav.insertBefore(button, languageSwitch);
+    }
     button.type = 'button';
-    button.className = 'nav-toggle';
     button.setAttribute('aria-controls', links.id);
     button.setAttribute('aria-expanded', 'false');
-    button.innerHTML = '<span class="nav-toggle-icon" aria-hidden="true"></span>' +
-      '<span class="nav-toggle-label"></span>';
-    nav.insertBefore(button, languageSwitch);
+    if (!button.querySelector('.nav-toggle-label')) {
+      button.innerHTML = '<span class="nav-toggle-icon" aria-hidden="true"></span>' +
+        '<span class="nav-toggle-label"></span>';
+    }
     nav.classList.add('site-nav--enhanced');
 
     function isOpen() {
