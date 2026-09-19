@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="meta.title">Raincoat — Product Engineer</title>
+<title data-i18n="meta.title">Nikolai Menzhiliy | Python и AI-инструменты</title>
 <meta name="description" data-i18n="meta.desc" data-i18n-attr="content" content="Product Engineer: превращаю идеи в работающие продукты — от первого прототипа до релиза. Web, AI-инструменты, desktop, автоматизация.">
-<meta property="og:title" content="Raincoat — Product Engineer">
+<meta property="og:title" content="Nikolai Menzhiliy | Python & AI tools">
 <meta property="og:description" data-i18n="meta.ogDesc" data-i18n-attr="content" content="Превращаю идеи в работающие продукты — от прототипа до релиза">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://raincoat.cc/assets/og.png">
@@ -680,17 +680,17 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
 .route .arw{display:inline-block;margin-top:14px;color:var(--cream);transition:transform .3s}
 .route:hover .arw{transform:translateX(6px)}
 </style>
+<link rel="stylesheet" href="assets/hiring.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="canonical" href="https://raincoat.cc/">
 </head>
 <body>
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Main navigation">
   <a class="brand" href="#">Raincoat</a>
   <div class="nav-links">
-    <a href="#products" data-i18n="nav.products">Продукты</a>
-    <a href="#experiments" data-i18n="nav.experiments">Эксперименты</a>
-    <a href="#about" data-i18n="nav.about">Обо мне</a>
-    <a href="blog.html" data-i18n="nav.blog">Блог</a>
+    <a href="case-studies.html" data-i18n="nav.cases">Кейсы</a>
     <a href="team.html" data-i18n="nav.hire">Для команд</a>
-    <a href="build.html" data-i18n="nav.build">Заказать MVP</a>
+    <a href="blog.html" data-i18n="nav.blog">Блог</a>
     <a href="#contacts" data-i18n="nav.contacts">Контакты</a>
   </div>
   <div class="lang-switch" role="group" aria-label="Language / Язык">
@@ -701,38 +701,59 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
 </nav>
 
 <header class="hero">
-  <video autoplay muted loop playsinline preload="auto" poster="assets/poster.jpg" src="assets/hero-loop.mp4"></video>
+  <video data-hero-video data-src="assets/hero-loop.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
   <div class="hero-content">
-    <h1>Raincoat</h1>
-    <p class="role">Product Engineer</p>
-    <p data-i18n="hero.tagline">Превращаю идеи в работающие продукты — от первого прототипа до релиза</p>
-    <p class="sub" data-i18n="hero.sub">Web-приложения, AI-инструменты, desktop-продукты и автоматизация. Самостоятельно закрываю продукт, интерфейс, разработку и запуск.</p>
+    <p class="identity">Nikolai Menzhiliy / Raincoat</p>
+    <h1 data-i18n="hero.heading" data-i18n-html>Python-разработка<br>и AI-инструменты</h1>
+    <p class="sub" data-i18n="hero.sub">Создаю приложения для диктовки, работы с заметками и автоматизации. Здесь можно посмотреть код, решения и ограничения моих проектов.</p>
+    <p class="availability" data-i18n="hero.availability">Ищу junior/associate роль · удалённо · Батуми, UTC+4</p>
     <div class="cta-row">
-      <a class="cta" href="#products" data-i18n="hero.ctaProducts">Работающие продукты</a>
-      <a class="cta ghost" href="team.html" data-i18n="hero.ctaHire">Для команд</a>
-      <a class="cta ghost" href="build.html" data-i18n="hero.ctaBuild">Обсудить MVP</a>
+      <a class="cta primary" href="#products" data-i18n="hero.ctaProducts">Посмотреть 3 кейса</a>
+      <a class="cta ghost" href="assets/resume/nikolai-menzhiliy-ru.pdf" data-resume download data-i18n="resume.download">Резюме PDF ↓</a>
     </div>
+    <p class="quick-contact"><a href="mailto:mns.nicholas@gmail.com" data-i18n="hero.contact">Обсудить роль →</a></p>
   </div>
-  <div class="scroll-hint" data-i18n="hero.scroll">scroll</div>
+  <button class="motion-toggle" type="button" data-motion-toggle hidden aria-pressed="false">Включить дождь</button>
 </header>
 
-<section id="products">
-  <p class="section-label reveal" data-i18n="products.label">Продукты</p>
-  <h2 class="reveal" data-i18n="products.h2">Работающие — можно потрогать</h2>
-  <div class="prod-grid reveal">
-
-    <div class="prod">
-      <div class="shot"><img src="assets/shots/agv.jpg" alt="Advanced Graph View — 3D-граф на 10 000+ заметок" loading="lazy" width="800" height="516"></div>
-      <div class="head"><h3>Advanced Graph View</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
-      <div class="fact" data-i18n="prod.agv.fact">~3 000 установок · Obsidian community</div>
-      <p data-i18n="prod.agv.text">Штатный граф Obsidian умирает на больших хранилищах. Собрал 3D-граф на WebGL и Web Workers: 10 000+ заметок, кластеры, семантические связи — без тормозов.</p>
-      <div class="links">
-        <a href="https://n23eos.github.io/advanced_graph_view/" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
-        <a href="https://community.obsidian.md/plugins/graph-insight" target="_blank" rel="noopener" data-i18n="link.store">В каталоге</a>
+<section id="products" aria-labelledby="selected-heading">
+  <p class="section-label" data-i18n="selected.label">Избранные работы</p>
+  <div class="section-top"><h2 id="selected-heading" data-i18n="selected.heading">Три задачи. Три разбора.</h2><a href="projects.html" data-i18n="selected.archive">Весь архив →</a></div>
+  <div class="selected-grid">
+    <article class="selected-card">
+      <img class="selected-image" src="assets/shots/flowspeech-waveform.svg" alt="" loading="lazy" width="1200" height="675">
+      <div class="selected-body">
+        <div class="selected-meta">01 / PYTHON · DESKTOP</div>
+        <h3>FlowSpeech</h3>
+        <p data-i18n="selected.fs.text">Диктовка для macOS с локальным распознаванием и настраиваемой обработкой текста.</p>
+        <p class="case-detail" data-i18n="selected.fs.detail">В кейсе: границы приватности и поведение при ошибке модели.</p>
+        <div class="case-links"><a href="case-studies.html#flowspeech" data-i18n="selected.read">Разобрать кейс →</a><a href="https://github.com/N23eos/flowspeech" target="_blank" rel="noopener">GitHub ↗</a></div>
       </div>
-    </div>
-
-    <div class="prod">
+    </article>
+    <article class="selected-card">
+      <img class="selected-image" src="assets/shots/agv.jpg" alt="" loading="lazy" width="800" height="516">
+      <div class="selected-body">
+        <div class="selected-meta">02 / TYPESCRIPT · WEBGL</div>
+        <h3>Advanced Graph View</h3>
+        <p data-i18n="selected.agv.text">Граф заметок Obsidian: WebGL-рендеринг, расчёт раскладки и анализ в отдельных Workers.</p>
+        <p class="case-detail" data-i18n="selected.agv.detail">В кейсе: разделение нагрузки и воспроизводимый бенчмарк.</p>
+        <div class="case-links"><a href="case-studies.html#graph" data-i18n="selected.read">Разобрать кейс →</a><a href="https://github.com/N23eos/advanced_graph_view" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </div>
+    </article>
+    <article class="selected-card">
+      <img class="selected-image" src="assets/shots/kaidzen-cover.svg" alt="" loading="lazy" width="1200" height="675">
+      <div class="selected-body">
+        <div class="selected-meta">03 / PYTHON · AI WORKFLOWS</div>
+        <h3>Kaidzen</h3>
+        <p data-i18n="selected.kaidzen.text">Пайплайн исследования идей и сравнения промптов. Изменения проходят проверку по метрикам.</p>
+        <p class="case-detail" data-i18n="selected.kaidzen.detail">В кейсе: почему красивого ответа недостаточно для принятия изменения.</p>
+        <div class="case-links"><a href="case-studies.html#kaidzen" data-i18n="selected.read">Разобрать кейс →</a><a href="https://github.com/n23eos/kaidzen" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </div>
+    </article>
+  </div>
+  <p class="evidence-note" data-i18n="selected.note">В каждом разборе: задача, реализация, тестовые сценарии, ограничения и ссылки на исходный код.</p>
+  <details class="more-products"><summary data-i18n="selected.more">Ещё работающие продукты</summary><div class="prod-grid">
+<div class="prod">
       <div class="shot"><img src="assets/shots/column-explorer.jpg" alt="Column Explorer — двухпанельный файл-менеджер в Obsidian" loading="lazy" width="800" height="500"></div>
       <div class="head"><h3>Column Explorer</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
       <div class="fact" data-i18n="prod.ce.fact">400+ загрузок · v1.13</div>
@@ -742,8 +763,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
         <a class="gh" href="https://github.com/N23eos/column_explorer" target="_blank" rel="noopener">GitHub &rarr;</a>
       </div>
     </div>
-
-    <div class="prod">
+<div class="prod">
       <div class="shot"><img src="assets/shots/mafia-tool.webp" alt="Mafia Tool" loading="lazy" width="1536" height="1024"></div>
       <div class="head"><h3>Mafia-tool.com</h3><span class="badge live">Live</span></div>
       <div class="fact" data-i18n="prod.mafia.fact">Пульт ведущего · трекер партии · дедукция</div>
@@ -752,18 +772,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
         <a href="https://mafia-tool.com/" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
       </div>
     </div>
-
-    <div class="prod">
-      <div class="shot"><img src="assets/shots/kaidzen-cover.svg" alt="Kaidzen — multi-agent research loop" loading="lazy" width="1200" height="675"></div>
-      <div class="head"><h3>Kaidzen</h3><span class="badge beta" data-i18n="badge.beta">Beta</span></div>
-      <div class="fact" data-i18n="prod.kaidzen.fact">Multi-agent · research loop</div>
-      <p data-i18n="prod.kaidzen.text">Сырая идея — ещё не продукт. Kaidzen полирует её фактами из веб-поиска через пайплайн агентов и эволюционирует собственные инструкции после каждого прогона.</p>
-      <div class="links">
-        <a href="https://github.com/n23eos/kaidzen" target="_blank" rel="noopener" data-i18n="link.code">Код</a>
-      </div>
-    </div>
-
-    <div class="prod">
+<div class="prod">
       <div class="shot"><img src="assets/shots/i-was-here.jpg" alt="I Was Here — gasless NFT-бейджи на Base" loading="lazy" width="800" height="500"></div>
       <div class="head"><h3>I Was Here</h3><span class="badge live">Live</span></div>
       <div class="fact" data-i18n="prod.iwh.fact">Base mainnet · газ платит paymaster</div>
@@ -771,26 +780,20 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
       <div class="links">
         <a href="https://i-was-here-tau.vercel.app" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
       </div>
-    </div>
+    </div>  </div></details>
+</section>
 
-    <div class="prod">
-      <div class="shot"><img src="assets/shots/flowspeech-waveform.svg" alt="FlowSpeech — визуализация звуковой дорожки" loading="lazy" width="1200" height="675"></div>
-      <div class="head"><h3>FlowSpeech</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
-      <div class="fact" data-i18n="prod.fs.fact">macOS · Whisper on-device · приватно</div>
-      <p data-i18n="prod.fs.text">Облачная диктовка платная и шлёт голос на сервер. Собрал локальную альтернативу: зажал клавишу — надиктовал — чистый текст у курсора. Whisper на устройстве + LLM-очистка.</p>
-      <div class="links">
-        <a class="gh" href="https://github.com/N23eos/flowspeech" target="_blank" rel="noopener">GitHub &rarr;</a>
-      </div>
-    </div>
-
+<section id="process" class="workflow" aria-labelledby="workflow-heading">
+  <p class="section-label" data-i18n="workflow.label">Работа с AI</p>
+  <h2 id="workflow-heading" data-i18n="workflow.heading">Предложение агента проходит проверку</h2>
+  <p class="section-intro" data-i18n="workflow.intro">На примере Kaidzen: человек выбирает задачу и ограничения, агенты исследуют варианты, а код проверяет основания для принятия изменений.</p>
+  <div class="workflow-grid">
+    <div class="workflow-step"><span class="num">01</span><h3 data-i18n="workflow.1.title">Задача и допущения</h3><p data-i18n="workflow.1.body">Analyzer выделяет рискованные допущения, которые нужно проверить.</p></div>
+    <div class="workflow-step"><span class="num">02</span><h3 data-i18n="workflow.2.title">Контекст и источники</h3><p data-i18n="workflow.2.body">Researcher ищет факты, а Refiner связывает правки с найденными основаниями.</p></div>
+    <div class="workflow-step"><span class="num">03</span><h3 data-i18n="workflow.3.title">Сравнение и проверки</h3><p data-i18n="workflow.3.body">Judge сравнивает варианты. Код проверяет метрики, регрессии и расход токенов.</p></div>
+    <div class="workflow-step"><span class="num">04</span><h3 data-i18n="workflow.4.title">Решение и отчёт</h3><p data-i18n="workflow.4.body">Изменение принимается или отклоняется. Сохранённый отчёт позволяет разобрать решение.</p></div>
   </div>
-
-  <div class="stats reveal">
-    <div><b>4</b><span data-i18n="stats.plugins">Obsidian-плагина в каталоге</span></div>
-    <div><b>3&nbsp;600+</b><span data-i18n="stats.downloads">загрузок плагинов</span></div>
-    <div><b>18</b><span data-i18n="stats.repos">открытых репозиториев</span></div>
-    <div><b>TS·Py·Go·Sol</b><span data-i18n="stats.langs">TypeScript / Python / Go / Solidity</span></div>
-  </div>
+  <div class="workflow-proof"><p data-i18n="workflow.proof">Есть отдельный тест на случай, когда отчёт стал красивее, а доля закрытых критичных допущений ухудшилась.</p><a href="case-studies.html#gate-demo" data-i18n="workflow.try">Попробовать проверку →</a></div>
 </section>
 
 <section id="about" class="about">
@@ -802,7 +805,13 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
   <p class="section-label reveal" data-i18n="tools.label">Инструменты</p>
   <h2 class="reveal" data-i18n="tools.h2">Город, в котором я работаю</h2>
   <div class="skillmap-wrap reveal">
-    <canvas id="skillmap"></canvas>
+    <canvas id="skillmap" aria-hidden="true"></canvas>
+  </div>
+  <div class="skills-text">
+    <div><h3 data-i18n="tools.cat.aicode">AI-код</h3><p>Claude Code · Codex · Cursor</p></div>
+    <div><h3 data-i18n="tools.cat.agents">Агенты и автоматизация</h3><p>Claude Agent SDK · MCP · n8n</p></div>
+    <div><h3 data-i18n="tools.cat.video">Видео</h3><p>Final Cut · DaVinci Resolve · Motion</p></div>
+    <div><h3 data-i18n="tools.cat.aigen">Генерация</h3><p>Midjourney · Flux · ElevenLabs · Suno</p></div>
   </div>
 </section>
 
@@ -827,16 +836,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
   </div>
 </section>
 
-<section id="process">
-  <p class="section-label reveal" data-i18n="process.label">Процесс</p>
-  <h2 class="reveal" data-i18n="process.h2">Как идея становится продуктом</h2>
-  <div class="steps reveal">
-    <div class="step"><div class="num">01</div><h3 data-i18n="process.s1h">Разбор задачи</h3><p data-i18n="process.s1p">Неясную идею превращаю в сценарии и продуктовую гипотезу. Фиксирую, что проверяем и что считается успехом.</p></div>
-    <div class="step"><div class="num">02</div><h3 data-i18n="process.s2h">Прототип</h3><p data-i18n="process.s2p">Кликабельный скелет за дни: UX, интерфейс, ключевой сценарий end-to-end. Смотрим на живое, а не на макет.</p></div>
-    <div class="step"><div class="num">03</div><h3 data-i18n="process.s3h">Итерации с тестами</h3><p data-i18n="process.s3p">Код, интеграции, AI — с тестами: 135 тестов в Rabbit Run, walk-forward валидация в торговых ботах.</p></div>
-    <div class="step"><div class="num">04</div><h3 data-i18n="process.s4h">Релиз</h3><p data-i18n="process.s4p">Публикация и передача: каталоги Obsidian и Chrome, Яндекс Игры, mainnet, docker compose одной командой.</p></div>
-  </div>
-</section>
+
 
 <section id="routes">
   <div class="routes reveal">
@@ -933,16 +933,18 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
   <p class="section-label reveal" data-i18n="philo.label">Интересы &amp; философия</p>
   <h2 class="reveal" data-i18n="philo.h2">Чем живу вне кода</h2>
   <div class="philo-wrap reveal">
-    <canvas id="cloud"></canvas>
+    <canvas id="cloud" aria-hidden="true"></canvas>
     <div class="philo-terminal"><span id="philoLine"></span><span class="cursor"></span></div>
   </div>
 </section>
 
 <section id="contacts" class="contacts">
   <p class="section-label reveal" data-i18n="contacts.label">Контакты</p>
-  <h2 class="reveal" data-i18n="contacts.h2">Есть идея? Обсудим</h2>
+  <h2 class="reveal" data-i18n="contacts.h2">Обсудим работу в вашей команде</h2>
+  <p class="contact-copy" data-i18n="contacts.copy">Python, AI-инструменты, интеграции и автоматизация. Пришлите описание роли или задачи, чтобы понять, где мой опыт будет полезен.</p>
   <div class="contact-links reveal">
-    <a href="mailto:mns.nicholas@gmail.com">Email</a>
+    <a href="mailto:mns.nicholas@gmail.com">mns.nicholas@gmail.com</a>
+    <a href="assets/resume/nikolai-menzhiliy-ru.pdf" data-resume download data-i18n="resume.download">Резюме PDF ↓</a>
     <a href="https://github.com/N23eos" target="_blank" rel="noopener">GitHub</a>
     <a href="https://x.com/Raincoat_t" target="_blank" rel="noopener">X (Twitter)</a>
   </div>
@@ -956,7 +958,9 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
 
 <footer>Raincoat &copy; 2026</footer>
 
-<script src="i18n.js?v=2"></script>
+<script src="i18n.js?v=3"></script>
+<script src="assets/site.js"></script>
+<script src="assets/hiring.js"></script>
 <script>
 const io=new IntersectionObserver(entries=>{
   for(const e of entries){

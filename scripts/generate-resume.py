@@ -39,7 +39,7 @@ def styles(lang):
 
 
 def link(label, url, style):
-    return f'<link href="{url}" color="#9c5d32"><u>{label}</u></link>'
+    return f'<a href="{url}"><font color="#9c5d32"><u>{label}</u></font></a>'
 
 
 def build(lang, filename):
