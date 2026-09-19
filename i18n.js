@@ -211,7 +211,7 @@
 
     /* обо мне */
     "about.label": "Обо мне",
-    "about.text": "Я разработчик без имени и фамилии",
+    "about.text": "Я разработчик. Работаю с <strong>Python, TypeScript и AI-инструментами</strong>: делаю приложения для себя и публикую исходный код. Ищу <strong>junior/associate роль</strong>, где смогу применять этот опыт, получать обратную связь и развиваться в команде.",
 
     /* инструменты (в т.ч. подписи на зданиях в canvas) */
     "tools.label": "Инструменты",
@@ -630,7 +630,7 @@
 
     /* обо мне */
     "about.label": "About",
-    "about.text": "I am a developer without a first or last name",
+    "about.text": "I am a developer working with <strong>Python, TypeScript and AI tools</strong>. I build applications for my own use and publish the source code. I am looking for a <strong>junior/associate role</strong> where I can apply this experience, get feedback and grow within a team.",
 
     /* инструменты (в т.ч. подписи на зданиях в canvas) */
     "tools.label": "Tools",
