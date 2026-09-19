@@ -1,58 +1,60 @@
-# The Window of Freedom That May Soon Close
+# The Window of Opportunity That May Soon Close
 
-Before agents, the advantage of a corporation was fairly mundane: it simply had more people. Developers, lawyers, accountants, analysts, testers. It could buy research, outsource part of the work, and test several ideas at once. A large company could afford a bureaucratic apparatus and use it to do what a small startup could not.
+![A lone builder facing a wave of autonomously generated software](assets/blog/window-of-opportunity-cover.png)
 
-That advantage no longer looks quite so secure.
+My bet is that we have three to six months left to build our own products under the current conditions.
 
-One person can now access the kind of labor that used to require an entire department. They can delegate market research, document review, prototypes, tests, analytics, content, and support to agents. They can run several processes in parallel and return to the results. A company that once would have required funding and a team can now fit on a solo developer's laptop.
+This is not a prediction with a reliable date. Nobody knows when the next generation of agents will arrive or how dependable it will be. But waiting until the timing is obvious to everyone makes no sense. Once the transition can be measured with confidence, the window will already be closed.
 
-The human in this company is not necessarily its fastest or most productive member. For now, the human is the one with intent.
+We are in a rare position now. Agents are already capable enough to let one person do the work of a small company. They can research a market, analyze documents, write code, run tests, prepare interfaces, and assemble launch materials. But a human still chooses the goal. A person notices a need, decides what is worth building, makes the important decisions, and sends agents to do the work.
 
-I decide what product to build, who it is for, and why it should exist. I choose the architecture and make the final product decisions. Agents take the research and routine work, explore options, write and test code, and assemble materials. This is no longer a "programmer's assistant" in the old sense. It lets one person act with the reach of an organization without becoming the manager of five departments.
+That delay between agent capability and agent autonomy is our advantage.
 
-That is why the conversation about agents cannot be reduced to faster programming. If a model writes code faster, productivity goes up. The real break comes when one person acquires several functions that once required an organization. Research becomes a decision, the decision becomes a prototype, the prototype becomes a test, and the result comes back to the human. The number of tasks has not fallen. Their coordination and much of their execution now fit inside one loop.
+The next step will change more than programming speed. It will change the market for making products.
 
-The first real results no longer look like lab demos. Maor Shlomo started Base44 alone. In an interview with N12, he said he built everything himself and only then began thinking about hiring support. A few months later Wix acquired the company; its official press release put the initial consideration at about $80 million. Base44 had a team by the time of the sale, so this is not a fairy tale about a "one-person unicorn." But one person built the core product and created its initial momentum. Until recently, that outcome would have been hard to imagine without a full company behind it.
+Imagine a system continuously watching human behavior, search queries, complaints, job listings, discussions, and the movement of money. It notices an unmet need. Within hours it assembles a solution, designs the interface, writes the code, deploys the infrastructure, prepares the advertising, launches the product, and watches the response. If it fails, the system closes it. If it works, the system improves it, scales it, and immediately builds several variants for adjacent audiences.
 
-Another example is Pieter Levels' Photo AI. In March 2026, he wrote on his own site that the product was making $105,000 in monthly revenue and $80,000 in monthly profit. These are the founder's figures, not the result of an independent audit. Even with that caveat, the scale matters: a solo maker is publicly showing a product with the economics of a small business.
+It does not need to dream about a startup for years. It does not need to fight procrastination, find a cofounder, gather the courage to launch, or recover from rejection. As soon as a need appears, a product appears with it.
 
-The same shift is visible from the other side, inside a large company. In a filing with the SEC, Klarna said its AI assistant handled 69 percent of customer service chats during the twelve months ending in June 2025. By the company's own estimate, that was equivalent to the work of more than 700 full-time agents; it estimated roughly $39 million in cost savings for 2024. Those figures do not prove that the assistant directly replaced 700 specific people. They show something else: a function that once required a large human operation can already be compressed, to a significant degree, into a software system.
+This is still a scenario, not a description of today's market. But parts of this loop already exist. [OpenAI described](https://openai.com/index/harness-engineering/) an internal product whose entire codebase was written by Codex agents; the team estimated that it took roughly one tenth of the time manual development would have required. In September 2026, the company [opened the Agents API](https://openai.com/index/introducing-the-agents-api/), allowing cloud agents with tools, long-running tasks, and subagents to be started through a single API call. [Wix paid](https://www.wix.com/press-room/home/post/wix-further-expands-into-vibe-coding-with-acquisition-of-base44-a-hyper-growth-startup-that-simplif) about $80 million for Base44, a product that turns a natural-language description into a working application.
 
-None of these cases tells us what happens to the average startup. Sales, reputation, taste, market knowledge, and luck have not disappeared. Still, they demonstrate the technical possibility. There are now far fewer mandatory human links between one person's idea and a valuable working product. An individual gets organizational leverage, while a large organization can compress an entire function into a system.
+For now, a human stands between these pieces. The human connects the market signal, the solution, the launch, and the responsibility. But the technical distance between them is shrinking quickly.
 
-For a solo developer, this is liberation. In the past, you had to choose a project based on the size of the team you could assemble or afford. Now you can start by asking what is worth creating. Software is gradually becoming less of a privilege reserved for those who can finance a staff. If models and compute continue to get cheaper, more people will be able to build programs for their own needs.
+![The progression from human-directed agents to an autonomous demand-to-product loop](assets/blog/agent-product-loop.png)
 
-At the limit, software stops being a product made only for mass markets. You can build it for your own process, an unusual profession, or a small group of people: situations where traditional development would never have paid for itself. That is a different kind of freedom. You do not have to choose the nearest ready-made service. You can assemble the one you need.
+Once the loop closes, we will get an almost unlimited stream of services. Not because every service is needed. The cost of testing an idea will approach the cost of a few hours of compute. An agent will be able to make a hundred attempts while a human is still considering one.
 
-The small player now has a cheaper tool and a different way to organize work. You no longer need to build a company before you can build a product. You can start with the product and assemble the company from agents as you go.
+The market will fill with products created almost in real time for every visible need. A new regulation appears, and a day later there are dozens of tools for applying it. A new model launches, and within hours it is surrounded by wrappers, studios, agents, and services. People repeat the same manual operation, and a system is already offering to automate it.
 
-But this is exactly where techno-optimism begins to turn into anxiety.
+Today we compete with other people and companies. Soon we may have to compete with a continuous process for generating supply.
 
-We tend to assume that cheaper models will level the playing field. To some extent, they do. An individual ChatGPT Pro subscription still costs $200 a month: a serious but attainable price for a working developer. Buy a few tools, connect them, and you gain capabilities that recently came bundled with the labor of a team.
+In that world, writing code quickly will no longer be an advantage. Even assembling a product over a weekend will stop being one. An agent will do it faster, cheaper, and in a hundred variants at once.
 
-Equal access to a model does not mean equal access to compute at scale. A solo developer thinks about subscription limits and the cost of every parallel agent. A large company can buy compute, data, and infrastructure in a completely different volume. "Infinite compute" is an image, of course. But the difference in orders of budget is a real constraint on the small player, even as each individual token gets cheaper.
+The next few months matter because they give us time to occupy a position that is harder to generate automatically.
 
-For now, this does not erase the solo developer's advantage. Their strength is the short distance between intent and action, not raw compute. A person chooses what to do and immediately points their company of agents at the task.
+We can find real users and learn their language. We can obtain data that is not publicly available. We can become part of the workflow of a particular industry. We can build a reputation people trust. We can establish distribution. We can learn to distinguish a real need from noise. A few months of talking to users will offer more protection than another elegant stack.
 
-What happens when that distance collapses too?
+Code will keep getting cheaper. Contact with reality will remain scarce.
 
-Today a person says, "I want to build this." An agent researches, proposes an architecture, writes, tests, and revises. Tomorrow initiative may become impersonal. A system may identify an unmet need, assemble possible solutions, release dozens of services, watch the response, and keep developing the one that grows. Not because it wants anything in the human sense. Intent becomes a continuous automated search for opportunities.
+This also changes what we mean by a product. Many people currently treat a working website, application, or agent as the product. Soon that will be an instantly generated shell. The product will be the full loop: whose need was noticed, why a person trusts the solution, where the data comes from, how the system learns from use, and why people keep choosing it after a thousand copies appear.
 
-For now, this is my fear, not a dated prediction. The transition may take years. It may run into the limits of model quality, law, physical infrastructure, or customer trust. But the direction already makes me uneasy. If agents acquire execution and the choice of what to do next, it will become harder for a human to compete through speed and the courage to begin.
+If you start today, six months from now you may have more than code. You may have users, a history of decisions, proprietary data, a recognizable voice, and several completed launch cycles. None of this guarantees victory over stronger agents. But it gives you a foothold that someone waiting for the next model will not have.
 
-The corporation would then gain the perfect continuation of its old power. It used to scale its search for opportunities through headcount and money. Now it will be able to scale that search through compute. Thousands of processes will scan the market without fatigue, create alternatives, close the failures, and replicate the winners. A large staff will cease to be the main requirement, but capital will become an advantage again, this time as access to machines.
+Waiting is especially tempting now. The tools improve every week. It is easy to avoid their current failures and wait for a version that gets everything right on the first attempt. But every improvement becomes available to everyone at the same time. It gives no advantage to the person who waited. It multiplies what people have already built.
 
-This may not stop with digital services. Software is the first territory because the path from decision to result can already be traced there. If the agentic principle spreads to the creation of any kind of product, the question will no longer be who writes code faster. For now, this is a hypothesis about direction, not a description of a reality that has already arrived.
+There is a calmer interpretation too. A flood of automatically created services could bring enormous abundance. A rare disease, a small profession, or a personal workflow may finally get its own software because making that software costs almost nothing. We will no longer have to choose the closest mass-market product. A system will be able to assemble what each person needs.
 
-The question will be what remains for humans at all.
+That is why I remain a techno-optimist. A world where software appears on demand could be freer than the one we have now. The problem is not that there will be too many machines. The problem is the transition. Technology may create abundance faster than society can invent new ways to distribute income, status, and decision-making power.
 
-Perhaps the human role will survive wherever desire matters, along with the right to say, "This should not be done." Perhaps new forms of work will emerge. Or perhaps the market's ability to provide people with income will no longer keep pace with machines' ability to produce more goods and services. Then a practical question appears: will we need a universal basic income?
+For an individual creator, the conclusion is simpler. Agents currently amplify our intent. Soon they may begin to replace the entrepreneurial act itself: finding an opportunity, choosing a solution, building, launching, and reallocating resources without us.
 
-The answer remains open. But this feels like a short lag: agents are already strong enough to expand the power of one person, yet they have not taken the choice of goal away from that person. During this lag, a solo developer can behave like a company without having one. That is why waiting for complete certainty is dangerous. By the time it becomes obvious that the window has closed, it will be too late to use it.
+The window does not close when an agent learns to write perfect code. It closes when an agent learns to turn a new need into a new product and take it to market faster than a human can formulate the idea.
 
-Build your own thing while agents still amplify people instead of replacing them.
+Maybe this happens later than six months. I would rather be wrong about the timing with a working product than be right without one.
+
+Now is the time to build your own.
 
 ---
 
-*Auto-translated from Russian by AI.*
+*Translated from Russian with AI assistance.*
 *Written with the [esseist_framework](https://github.com/n23eos/esseist_framework).*
