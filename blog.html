@@ -274,19 +274,17 @@ footer{
   .essay-item{padding:20px 2px}
 }
 </style>
+<link rel="stylesheet" href="assets/site.css?v=1">
 </head>
 <body>
 
 <nav class="site-nav">
   <a class="brand" href="index.html">Raincoat</a>
   <div class="nav-links">
-    <a href="index.html#products" data-i18n="nav.products">Продукты</a>
-    <a href="index.html#experiments" data-i18n="nav.experiments">Эксперименты</a>
-    <a href="index.html#about" data-i18n="nav.about">Обо мне</a>
-    <a href="blog.html" data-i18n="nav.blog">Блог</a>
-    <a href="team.html" data-i18n="nav.hire">Для команд</a>
-    <a href="build.html" data-i18n="nav.build">Заказать MVP</a>
-    <a href="index.html#contacts" data-i18n="nav.contacts">Контакты</a>
+    <a href="case-studies.html#flowspeech" data-site-i18n="cases">Кейсы</a>
+    <a href="team.html" data-site-i18n="teams">Для команд</a>
+    <a href="blog.html" data-site-i18n="blog">Блог</a>
+    <a href="index.html#contacts" data-site-i18n="contacts">Контакты</a>
   </div>
   <div class="lang-switch" role="group" aria-label="Language / Язык">
     <button type="button" data-lang="ru">RU</button>
@@ -322,6 +320,7 @@ footer{
 </div><!-- /wrap -->
 
 <script src="i18n.js?v=2"></script>
+<script src="assets/site.js?v=1"></script>
 <script>
 (()=>{
 'use strict';
@@ -330,7 +329,12 @@ footer{
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function inline(s){
   return s
-    .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,'<img src="$2" alt="$1" loading="lazy">')
+    .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g,function(match,alt,src){
+      var size='';
+      if(src==='assets/blog/window-of-opportunity-cover.png')size=' width="1672" height="941"';
+      if(src==='assets/blog/agent-product-loop.png')size=' width="1600" height="900"';
+      return '<img src="'+src+'" alt="'+alt+'" loading="lazy" decoding="async"'+size+'>';
+    })
     .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
     .replace(/`([^`]+)`/g,'<code>$1</code>')
     .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
@@ -372,6 +376,10 @@ function renderMd(md){
 const listView=document.getElementById('listView');
 const reader=document.getElementById('reader');
 const essaysEl=document.getElementById('essays');
+const entrySlug=document.body.dataset.post||'';
+const entryLang=document.body.dataset.entryLang||'';
+
+if(entryLang&&i18n.lang!==entryLang)i18n.setLang(entryLang);
 
 function fmtDate(iso){
   try{
@@ -390,7 +398,10 @@ function renderList(){
   essaysEl.innerHTML=POSTS.map(p=>{
     const title=en&&p.title_en?p.title_en:p.title;
     const desc=en&&p.desc_en?p.desc_en:p.desc;
-    return '<a class="essay-item" href="blog.html?post='+encodeURIComponent(p.slug)+'">'+
+    var route='articles/'+encodeURIComponent(p.slug)+'/';
+    if(en&&p.en)route+='en/';
+    else if(en)route+='?lang=en';
+    return '<a class="essay-item" href="'+route+'">'+
       '<time datetime="'+p.date+'">'+fmtDate(p.date)+'</time>'+
       '<h2>'+esc(title)+'</h2>'+
       (desc?'<p>'+esc(desc)+'</p>':'')+
@@ -419,7 +430,7 @@ fetch('posts/index.json')
   .then(r=>r.json())
   .then(posts=>{
     POSTS=posts.sort((a,b)=>b.date.localeCompare(a.date));
-    let slug=new URLSearchParams(location.search).get('post');
+    let slug=entrySlug||new URLSearchParams(location.search).get('post');
     /* старые ссылки вида ?post=<slug>-en — редиректим на единый пост с английским языком */
     if(slug&&!POSTS.find(p=>p.slug===slug)&&/-en$/.test(slug)){
       const base=slug.replace(/-en$/,'');
@@ -439,8 +450,14 @@ fetch('posts/index.json')
 /* список и открытый пост зависят от языка */
 document.addEventListener('langchange',()=>{
   renderList();
-  const slug=new URLSearchParams(location.search).get('post');
-  if(slug&&POSTS.find(p=>p.slug===slug))showPost(slug);
+  const slug=entrySlug||new URLSearchParams(location.search).get('post');
+  const meta=POSTS.find(p=>p.slug===slug);
+  if(entrySlug&&meta&&meta.en){
+    const route='articles/'+encodeURIComponent(slug)+'/'+(i18n.lang==='en'?'en/':'');
+    location.href=route;
+    return;
+  }
+  if(slug&&meta)showPost(slug);
 });
 })();
 </script>
