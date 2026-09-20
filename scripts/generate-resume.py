@@ -27,14 +27,13 @@ PAPER = colors.HexColor("#fbf8f3")
 def styles(lang):
     s = getSampleStyleSheet()
     s.add(ParagraphStyle("Name", parent=s["Normal"], fontName="Noto-Bold", fontSize=25, leading=28, textColor=INK, spaceAfter=2))
-    s.add(ParagraphStyle("Role", parent=s["Normal"], fontName="Noto", fontSize=10.5, leading=14, textColor=ACCENT, spaceAfter=7))
+    s.add(ParagraphStyle("Role", parent=s["Normal"], fontName="Noto", fontSize=11, leading=15, textColor=ACCENT, spaceAfter=7))
     s.add(ParagraphStyle("Contact", parent=s["Normal"], fontName="Noto", fontSize=8.5, leading=12, textColor=MUTED, alignment=TA_LEFT))
-    s.add(ParagraphStyle("Intro", parent=s["Normal"], fontName="Noto", fontSize=9.3, leading=13.2, textColor=INK, spaceAfter=7))
+    s.add(ParagraphStyle("Intro", parent=s["Normal"], fontName="Noto", fontSize=10.5, leading=14.5, textColor=INK, spaceAfter=7))
     s.add(ParagraphStyle("Head", parent=s["Normal"], fontName="Noto-Bold", fontSize=9.2, leading=12, textColor=ACCENT, spaceBefore=5, spaceAfter=3))
-    s.add(ParagraphStyle("Body", parent=s["Normal"], fontName="Noto", fontSize=8.2, leading=11.3, textColor=INK, spaceAfter=2))
-    s.add(ParagraphStyle("Project", parent=s["Normal"], fontName="Noto-Bold", fontSize=8.4, leading=11, textColor=INK))
-    s.add(ParagraphStyle("ProjectBody", parent=s["Normal"], fontName="Noto", fontSize=7.8, leading=10.4, textColor=INK))
-    s.add(ParagraphStyle("Small", parent=s["Normal"], fontName="Noto", fontSize=7.4, leading=10, textColor=MUTED))
+    s.add(ParagraphStyle("Body", parent=s["Normal"], fontName="Noto", fontSize=10.5, leading=14, textColor=INK, spaceAfter=2))
+    s.add(ParagraphStyle("Project", parent=s["Normal"], fontName="Noto-Bold", fontSize=10.5, leading=14, textColor=INK))
+    s.add(ParagraphStyle("ProjectBody", parent=s["Normal"], fontName="Noto", fontSize=10.5, leading=14, textColor=INK))
     return s
 
 
@@ -45,21 +44,20 @@ def link(label, url, style):
 def build(lang, filename):
     ru = lang == "ru"
     s = styles(lang)
-    title = "Николай Менжилий" if ru else "Nikolai Menzhiliy"
-    role = "Независимый разработчик: Python, AI-инструменты, веб" if ru else "Independent developer: Python, AI tools, web"
+    title = "Nikolai Menzhiliy"
+    role = "AI Engineer / агентные системы / интеграции" if ru else "AI Engineer / agent systems / integrations"
     intro = (
-        "Ищу junior/associate роль с полной удалёнкой из Батуми, Грузия (UTC+4). Проектный опыт в Python, AI-инструментах и браузерных HTML5-проектах."
+        "Ищу junior/associate роль AI Engineer с полной удалёнкой из Батуми, Грузия (UTC+4). Проектный опыт в агентных системах, AI-инструментах, интеграциях и автоматизации; Python - часть стека и реализации проектов."
         if ru else
-        "Seeking a junior or associate role, fully remote from Batumi, Georgia (UTC+4). Project experience in Python, AI tools, and browser based HTML5 work."
+        "Seeking a junior or associate AI Engineer role, fully remote from Batumi, Georgia (UTC+4). Project experience in agent systems, AI tools, integrations, and automation; Python is part of the stack used to build projects."
     )
     skills_head = "Навыки" if ru else "Skills"
     projects_head = "Избранные проекты" if ru else "Selected projects"
     format_head = "Формат работы" if ru else "Work format"
-    source_note = "Проектный опыт; без заявлений о коммерческом стаже или измеренных результатах." if ru else "Project experience; no claims about commercial employment or measured results."
     skills = (
-        "Python, JavaScript, TypeScript, APIs, MCP, pytest, Git, HTML5, Canvas, Three.js. Русский, английский."
+        "Агентные системы, AI-инструменты, интеграции, автоматизация, Python, JavaScript, TypeScript, APIs, MCP, pytest, Git, HTML5, Canvas, Three.js. Русский, английский."
         if ru else
-        "Python, JavaScript, TypeScript, APIs, MCP, pytest, Git, HTML5, Canvas, Three.js. Russian, English."
+        "Agent systems, AI tools, integrations, automation, Python, JavaScript, TypeScript, APIs, MCP, pytest, Git, HTML5, Canvas, Three.js. Russian, English."
     )
     work = (
         "Полная удалёнка из Батуми, Грузия (UTC+4). Открыт к командной работе, обратной связи и code review."
@@ -77,7 +75,7 @@ def build(lang, filename):
     story = [
         Paragraph(title, s["Name"]),
         Paragraph(role, s["Role"]),
-        Paragraph(" · ".join([link("mns.nicholas@gmail.com", "mailto:mns.nicholas@gmail.com", s["Contact"]), link("github.com/n23eos", "https://github.com/n23eos", s["Contact"]), link("raincoat.cc", "https://raincoat.cc", s["Contact"])]), s["Contact"]),
+        Paragraph(" · ".join([link("mns.nicholas@gmail.com", "mailto:mns.nicholas@gmail.com", s["Contact"]), link("github.com/n23eos", "https://github.com/n23eos", s["Contact"]), link("raincoat.cc", "https://raincoat.cc", s["Contact"]), link("Проекты" if ru else "Projects", "https://raincoat.cc/#products", s["Contact"])]), s["Contact"]),
         Spacer(1, 5),
         HRFlowable(width="100%", thickness=0.8, color=LINE, spaceAfter=7),
         Paragraph(intro, s["Intro"]),
@@ -97,8 +95,15 @@ def build(lang, filename):
         ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
         ("LINEBELOW", (0, 0), (-1, -2), 0.35, LINE),
     ]))
-    story.extend([table, Paragraph(format_head, s["Head"]), Paragraph(work, s["Body"]), Spacer(1, 3), Paragraph(source_note, s["Small"])])
-    doc.build(story, onFirstPage=lambda canv, doc: canv.setFillColor(PAPER) or canv.rect(0, 0, A4[0], A4[1], fill=1, stroke=0) or canv.saveState())
+    story.extend([table, Paragraph(format_head, s["Head"]), Paragraph(work, s["Body"])])
+
+    def paint_page(canvas, _doc):
+        canvas.saveState()
+        canvas.setFillColor(PAPER)
+        canvas.rect(0, 0, A4[0], A4[1], fill=1, stroke=0)
+        canvas.restoreState()
+
+    doc.build(story, onFirstPage=paint_page)
 
 
 if __name__ == "__main__":

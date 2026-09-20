@@ -5,11 +5,11 @@
   var labels = {
     ru: {
       menu: 'Меню', open: 'Открыть меню', close: 'Закрыть меню',
-      cases: 'Кейсы', teams: 'Для команд', blog: 'Блог', contacts: 'Контакты'
+      cases: 'Проекты', teams: 'Для команд', blog: 'Блог', contacts: 'Контакты'
     },
     en: {
       menu: 'Menu', open: 'Open menu', close: 'Close menu',
-      cases: 'Cases', teams: 'For teams', blog: 'Blog', contacts: 'Contact'
+      cases: 'Projects', teams: 'For teams', blog: 'Blog', contacts: 'Contact'
     }
   };
 
@@ -35,7 +35,7 @@
     if (!button) {
       button = document.createElement('button');
       button.className = 'nav-toggle';
-      nav.insertBefore(button, languageSwitch);
+      nav.insertBefore(button, links);
     }
     button.type = 'button';
     button.setAttribute('aria-controls', links.id);

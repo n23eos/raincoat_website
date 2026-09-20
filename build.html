@@ -63,6 +63,11 @@ li strong,p strong{color:var(--cream);font-weight:600}
 .cta-final a{display:inline-block;margin:0 8px 8px;padding:12px 30px;border:1px solid var(--amber);border-radius:999px;color:var(--amber);text-decoration:none;transition:background .3s,color .3s}
 .cta-final a:hover{background:var(--amber);color:var(--charcoal)}
 footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
+@media (max-width:600px){
+  .offers{grid-template-columns:minmax(0,1fr)}
+  .offer,.stage{padding:22px}
+  .cta-final{padding:30px 18px}
+}
 </style>
 <link rel="stylesheet" href="assets/site.css?v=1">
 </head>
@@ -70,7 +75,7 @@ footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
 <nav class="site-nav">
   <a class="brand" href="index.html">Raincoat</a>
   <div class="nav-links">
-    <a href="case-studies.html#flowspeech" data-site-i18n="cases">Кейсы</a>
+    <a href="index.html#products" data-site-i18n="cases">Проекты</a>
     <a href="team.html" data-site-i18n="teams">Для команд</a>
     <a href="blog.html" data-site-i18n="blog">Блог</a>
     <a href="index.html#contacts" data-site-i18n="contacts">Контакты</a>
@@ -131,7 +136,7 @@ footer{text-align:center;padding:24px;color:var(--sage);font-size:13px}
 </main>
 
 <footer>Raincoat &copy; 2026</footer>
-<script src="i18n.js?v=2"></script>
+<script src="i18n.js?v=4"></script>
 <script src="assets/site.js?v=1"></script>
 </body>
 </html>
