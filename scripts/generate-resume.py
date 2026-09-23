@@ -44,7 +44,7 @@ def link(label, url, style):
 def build(lang, filename):
     ru = lang == "ru"
     s = styles(lang)
-    title = "Nikolai Menzhiliy"
+    title = "Raincoat"
     role = "AI Engineer / агентные системы / интеграции" if ru else "AI Engineer / agent systems / integrations"
     intro = (
         "Ищу junior/associate роль AI Engineer с полной удалёнкой из Батуми, Грузия (UTC+4). Проектный опыт в агентных системах, AI-инструментах, интеграциях и автоматизации; Python - часть стека и реализации проектов."
@@ -108,5 +108,5 @@ def build(lang, filename):
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
-    build("ru", "nikolai-menzhiliy-ru.pdf")
-    build("en", "nikolai-menzhiliy-en.pdf")
+    build("ru", "raincoat-resume-ru.pdf")
+    build("en", "raincoat-resume-en.pdf")

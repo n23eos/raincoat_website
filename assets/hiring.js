@@ -3,7 +3,7 @@
   function paintResume() {
     var lang = window.i18n && window.i18n.lang === 'en' ? 'en' : 'ru';
     document.querySelectorAll('[data-resume]').forEach(function (link) {
-      link.href = 'assets/resume/nikolai-menzhiliy-' + lang + '.pdf';
+      link.href = 'assets/resume/raincoat-resume-' + lang + '.pdf';
       link.setAttribute('hreflang', lang);
     });
   }

@@ -72,9 +72,9 @@
     "philo.accessible": "Интересы вне кода: философия, созерцательная практика, музыка и игры.",
 
     /* мета-теги */
-    "meta.title": "Nikolai Menzhiliy | AI Engineer",
-    "meta.desc": "Nikolai Menzhiliy, AI Engineer. AI-инструменты, агентные системы и автоматизация. Проекты, открытый код и резюме.",
-    "meta.ogDesc": "AI Engineer: агентные системы, работающие продукты и открытый код Nikolai Menzhiliy.",
+    "meta.title": "Raincoat | AI Engineer",
+    "meta.desc": "Raincoat, AI Engineer. AI-инструменты, агентные системы и автоматизация. Проекты, открытый код и резюме.",
+    "meta.ogDesc": "AI Engineer: агентные системы, работающие продукты и открытый код Raincoat.",
 
     /* навигация */
     "nav.about": "Обо мне",
@@ -165,10 +165,10 @@
     "archive.h2": "И ещё 30+ проектов",
 
     /* страница /hire */
-    "hire.meta.title": "Nikolai Menzhiliy - AI Engineer",
-    "hire.meta.desc": "Nikolai Menzhiliy, AI Engineer: AI-инструменты, агентные системы, интеграции и автоматизация.",
+    "hire.meta.title": "Raincoat - AI Engineer",
+    "hire.meta.desc": "Raincoat, AI Engineer: AI-инструменты, агентные системы, интеграции и автоматизация.",
     "hire.label": "Для рекрутеров и команд",
-    "hire.h1": "Nikolai Menzhiliy - AI Engineer",
+    "hire.h1": "Raincoat - AI Engineer",
     "hire.lede": "AI Engineer. Создаю AI-инструменты, агентные системы и автоматизацию. Ищу junior/associate роль с полной удалёнкой из Батуми, Грузия (UTC+4).",
     "hire.whatH": "Проектный опыт",
     "hire.what1": "<strong>Python и AI-инструменты:</strong> локальные приложения, интеграции с моделями и MCP.",
@@ -499,9 +499,9 @@
     "philo.accessible": "Interests beyond code: philosophy, contemplative practice, music and games.",
 
     /* мета-теги */
-    "meta.title": "Nikolai Menzhiliy | AI Engineer",
-    "meta.desc": "Nikolai Menzhiliy, AI Engineer. AI tools, agent systems and automation. Projects, source code and resume.",
-    "meta.ogDesc": "AI Engineer: agent systems, working products and open-source work by Nikolai Menzhiliy.",
+    "meta.title": "Raincoat | AI Engineer",
+    "meta.desc": "Raincoat, AI Engineer. AI tools, agent systems and automation. Projects, source code and resume.",
+    "meta.ogDesc": "AI Engineer: agent systems, working products and open-source work by Raincoat.",
 
     /* навигация */
     "nav.about": "About",
@@ -592,10 +592,10 @@
     "archive.h2": "And 30+ more projects",
 
     /* страница /hire */
-    "hire.meta.title": "Nikolai Menzhiliy - AI Engineer",
-    "hire.meta.desc": "Nikolai Menzhiliy, AI Engineer: AI tools, agent systems, integrations and automation.",
+    "hire.meta.title": "Raincoat - AI Engineer",
+    "hire.meta.desc": "Raincoat, AI Engineer: AI tools, agent systems, integrations and automation.",
     "hire.label": "For recruiters and teams",
-    "hire.h1": "Nikolai Menzhiliy - AI Engineer",
+    "hire.h1": "Raincoat - AI Engineer",
     "hire.lede": "AI Engineer building AI tools, agent systems and automation. Seeking a junior/associate role, fully remote from Batumi, Georgia (UTC+4).",
     "hire.whatH": "Project-based experience",
     "hire.what1": "<strong>Python and AI tools:</strong> local applications, model integrations and MCP.",

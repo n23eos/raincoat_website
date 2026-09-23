@@ -87,6 +87,16 @@ class SiteIntegrityTests(unittest.TestCase):
                     with self.subTest(page=str(path.relative_to(ROOT))):
                         self.assertEqual(urlsplit(href).path, 'mns.nicholas@gmail.com')
 
+    def test_public_site_and_resume_names_use_raincoat_brand(self):
+        public_sources = [ROOT / 'index.html', ROOT / 'team.html', ROOT / 'i18n.js', ROOT / 'assets' / 'hiring.js']
+        for path in public_sources:
+            with self.subTest(file=str(path.relative_to(ROOT))):
+                text = path.read_text()
+                self.assertNotIn('Nikolai Menzhiliy', text)
+                self.assertNotIn('nikolai-menzhiliy', text)
+        self.assertTrue((ROOT / 'assets' / 'resume' / 'raincoat-resume-ru.pdf').is_file())
+        self.assertTrue((ROOT / 'assets' / 'resume' / 'raincoat-resume-en.pdf').is_file())
+
 
 if __name__ == '__main__':
     unittest.main()
