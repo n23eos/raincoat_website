@@ -51,15 +51,29 @@ class SiteIntegrityTests(unittest.TestCase):
 
     def test_showcase_links_go_directly_to_products(self):
         text = (ROOT / 'index.html').read_text()
-        showcase = text.split('<div class="selected-grid">', 1)[1].split('<details', 1)[0]
-        self.assertIn('<h3>FloatPlayer</h3>', showcase)
-        self.assertIn('<h3>I Was Here</h3>', showcase)
+        showcase = text.split('<div class="project-showcase">', 1)[1].split('</section>', 1)[0]
+        lanes = showcase.split('<div class="project-lane">')[1:]
+        self.assertEqual(len(lanes), 2)
+        self.assertGreaterEqual(lanes[0].count('class="project-tile"'), 5)
+        self.assertGreaterEqual(lanes[1].count('class="project-tile"'), 5)
+        self.assertIn('<strong>FloatPlayer</strong>', showcase)
+        self.assertIn('<strong>I Was Here</strong>', showcase)
         self.assertIn('https://n23eos.github.io/floatplayer-site/', showcase)
         self.assertIn('https://n23eos.github.io/advanced_graph_view/', showcase)
         self.assertIn('https://i-was-here-tau.vercel.app', showcase)
+        self.assertIn('obsidian-projects.webp', showcase)
+        self.assertIn('other-projects.webp', showcase)
+        self.assertNotIn('selected-card', showcase)
         self.assertNotIn('case-studies.html', text)
         self.assertNotIn('Разобрать кейс', text)
         self.assertIn('>AI Engineer</h1>', text)
+
+    def test_showcase_has_reduced_motion_fallback(self):
+        css = (ROOT / 'assets' / 'hiring.css').read_text()
+        self.assertIn('@media(prefers-reduced-motion:reduce)', css)
+        reduced = css.split('@media(prefers-reduced-motion:reduce)', 1)[1]
+        self.assertIn('.project-track{animation:none!important}', reduced)
+        self.assertIn('.project-set[aria-hidden="true"]{display:none}', reduced)
 
     def test_ids_are_unique(self):
         for path, page in self.pages.items():

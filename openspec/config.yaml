@@ -5,12 +5,14 @@ context: |
   and SHALL/MUST keywords in English.
   Raincoat is an existing static portfolio and blog served by GitHub Pages.
   Stack: HTML, CSS and vanilla JavaScript; no build step or npm runtime dependencies.
-  Pages: index.html, projects.html, team.html, build.html, blog.html.
+  Pages: index.html, projects.html, team.html, build.html, blog.html, case-studies.html.
   CSS and page scripts are mostly inline. Shared localization is in i18n.js (RU/EN).
   Blog content: posts/index.json and posts/*.md, with optional *.en.md translations.
   Assets live in assets/. CNAME defines the custom domain.
   scripts/render-tbilisi-gif.sh is an optional asset-generation helper, not a site build.
-  No automated test runner is configured. Preview with python3 -m http.server 8000.
+  Tests: node --test tests/*.test.cjs and Python unittest discovery in tests/.
+  Optional article metadata generator: python3 scripts/generate-article-pages.py.
+  Preview with python3 -m http.server 8000.
   Preserve existing architecture and unrelated uncommitted changes.
   Directories named !notes contain private user notes; never publish their contents.
   Use OpenSpec for future features; do not retroactively rewrite existing code.

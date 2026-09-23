@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-case-i18n="meta.title">Инженерные кейсы - Raincoat</title>
+<meta name="description" data-case-i18n="meta.description" data-case-i18n-attr="content" content="Три инженерных кейса: FlowSpeech, Advanced Graph View и Kaidzen. Задачи, решения, проверки, исходники и ограничения.">
+<meta property="og:title" content="Инженерные кейсы - Raincoat">
+<meta property="og:description" content="FlowSpeech, Advanced Graph View и Kaidzen: задачи, решения, проверки и исходники.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://raincoat.cc/assets/og.png">
+<meta property="og:url" content="https://raincoat.cc/case-studies.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='47' fill='%2325221D'/%3E%3Cpath d='M50 20c-17 0-29 13-29 25h58c0-12-12-25-29-25z' fill='%23D9A26E'/%3E%3Cpath d='M50 45v25a8 8 0 0 1-16 0' stroke='%23D9A26E' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/cases.css?v=1">
+<link rel="stylesheet" href="assets/site.css?v=1">
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Основная навигация" data-case-i18n="nav.aria" data-case-i18n-attr="aria-label">
+  <a class="brand" href="index.html">Raincoat</a>
+  <div class="nav-links" id="case-nav-links">
+    <a href="index.html#products" aria-current="page" data-case-i18n="nav.cases">Проекты</a>
+    <a href="team.html" data-case-i18n="nav.team">Для команд</a>
+    <a href="blog.html" data-case-i18n="nav.blog">Блог</a>
+    <a href="index.html#contacts" data-case-i18n="nav.contacts">Контакты</a>
+  </div>
+  <div class="lang-switch" role="group" aria-label="Language / Язык">
+    <button type="button" data-lang="ru">RU</button>
+    <span class="sep" aria-hidden="true">|</span>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+</nav>
+
+<main>
+  <header class="cases-hero">
+    <div class="hero-copy">
+      <p class="eyebrow" data-case-i18n="hero.eyebrow">Избранные инженерные кейсы</p>
+      <h1 data-case-i18n="hero.title">Как устроена работа внутри</h1>
+      <p class="hero-lede" data-case-i18n="hero.lede">Три проекта с разными задачами: desktop-инструмент, большой интерактивный граф и система оценки AI-изменений. Здесь есть архитектурные решения, проверяемые источники и границы выводов.</p>
+      <p class="source-note" data-case-i18n="hero.source">Срезы публичного кода зафиксированы коммитами и датой 19.09.2026. Ссылки на проверки ведут к тестовым сценариям в исходниках.</p>
+    </div>
+    <nav class="case-jumps" aria-label="Кейсы" data-case-i18n="jumps.aria" data-case-i18n-attr="aria-label">
+      <a href="#flowspeech"><span>01</span> FlowSpeech</a>
+      <a href="#graph"><span>02</span> Advanced Graph View</a>
+      <a href="#kaidzen"><span>03</span> Kaidzen</a>
+    </nav>
+  </header>
+
+  <article class="case-study" id="flowspeech" aria-labelledby="flowspeech-title">
+    <header class="case-header">
+      <p class="case-number">01 / Desktop AI tool</p>
+      <div>
+        <p class="case-role" data-case-i18n="shared.role">Роль: проектная самостоятельная разработка</p>
+        <h2 id="flowspeech-title">FlowSpeech</h2>
+        <p class="case-intro" data-case-i18n="flow.intro">macOS-приложение для диктовки: запись по горячей клавише, распознавание речи и опциональная очистка текста перед вставкой в активное приложение.</p>
+      </div>
+    </header>
+
+    <div class="case-body">
+      <section class="case-block task-block">
+        <p class="block-label" data-case-i18n="shared.task">Задача</p>
+        <p data-case-i18n="flow.task">Сократить путь от речи до пригодного текста и при этом оставить пользователю выбор между локальной обработкой и облачными сервисами.</p>
+      </section>
+
+      <section class="case-block">
+        <p class="block-label" data-case-i18n="shared.implementation">Реализация</p>
+        <ol class="flow-pipeline" aria-label="Пайплайн FlowSpeech" data-case-i18n="flow.pipelineAria" data-case-i18n-attr="aria-label">
+          <li><span>01</span><strong data-case-i18n="flow.step1h">Захват</strong><p data-case-i18n="flow.step1p">Горячая клавиша управляет записью, а короткие фрагменты получают тишину по краям, чтобы модель не теряла границы речи.</p></li>
+          <li><span>02</span><strong data-case-i18n="flow.step2h">Распознавание</strong><p data-case-i18n="flow.step2p">faster-whisper работает локально. Groq ASR доступен как отдельный облачный вариант, а не как условие работы приложения.</p></li>
+          <li><span>03</span><strong data-case-i18n="flow.step3h">Очистка</strong><p data-case-i18n="flow.step3p">Пользователь выбирает Claude, OpenAI, DeepSeek, Ollama или режим без LLM-очистки.</p></li>
+          <li><span>04</span><strong data-case-i18n="flow.step4h">Вставка</strong><p data-case-i18n="flow.step4p">Результат возвращается в активное приложение; сбой форматтера не должен уничтожить исходный транскрипт.</p></li>
+        </ol>
+      </section>
+
+      <section class="case-block split-block">
+        <div>
+          <p class="block-label" data-case-i18n="shared.decisions">Инженерные решения</p>
+          <ul class="decision-list">
+            <li data-case-i18n="flow.decision1">Локальное ASR отделено от LLM-очистки: приватный путь остаётся доступным без облачного форматтера.</li>
+            <li data-case-i18n="flow.decision2">Ошибки постобработки деградируют к исходному тексту вместо потери диктовки.</li>
+            <li data-case-i18n="flow.decision3">Форматтеру запрещено отвечать на продиктованный вопрос: его задача только редактировать текст.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="block-label" data-case-i18n="shared.verification">Примеры проверки в исходнике</p>
+          <ul class="evidence-list">
+            <li><a href="https://github.com/n23eos/flowspeech/blob/ed8d67b475ee22b7b323b9acfe390cdf688072bd/tests/test_formatter.py" target="_blank" rel="noopener" data-case-i18n="flow.verify1">Formatter: ошибка возвращает исходный текст</a></li>
+            <li><a href="https://github.com/n23eos/flowspeech/blob/ed8d67b475ee22b7b323b9acfe390cdf688072bd/tests/test_formatter.py" target="_blank" rel="noopener" data-case-i18n="flow.verify2">Formatter: защита от ответа на вопрос</a></li>
+            <li><a href="https://github.com/n23eos/flowspeech/blob/ed8d67b475ee22b7b323b9acfe390cdf688072bd/tests/test_transcriber.py" target="_blank" rel="noopener" data-case-i18n="flow.verify3">Transcriber: padding тишины и фильтрация артефактов</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <aside class="limits">
+        <p class="block-label" data-case-i18n="shared.limitations">Ограничения</p>
+        <p data-case-i18n="flow.limits">Полностью офлайн-режим требует заранее загруженную модель faster-whisper, отключённый cloud ASR и локальную очистку через Ollama либо режим без очистки.</p>
+      </aside>
+    </div>
+
+    <footer class="case-source">
+      <p><span data-case-i18n="shared.snapshot">Срез источника</span>: <code>ed8d67b</code>, 19.09.2026</p>
+      <div><a href="https://github.com/n23eos/flowspeech/tree/ed8d67b475ee22b7b323b9acfe390cdf688072bd" target="_blank" rel="noopener" data-case-i18n="shared.code">Код на GitHub</a><a href="https://github.com/n23eos/flowspeech/blob/ed8d67b475ee22b7b323b9acfe390cdf688072bd/README.md" target="_blank" rel="noopener">README</a></div>
+    </footer>
+  </article>
+
+  <article class="case-study" id="graph" aria-labelledby="graph-title">
+    <header class="case-header">
+      <p class="case-number">02 / Obsidian plugin</p>
+      <div>
+        <p class="case-role" data-case-i18n="shared.role">Роль: проектная самостоятельная разработка</p>
+        <h2 id="graph-title">Advanced Graph View</h2>
+        <p class="case-intro" data-case-i18n="graph.intro">Экспериментальный desktop-плагин для исследования больших графов заметок в Obsidian с WebGL-рендером и вынесенными из UI-потока вычислениями.</p>
+      </div>
+    </header>
+
+    <div class="case-body">
+      <section class="case-block task-block">
+        <p class="block-label" data-case-i18n="shared.task">Задача</p>
+        <p data-case-i18n="graph.task">Сохранить отзывчивые pan и zoom на графе из тысяч заметок, не блокируя интерфейс раскладкой и аналитикой.</p>
+      </section>
+
+      <section class="case-block">
+        <p class="block-label" data-case-i18n="shared.implementation">Реализация</p>
+        <div class="architecture-map" role="img" aria-label="Архитектура Advanced Graph View" data-case-i18n="graph.archAria" data-case-i18n-attr="aria-label">
+          <div class="arch-node"><small>UI thread</small><strong>Pixi.js / WebGL</strong><span data-case-i18n="graph.arch1">Камера, узлы, взаимодействие</span></div>
+          <span class="arch-arrow" aria-hidden="true">&rarr;</span>
+          <div class="arch-workers">
+            <div class="arch-node"><small>Worker A</small><strong>Layout</strong><span data-case-i18n="graph.arch2">Физика и позиции</span></div>
+            <div class="arch-node"><small>Worker B</small><strong>Analysis</strong><span data-case-i18n="graph.arch3">Метрики и структура</span></div>
+          </div>
+          <span class="arch-arrow" aria-hidden="true">&rarr;</span>
+          <div class="arch-node"><small>GPU</small><strong>Edge mesh</strong><span data-case-i18n="graph.arch4">Пакетный рендер связей</span></div>
+        </div>
+      </section>
+
+      <section class="case-block split-block">
+        <div>
+          <p class="block-label" data-case-i18n="shared.decisions">Инженерные решения</p>
+          <ul class="decision-list">
+            <li data-case-i18n="graph.decision1">Pixi.js и WebGL берут на себя отрисовку вместо большого числа DOM-элементов.</li>
+            <li data-case-i18n="graph.decision2">Layout Worker и Analysis Worker разделяют длительные вычисления и интерфейс.</li>
+            <li data-case-i18n="graph.decision3">Связи собираются в GPU edge mesh, чтобы уменьшить накладные расходы на отдельные объекты.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="block-label" data-case-i18n="shared.verification">Проверяемый сценарий</p>
+          <p data-case-i18n="graph.verify">bench/bench.ts описывает прогон на 10 000 узлов и 30 000 рёбер, собирает median FPS и p95 времени pan/zoom. Значение 50 FPS в файле является порогом, а не опубликованным результатом.</p>
+          <a class="text-link" href="https://github.com/n23eos/advanced_graph_view/blob/0f9bb6ff8bb3e778598ab1226fd8262413f6c0cf/bench/bench.ts" target="_blank" rel="noopener" data-case-i18n="graph.benchLink">Открыть benchmark source</a>
+        </div>
+      </section>
+
+      <aside class="limits">
+        <p class="block-label" data-case-i18n="shared.limitations">Ограничения</p>
+        <p data-case-i18n="graph.limits">Desktop beta. Производительность проверяется локальным benchmark; сохранённого результата для конкретного устройства в репозитории нет.</p>
+      </aside>
+    </div>
+
+    <footer class="case-source">
+      <p><span data-case-i18n="shared.snapshot">Срез источника</span>: <code>0f9bb6f</code>, 19.09.2026</p>
+      <div><a href="https://github.com/n23eos/advanced_graph_view/tree/0f9bb6ff8bb3e778598ab1226fd8262413f6c0cf" target="_blank" rel="noopener" data-case-i18n="shared.code">Код на GitHub</a><a href="https://github.com/n23eos/advanced_graph_view/blob/0f9bb6ff8bb3e778598ab1226fd8262413f6c0cf/README.md" target="_blank" rel="noopener">README</a></div>
+    </footer>
+  </article>
+
+  <article class="case-study" id="kaidzen" aria-labelledby="kaidzen-title">
+    <header class="case-header">
+      <p class="case-number">03 / AI evaluation</p>
+      <div>
+        <p class="case-role" data-case-i18n="shared.role">Роль: проектная самостоятельная разработка</p>
+        <h2 id="kaidzen-title">Kaidzen</h2>
+        <p class="case-intro" data-case-i18n="kaidzen.intro">Python-пайплайн, который развивает кандидатное решение по стадиям и пропускает изменение только после сравнения с измеримой базой.</p>
+      </div>
+    </header>
+
+    <div class="case-body">
+      <section class="case-block task-block">
+        <p class="block-label" data-case-i18n="shared.task">Задача</p>
+        <p data-case-i18n="kaidzen.task">Отделить убедительный отчёт от улучшения, которое действительно проходит набор продуктовых и ресурсных ограничений.</p>
+      </section>
+
+      <section class="case-block">
+        <p class="block-label" data-case-i18n="shared.implementation">Реализация</p>
+        <ol class="stage-row">
+          <li><span>01</span><strong>Analyzer</strong><small data-case-i18n="kaidzen.stage1">разбирает исходное состояние</small></li>
+          <li><span>02</span><strong>Researcher</strong><small data-case-i18n="kaidzen.stage2">собирает основания</small></li>
+          <li><span>03</span><strong>Refiner</strong><small data-case-i18n="kaidzen.stage3">готовит кандидата</small></li>
+          <li><span>04</span><strong>Judge</strong><small data-case-i18n="kaidzen.stage4">сравнивает с базой</small></li>
+        </ol>
+      </section>
+
+      <section class="case-block split-block">
+        <div>
+          <p class="block-label" data-case-i18n="shared.decisions">Инженерные решения</p>
+          <ul class="decision-list">
+            <li data-case-i18n="kaidzen.decision1">Gate задаёт минимальный win rate 0,55, допускает не более 10% регрессии целевой метрики и не более 1,5x токенов.</li>
+            <li data-case-i18n="kaidzen.decision2">Кандидат должен пройти все ограничения одновременно: сильная одна метрика не перекрывает провал другой.</li>
+            <li data-case-i18n="kaidzen.decision3">Тесты покрывают правдоподобные обходы: красивый отчёт с худшим closed rate, выигрыш за счёт уменьшения registry и качество, купленное тройной стоимостью.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="block-label" data-case-i18n="shared.verification">Примеры проверки в исходнике</p>
+          <ul class="evidence-list">
+            <li><a href="https://github.com/n23eos/kaidzen/blob/6fce78232662910ff4141409cdac5f03a322c280/tests/test_gate.py" target="_blank" rel="noopener" data-case-i18n="kaidzen.verify1">Худший closed rate отклоняет красивый отчёт</a></li>
+            <li><a href="https://github.com/n23eos/kaidzen/blob/6fce78232662910ff4141409cdac5f03a322c280/tests/test_gate.py" target="_blank" rel="noopener" data-case-i18n="kaidzen.verify2">Сужение registry не считается честным выигрышем</a></li>
+            <li><a href="https://github.com/n23eos/kaidzen/blob/6fce78232662910ff4141409cdac5f03a322c280/tests/test_gate.py" target="_blank" rel="noopener" data-case-i18n="kaidzen.verify3">Тройная стоимость отклоняет кандидата</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="gate-demo" id="gate-demo" aria-labelledby="gate-demo-title">
+        <div class="demo-heading">
+          <div>
+            <p class="block-label" data-case-i18n="demo.label">Локальный пример решения</p>
+            <h3 id="gate-demo-title" data-case-i18n="demo.title">Пропустить кандидата через gate</h3>
+          </div>
+          <span class="local-badge" data-case-i18n="demo.badge">Только в браузере</span>
+        </div>
+        <p class="demo-note" data-case-i18n="demo.note">Упрощённая учебная иллюстрация на фиксированных данных. Она не запускает Kaidzen, не вызывает AI и ничего не отправляет в сеть.</p>
+
+        <form id="gate-demo-form">
+          <fieldset class="preset-list">
+            <legend data-case-i18n="demo.legend">Выберите кандидата</legend>
+            <label><input type="radio" name="candidate" value="balanced" checked><span><strong data-case-i18n="demo.balancedH">Сбалансированный</strong><small data-case-i18n="demo.balancedP">Умеренный выигрыш без выхода за лимиты</small></span></label>
+            <label><input type="radio" name="candidate" value="regressed"><span><strong data-case-i18n="demo.regressedH">Красивый отчёт</strong><small data-case-i18n="demo.regressedP">Win rate вырос, целевая метрика просела</small></span></label>
+            <label><input type="radio" name="candidate" value="expensive"><span><strong data-case-i18n="demo.expensiveH">Дорогой выигрыш</strong><small data-case-i18n="demo.expensiveP">Метрики выросли ценой тройных токенов</small></span></label>
+          </fieldset>
+        </form>
+
+        <div class="metrics-wrap" role="region" tabindex="0" aria-label="Таблица сравнения метрик; прокручивается по горизонтали" data-case-i18n="demo.tableAria" data-case-i18n-attr="aria-label">
+          <table>
+            <thead><tr><th scope="col" data-case-i18n="demo.metric">Метрика</th><th scope="col" data-case-i18n="demo.baseline">База</th><th scope="col" data-case-i18n="demo.candidate">Кандидат</th><th scope="col" data-case-i18n="demo.threshold">Порог gate</th></tr></thead>
+            <tbody>
+              <tr><th scope="row" data-case-i18n="demo.winRate">Win rate</th><td id="baseline-win">0,55</td><td id="candidate-win">0,61</td><td data-case-i18n="demo.winThreshold">&ge; 0,55</td></tr>
+              <tr><th scope="row" data-case-i18n="demo.objective">Целевая метрика</th><td id="baseline-objective">80%</td><td id="candidate-objective">77%</td><td id="regression-threshold" data-case-i18n="demo.regressionThreshold">регрессия &le; 10%</td></tr>
+              <tr><th scope="row" data-case-i18n="demo.tokens">Токены</th><td id="baseline-tokens">10 000</td><td id="candidate-tokens">12 000</td><td data-case-i18n="demo.costThreshold">&le; 1,5x</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="gate-result accepted" id="gate-result" aria-live="polite" aria-atomic="true">
+          <p class="result-status" id="gate-status">Принять</p>
+          <p id="gate-explanation">Все три ограничения соблюдены: win rate 0,61; регрессия 3,8%; стоимость 1,2x.</p>
+        </div>
+      </section>
+
+      <aside class="limits">
+        <p class="block-label" data-case-i18n="shared.limitations">Ограничения</p>
+        <p data-case-i18n="kaidzen.limits">Интерактив выше повторяет только три числовых порога из gate.py и не воспроизводит полный пайплайн, registry или реальные запуски моделей.</p>
+      </aside>
+    </div>
+
+    <footer class="case-source">
+      <p><span data-case-i18n="shared.snapshot">Срез источника</span>: <code>6fce782</code>, 19.09.2026</p>
+      <div><a href="https://github.com/n23eos/kaidzen/tree/6fce78232662910ff4141409cdac5f03a322c280" target="_blank" rel="noopener" data-case-i18n="shared.code">Код на GitHub</a><a href="https://github.com/n23eos/kaidzen/blob/6fce78232662910ff4141409cdac5f03a322c280/kaidzen/gate.py" target="_blank" rel="noopener">gate.py</a></div>
+    </footer>
+  </article>
+
+  <section class="cases-cta">
+    <p class="eyebrow" data-case-i18n="cta.eyebrow">Следующий шаг</p>
+    <h2 data-case-i18n="cta.title">Нужны детали по коду или решениям?</h2>
+    <p data-case-i18n="cta.text">Можно открыть зафиксированные исходники или написать напрямую. Я отвечу, что делал сам, что проверено и где остаются ограничения.</p>
+    <div class="cta-row"><a class="button primary" href="mailto:mns.nicholas@gmail.com" data-case-i18n="cta.email">Написать по email</a><a class="button" href="team.html" data-case-i18n="cta.team">Формат работы</a></div>
+  </section>
+</main>
+
+<footer class="page-footer"><a href="index.html">Raincoat</a><span>&copy; 2026</span></footer>
+
+<script src="i18n.js?v=4"></script>
+<script src="assets/site.js?v=1"></script>
+<script src="assets/cases.js?v=1"></script>
+</body>
+</html>

@@ -39,7 +39,7 @@
   --terracotta:#965E2F;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:clip}
 body{
   background:var(--charcoal);
   color:var(--cream);
@@ -719,80 +719,70 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
 <section id="products" aria-labelledby="selected-heading">
   <p class="section-label" data-i18n="selected.label">Избранные работы</p>
   <div class="section-top"><h2 id="selected-heading" data-i18n="selected.heading">Продукты, которые я создаю</h2><a href="projects.html" data-i18n="selected.archive">Весь архив →</a></div>
-  <div class="selected-grid">
-    <article class="selected-card">
-      <img class="selected-image" src="assets/shots/flowspeech-waveform.svg" alt="" loading="lazy" width="1200" height="675">
-      <div class="selected-body">
-        <div class="selected-meta">01 / PYTHON · DESKTOP</div>
-        <h3>FlowSpeech</h3>
-        <p data-i18n="selected.fs.text">Диктовка для macOS с локальным распознаванием и настраиваемой обработкой текста.</p>
-        <p class="case-detail" data-i18n="selected.fs.detail">macOS · faster-whisper · LLM</p>
-        <div class="case-links"><a href="https://github.com/N23eos/flowspeech" target="_blank" rel="noopener">GitHub ↗</a></div>
+  <div class="project-showcase">
+    <div class="project-lane">
+      <h3 class="project-lane-label" data-i18n="showcase.obsidian">Плагины Obsidian</h3>
+      <div class="project-strip">
+        <div class="project-track forward" data-project-track>
+          <div class="project-set">
+            <a class="project-tile" href="https://community.obsidian.md/plugins/column-explorer" target="_blank" rel="noopener">
+              <span class="project-tile-media"><img src="assets/shots/column-explorer.jpg" alt="" loading="lazy" width="800" height="500"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.plugin">Плагин Obsidian</span><strong>Column Explorer</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://github.com/n23eos/obsidian-vault-sunburst" target="_blank" rel="noopener">
+              <span class="project-tile-media project-art" style="--project-art:url('shots/obsidian-projects.webp');--project-art-x:100%;--project-art-y:0%" aria-hidden="true"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.plugin">Плагин Obsidian</span><strong>Vault Sunburst</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://github.com/n23eos/obsidian-always-on-top-tasks" target="_blank" rel="noopener">
+              <span class="project-tile-media project-art" style="--project-art:url('shots/obsidian-projects.webp');--project-art-x:0%;--project-art-y:100%" aria-hidden="true"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.plugin">Плагин Obsidian</span><strong>Always-on-Top Tasks</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://n23eos.github.io/advanced_graph_view/" target="_blank" rel="noopener">
+              <span class="project-tile-media"><img src="assets/shots/agv.jpg" alt="" loading="lazy" width="800" height="516"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.plugin">Плагин Obsidian</span><strong>Advanced Graph View</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://community.obsidian.md/plugins/vault-telegram-bridge" target="_blank" rel="noopener">
+              <span class="project-tile-media project-art" style="--project-art:url('shots/obsidian-projects.webp');--project-art-x:100%;--project-art-y:100%" aria-hidden="true"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.plugin">Плагин Obsidian</span><strong>Vault Telegram Bridge</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+          </div>
+        </div>
       </div>
-    </article>
-    <article class="selected-card">
-      <img class="selected-image" src="assets/shots/agv.jpg" alt="" loading="lazy" width="800" height="516">
-      <div class="selected-body">
-        <div class="selected-meta">02 / TYPESCRIPT · WEBGL</div>
-        <h3>Advanced Graph View</h3>
-        <p data-i18n="selected.agv.text">Граф заметок Obsidian: WebGL-рендеринг, расчёт раскладки и анализ в отдельных Workers.</p>
-        <p class="case-detail" data-i18n="selected.agv.detail">Obsidian · WebGL · Web Workers</p>
-        <div class="case-links"><a href="https://n23eos.github.io/advanced_graph_view/" target="_blank" rel="noopener" data-i18n="selected.read">Сайт ↗</a><a href="https://github.com/N23eos/advanced_graph_view" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </div>
+    <div class="project-lane">
+      <h3 class="project-lane-label" data-i18n="showcase.others">Сайты, расширения и другие проекты</h3>
+      <div class="project-strip">
+        <div class="project-track reverse" data-project-track>
+          <div class="project-set">
+            <a class="project-tile" href="https://n23eos.github.io/floatplayer-site/" target="_blank" rel="noopener">
+              <span class="project-tile-media"><img src="assets/shots/floatplayer.png" alt="" loading="lazy" width="440" height="280"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.extension">Chrome-расширение</span><strong>FloatPlayer</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://github.com/n23eos/eye-rest-20-20-20" target="_blank" rel="noopener">
+              <span class="project-tile-media project-art utility" style="--project-art:url('shots/other-projects.webp');--project-art-x:0%;--project-art-y:50%" aria-hidden="true"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.extension">Chrome-расширение</span><strong>Eye Rest 20-20-20</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://mafia-tool.com/" target="_blank" rel="noopener">
+              <span class="project-tile-media"><img src="assets/shots/mafia-tool.webp" alt="" loading="lazy" width="1536" height="1024"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.webapp">Веб-приложение</span><strong>Mafia Tool</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://n23eos.github.io/workout.md/" target="_blank" rel="noopener">
+              <span class="project-tile-media project-art" style="--project-art:url('shots/obsidian-projects.webp');--project-art-x:0%;--project-art-y:100%" aria-hidden="true"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.webapp">Веб-приложение</span><strong>workout.md</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://serendipity-games.com/" target="_blank" rel="noopener">
+              <span class="project-tile-media"><img src="assets/shots/serendipity-games.webp" alt="" loading="lazy" width="1200" height="675"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.games">Игры</span><strong>Serendipity Games</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+            <a class="project-tile" href="https://i-was-here-tau.vercel.app" target="_blank" rel="noopener">
+              <span class="project-tile-media"><img src="assets/shots/i-was-here.jpg" alt="" loading="lazy" width="800" height="500"></span>
+              <span class="project-tile-copy"><span class="project-tile-type" data-i18n="showcase.type.webapp">Веб-приложение</span><strong>I Was Here</strong><span class="project-tile-action" aria-hidden="true">↗</span></span>
+            </a>
+          </div>
+        </div>
       </div>
-    </article>
-    <article class="selected-card">
-      <img class="selected-image" src="assets/shots/kaidzen-cover.svg" alt="" loading="lazy" width="1200" height="675">
-      <div class="selected-body">
-        <div class="selected-meta">03 / PYTHON · AI WORKFLOWS</div>
-        <h3>Kaidzen</h3>
-        <p data-i18n="selected.kaidzen.text">Пайплайн исследования идей и сравнения промптов. Изменения проходят проверку по метрикам.</p>
-        <p class="case-detail" data-i18n="selected.kaidzen.detail">Агентный пайплайн · оценка качества</p>
-        <div class="case-links"><a href="https://github.com/n23eos/kaidzen" target="_blank" rel="noopener">GitHub ↗</a></div>
-      </div>
-    </article>
-    <article class="selected-card" id="floatplayer">
-      <div class="selected-image floatplayer-cover" aria-hidden="true"><span class="floatplayer-window"><span class="floatplayer-bar">FloatPlayer <span>↗</span></span><span class="floatplayer-play">▶</span><span class="floatplayer-timeline"></span></span></div>
-      <div class="selected-body">
-        <div class="selected-meta">04 / CHROME EXTENSION</div>
-        <h3>FloatPlayer</h3>
-        <p data-i18n="selected.float.text">YouTube в окне поверх других приложений: видео, Shorts и управление воспроизведением.</p>
-        <p class="case-detail">Picture-in-Picture · YouTube · Shorts</p>
-        <div class="case-links"><a href="https://n23eos.github.io/floatplayer-site/" target="_blank" rel="noopener" data-i18n="selected.read">Сайт ↗</a><a href="https://github.com/n23eos/floatplayer" target="_blank" rel="noopener">GitHub ↗</a></div>
-      </div>
-    </article>
-    <article class="selected-card" id="i-was-here">
-      <img class="selected-image" src="assets/shots/i-was-here.jpg" alt="" loading="lazy" width="800" height="500">
-      <div class="selected-body">
-        <div class="selected-meta">05 / WEB APP · BASE</div>
-        <h3>I Was Here</h3>
-        <p data-i18n="selected.iwh.text">Бейджи за посещение событий на Base: QR-код, вход по email и получение NFT без оплаты газа гостем.</p>
-        <p class="case-detail">Base · NFT · Gasless</p>
-        <div class="case-links"><a href="https://i-was-here-tau.vercel.app" target="_blank" rel="noopener" data-i18n="selected.read">Сайт ↗</a></div>
-      </div>
-    </article>
+    </div>
   </div>
-  <p class="evidence-note" data-i18n="selected.note">Работающие приложения, расширения и инструменты. Открывайте сайт проекта или исходный код.</p>
-  <details class="more-products"><summary data-i18n="selected.more">Ещё работающие продукты</summary><div class="prod-grid">
-<div class="prod">
-      <div class="shot"><img src="assets/shots/column-explorer.jpg" alt="Column Explorer - двухпанельный файл-менеджер в Obsidian" loading="lazy" width="800" height="500"></div>
-      <div class="head"><h3>Column Explorer</h3><span class="badge released" data-i18n="badge.released">Released</span></div>
-      <div class="fact" data-i18n="prod.ce.fact">400+ загрузок · v1.13</div>
-      <p data-i18n="prod.ce.text">Навигация по vault через дерево - медленно. Сделал двухпанельный файл-менеджер в стиле Finder внутри Obsidian и довёл его через 13 публичных релизов.</p>
-      <div class="links">
-        <a href="https://community.obsidian.md/plugins/column-explorer" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
-        <a class="gh" href="https://github.com/N23eos/column_explorer" target="_blank" rel="noopener">GitHub &rarr;</a>
-      </div>
-    </div>
-<div class="prod">
-      <div class="shot"><img src="assets/shots/mafia-tool.webp" alt="Mafia Tool" loading="lazy" width="1536" height="1024"></div>
-      <div class="head"><h3>Mafia-tool.com</h3><span class="badge live">Live</span></div>
-      <div class="fact" data-i18n="prod.mafia.fact">Пульт ведущего · трекер партии · дедукция</div>
-      <p data-i18n="prod.mafia.text">Кто против кого голосовал, кого проверил шериф, чья версия не сходится? Собрал помощника для мафии: веди партию, фиксируй голоса и проверки, а между играми тренируй дедукцию. Всё сохраняется в браузере.</p>
-      <div class="links">
-        <a href="https://mafia-tool.com/" target="_blank" rel="noopener" data-i18n="link.try">Потрогать</a>
-      </div>
-    </div>
-  </div></details>
 </section>
 
 <section id="process" class="workflow" aria-labelledby="workflow-heading">
@@ -969,7 +959,7 @@ a.exp:hover{border-color:var(--amber);background:rgba(87,73,56,.34);transform:tr
 
 <footer>Raincoat &copy; 2026</footer>
 
-<script src="i18n.js?v=4"></script>
+<script src="i18n.js?v=5"></script>
 <script src="assets/site.js"></script>
 <script src="assets/hiring.js"></script>
 <script>
@@ -981,6 +971,16 @@ const io=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- БЕСШОВНАЯ ВИТРИНА ПРОЕКТОВ ---------- */
+document.querySelectorAll('[data-project-track]').forEach(track=>{
+  const source=track.querySelector('.project-set');
+  if(!source)return;
+  const clone=source.cloneNode(true);
+  clone.setAttribute('aria-hidden','true');
+  clone.querySelectorAll('a').forEach(link=>link.tabIndex=-1);
+  track.appendChild(clone);
+});
 
 /* ---------- SPOTLIGHT НА КАРТОЧКАХ ---------- */
 document.addEventListener('pointermove',e=>{
